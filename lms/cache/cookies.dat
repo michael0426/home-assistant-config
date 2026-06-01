@@ -1,0 +1,8 @@
+#LWP-Cookies-1.0
+Set-Cookie3: Squeezebox-player=aa%3Aaa%3A8a%3A8b%3A28%3Ac5; path="/"; domain=10.0.0.25; path_spec; expires="2023-01-03 10:27:31Z"; version=0
+Set-Cookie3: Squeezebox-player=aa%3Aaa%3Acd%3A64%3A91%3Ae6; path="/"; domain=10.0.0.27; path_spec; expires="2023-01-04 09:18:06Z"; version=0
+Set-Cookie3: Squeezebox-player=aa%3Aaa%3Acd%3A64%3A91%3Ae6; path="/"; domain=172.17.0.1; path_spec; expires="2023-01-04 05:40:24Z"; version=0
+Set-Cookie3: Squeezebox-player=aa%3Aaa%3A9c%3Af2%3Af4%3Ab2; path="/"; domain=172.30.32.1; path_spec; expires="2023-02-04 14:01:53Z"; version=0
+Set-Cookie3: sf_mirror_attempt="lms-plugins-philippe44:nchc:UPnPBridge-1.81.0.zip"; path="/"; domain=downloads.sourceforge.net; path_spec; expires="2021-12-13 17:01:16Z"; version=0
+Set-Cookie3: AISSessionId=615674f002785822_5455874_7xantqis_MjE2LjIzNS45MC4xMzg6ODA!_0000001osHa; path="/"; domain=pureplay.cdnstream1.com; path_spec; secure; expires="2021-12-03 07:50:43Z"; SameSite=None; version=0
+Set-Cookie3: sdi_squeezenetwork_language=en; path="/"; domain=www.mysqueezebox.com; path_spec; secure; expires="2023-01-04 04:54:54Z"; HttpOnly; version=0

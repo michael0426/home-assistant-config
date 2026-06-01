@@ -1,0 +1,200 @@
+esphome:
+  name: $devicename
+  friendly_name: ${upper_devicename}   
+  min_version: 2025.9.0
+  name_add_mac_suffix: false
+  comment: ESP32C3 for $model_name
+  project:
+    name: "TaiSEIA-Hitachi.$model_name"
+    version: "ESP32C3"
+
+esp32:
+  board: esp32-c3-devkitm-1
+#  board: airm2m_core_esp32c3
+  framework:
+#    type: esp-idf   
+    type: arduino
+
+substitutions:
+  devicename: climate-m #記得每台要不同名稱避免打架
+  upper_devicename: "Climate-M"
+  model_name: "Hitachi-RAS-71QK" #可加註冷氣型號
+
+external_components:
+  - source: github://tsunglung/taixia@master
+    components: [ taixia ]  
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+#  encryption:
+#    key: "Gmw4lO26a9QElALnaUWUWNqebCrQ9mpHUAj26Pq2AK8="
+
+ota:
+  - platform: esphome
+#    password: "876ef1aa33ac2980d48ded5cce4fd33a"
+
+web_server:
+  port: 80
+
+wifi:
+  ssid: "ORBI97"
+  password: "elatednest901"
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 10.0.0.68
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 10.0.0.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: ${devicename}
+    password: "12345678"
+  #  ssid: "Climate-M Fallback Hotspot"
+  #  password: "REG2XAdTNczX"
+
+captive_portal:
+
+uart:
+  id: uart_taixia
+  tx_pin: GPIO6 #pin3 (RX to AC)
+  rx_pin: GPIO7 #pin4 (TX from AC)
+  baud_rate: 9600
+  debug:
+    direction: BOTH
+    
+    
+# optional binary sensor to monitor serial connection:
+binary_sensor:
+  - platform: status
+    name: "Status"
+
+status_led:
+  pin:
+    number: GPIO8 # Blue LED
+    inverted: true
+
+
+climate:
+  - platform: taixia
+    name: "Climate"
+    supported_modes:
+      - COOL
+      - HEAT
+      - DRY
+      - FAN_ONLY
+    supported_fan_modes:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - AUTO
+    supported_swing_modes:
+      - VERTICAL
+      - HORIZONTAL
+      - BOTH
+    supported_presets:
+      - NONE
+      - BOOST
+      - ECO
+    #supported_humidity: True
+
+button:
+  - platform: safe_mode
+    name: Safe Mode Boot
+    entity_category: diagnostic
+  - platform: restart
+    name: "Restart"
+  - platform: taixia
+    type: airconditioner
+    get_info:
+      name: "Get Info"
+
+number:
+  - platform: taixia
+    type: airconditioner
+    sleep_timer:
+      name: "Sleep Timer"
+    off_timer:
+      name: "Off Timer"
+    on_timer:
+      name: "On Timer"
+
+select:
+  - platform: taixia
+    type: airconditioner
+    display_mode:
+      name: "Display Mode"
+    swing_horizontal_level:
+      name: "Swing Horizontal Level"    
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+
+  - platform: uptime
+    name: "Uptime"
+    filters:
+      - lambda: return x / 3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+
+  - platform: internal_temperature
+    name: "ESP Temperature"
+
+  - platform: taixia
+    type: airconditioner
+    temperature_indoor:
+      name: "Temperature Indoor"
+    humidity_indoor:
+      name: "Humidity Indoor"
+    temperature_outdoor:
+      name: "Temperature Outdoor"
+    energy_consumption:
+      state_class: total_increasing
+      name: "Energy"
+    operating_hours:
+      name: "Operating Hours"
+
+switch:
+  - platform: taixia
+    type: airconditioner
+    power:
+      name: "Power Switch"
+    beeper:
+      name: "Buzzer"
+    mildew_proof:
+      name: "Mildew Proof"
+    swing_vertical:
+      name: "Swing Vertical"
+    swing_horizontal:
+      name: "Swing Horizontal"
+
+text_sensor:
+  - platform: version
+    name: "ESPHome Version"
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+  - platform: taixia
+    sa_id:
+      name: "SA ID"
+      id: sa_id
+    brand:
+      name: "SA Brand"
+    model:
+      name: "SA Model"
+    version:
+      name: "SA Version"
+    services:
+      name: "SA Services"
+
+taixia:
+  sa_id: 1
+  version: 2.0
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time    

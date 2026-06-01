@@ -1,0 +1,9 @@
+{
+  "domain": "universal",
+  "name": "Universal Media Player",
+  "version": "0.3.36",
+  "documentation": "https://www.home-assistant.io/integrations/universal",
+  "codeowners": [],
+  "quality_scale": "internal",
+  "iot_class": "calculated"
+}

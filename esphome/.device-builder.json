@@ -1,0 +1,39 @@
+{
+  "garagedoor-sensor.yaml": {
+    "board_id": "nodemcuv2",
+    "mac_address": "AC:0B:FB:CE:DF:42"
+  },
+  "climate-l.yaml": {
+    "board_id": "esp32-c6-devkitm-1",
+    "mac_address": "DC:B4:D9:8B:89:B4"
+  },
+  "esphome-web-61ea0d.yaml": {
+    "board_id": "nodemcuv2"
+  },
+  "aisle-light.yaml": {
+    "board_id": "generic-esp8266"
+  },
+  "ceiling-light.yaml": {
+    "board_id": "generic-esp8266",
+    "mac_address": "70:03:9F:66:28:4A"
+  },
+  "sonoffmini.yaml": {
+    "board_id": "esp8285",
+    "mac_address": "70:03:9F:67:C7:B3"
+  },
+  "curtain.yaml": {
+    "board_id": "nodemcuv2",
+    "mac_address": "AC:0B:FB:D9:20:DB"
+  },
+  "gas-sensor.yaml": {
+    "board_id": "generic-esp32",
+    "mac_address": "78:21:84:9D:F8:D8"
+  },
+  "esphome-web-8d6f14.yaml": {
+    "board_id": "esp32-c6-devkitm-1",
+    "mac_address": "DC:B4:D9:8D:6F:14"
+  },
+  "_remote_build": {
+    "dashboard_id": "9RsIipFUR0Qg3lhcbyjq8lqZbTSYZy0x"
+  }
+}

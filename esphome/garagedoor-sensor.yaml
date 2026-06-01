@@ -1,0 +1,63 @@
+esphome:
+  name: garagedoor-sensor
+
+esp8266:
+  board: nodemcuv2
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  
+ota:
+  platform: esphome
+  password: "babypig1"
+
+web_server:
+  port: 80
+
+wifi:
+  ssid: "ORBI97"
+  password: "elatednest901"
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 10.0.0.53
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 10.0.0.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0
+
+    
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garagedoor-Sensor"
+    password: "izLGcAF6vh0v"
+
+captive_portal:
+
+switch:   #HA -> ESP -> Pin
+  - platform: gpio
+    pin: D4 #Internal LED switching
+    id: internal_led
+    name: "NodeMCU Internal LED"
+
+binary_sensor: #Pin or Internal Status -> ESP -> HA
+  - platform: gpio
+    pin: 
+      number: D2
+      mode: INPUT_PULLUP
+      inverted: False
+    name: "Garage Door"
+  - platform: status
+    name: "NodeMCU Connection Status"
+    
+#interval:
+#  - interval: 1sec
+#    then:
+#      - if:
+#          condition: api.connected
+#          then: 
+#            - switch.toggle: internal_led
+
+

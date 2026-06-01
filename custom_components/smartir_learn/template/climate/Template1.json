@@ -1,0 +1,94 @@
+{
+    "manufacturer": "",
+    "supportedModels": [
+    ],
+    "commandsEncoding": "Base64",
+    "supportedController": "Broadlink",
+    "minTemperature": 16,
+    "maxTemperature": 32,
+    "precision": 1,
+    "operationModes": [
+        "cool",
+        "heat",
+        "dry",
+        "fan_only"
+    ],
+    "fanModes": [
+        "auto",
+        "high",
+        "med",
+        "low",
+        "quiet"
+    ],
+    "commands": {
+        "off": "",
+        "cool": {
+            "auto": {
+                "minTemperature-maxTemperature": ""
+            },
+            "high": {
+                "minTemperature-maxTemperature": ""
+            },
+            "med": {
+                "minTemperature-maxTemperature": ""
+            },
+            "low": {
+                "minTemperature-maxTemperature": ""
+            },
+            "quiet": {
+                "minTemperature-maxTemperature": ""
+            }
+        },
+        "heat": {
+            "auto": {
+                "minTemperature-maxTemperature": ""
+            },
+            "high": {
+                "minTemperature-maxTemperature": ""
+            },
+            "med": {
+                "minTemperature-maxTemperature": ""
+            },
+            "low": {
+                "minTemperature-maxTemperature": ""
+            },
+            "quiet": {
+                "minTemperature-maxTemperature": ""
+            }
+        },
+        "dry": {
+            "auto": {
+                "minTemperature-maxTemperature": ""
+            },
+            "high": {
+                "minTemperature-maxTemperature": ""
+            },
+            "med": {
+                "minTemperature-maxTemperature": ""
+            },
+            "low": {
+                "minTemperature-maxTemperature": ""
+            },
+            "quiet": {
+                "minTemperature-maxTemperature": ""
+            }
+        },
+        "fan_only": {
+            "auto": {
+                "minTemperature-maxTemperature": ""
+            },
+            "high": {
+                "minTemperature-maxTemperature": ""
+            },
+            "med": {
+                "minTemperature-maxTemperature": ""
+            },
+            "low": {
+                "minTemperature-maxTemperature": ""
+            },
+            "quiet": {
+                "minTemperature-maxTemperature": ""
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "manufacturer": "",
+  "supportedModels": [
+  ],
+  "supportedController": "Broadlink",
+  "commandsEncoding": "Base64",
+  "speed": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "commands": {
+    "off": "",
+    "default": {
+      "low": "",
+      "medium": "",
+      "high": ""
+    },
+    "oscillate": ""
+  }
+}

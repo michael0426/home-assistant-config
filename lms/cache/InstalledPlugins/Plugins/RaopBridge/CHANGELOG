@@ -1,0 +1,548 @@
+Note: beware of crypto version (see shairtunes)
+
+0.4.62.3
+ - add proper opus DLLs
+
+0.4.62.2
+ - Fix CVE-2017-12087
+ 
+0.4.62.1
+ - add support for Perl 5.32
+
+0.4.62.0
+ - (P) don't fade-out on pause (no zero volume)
+
+0.4.61.0
+ - autorun by default and use static version
+
+0.4.60.1
+ - threshold is in FRAMES
+ - mdns fix for blank name field
+
+0.4.60.0
+ - Let user select if connection should be presistent on RAOP error
+
+0.4.53.2
+ - fix handling of MONO flags when soft gain is used
+ 
+0.4.53.1
+ - fix sslsym macros that were still incorrect
+ - move back CLI buffer to 4kB (allocated) 
+
+0.4.53.0
+ - add combined L+R channel option
+
+0.4.52.2
+ - limit sample rate capability to 44100 when soxr is not loaded
+
+0.4.52.1
+ - SNI must be w/o any leading space or trailing garbage now that LMS excludes port
+
+0.4.52.0
+ - less aggressive CLI timeout
+
+0.4.51.0
+ - openssl dynamic load compatible with 1.1.x
+ - playlist index modulus cannot be 0
+ - some mDNS repeater might continuously announce expired devices
+
+0.4.50.10
+ - address valgrind complaints (there is still one due to inline strlen on 32 bits)
+
+0.4.50.9
+ - synthetic MAC should be 0xaa
+ 
+0.4.50.8
+ - improving alac style while verifying code
+
+0.4.50.6 
+ - remove un-necessary "buffer" variable in alac.c
+ - aac buffer wrap only when needed
+ - guarantee alac writebuf size
+ 
+0.4.50.5
+ - mispelled aarch64 static version 
+ - alac stock decoder does not have aarch64 flag for endianness
+
+0.4.50.4
+ - bump version number
+
+0.4.50.3
+ - Cosmetic issues in Settings' UI
+
+0.4.50.2
+ - help port syntax
+
+0.4.50.1
+ - server discovry response was truncated and CLIP was missing
+ 
+0.4.50.0
+ - let user define inboud ports
+
+0.4.43.0
+ - SSL flags in stream_s
+ - consolidation with other bridges
+
+0.4.42.0
+ - try SSL when plain fails on non 443
+ 
+0.4.41.4
+ - when searching for mad sync, verify that next frame is valid
+ 
+0.4.41.3
+ - linearize streambuf for large needed atoms crossing boundary or give-up
+ 
+0.4.41.2
+ - bytes_per_frame must be in context!
+ 
+0.4.41.1
+ - stop pcm decoder when bytes < bytes_pr_frame
+ - set bytes_per_frame in new_stream only
+
+0.4.41.0
+ - tweak WAV and AIF header detection
+
+0.4.40.0
+ - add 'wav' codec
+
+0.4.32.0
+ - add perl crypto 5.30
+
+0.4.31.0
+ - change modelName to RaopBridge and add command line -M
+ 
+0.4.30.0
+ - add OggFlac
+ 
+0.4.23.0
+ - add FreeBSD build and Perl 5.24 crypto - not tested
+ 
+0.4.22.2
+ - FriendlyName should always be updated in config file
+ 
+0.4.22.1
+ - Pairing socket issue with keep-alive, move back to own HTTP.pm (will fix that crap later ...)
+ 
+0.4.22.0
+ - Increase LMS max version
+ 
+0.4.21.3
+ - just bump up version
+ 
+0.4.21.2
+ - improve mDNS detection
+
+0.4.21.1
+ - tabulate volume conversion
+ - raop_client hacks for squeezelite-esp32 were left by mistake
+ 
+0.4.21.0
+ - add "airesp32" from excluded model list
+ 
+0.4.20.0
+ - add opus decoder
+ - change vorbis codec min input
+ - vorbis does not exit on no frame decoded
+ - alac encoder produces more data than expected when supplied with few frames (for sure 4 creates a problem)
+ 
+0.4.16.1 
+ - mad was using new decoder structure but librariy was not updated
+ 
+0.4.16.0
+ - alac.c did not set blocksize to NULL
+ - add LOOPBACK option
+ - update Windows dll to remove msvc dependencies
+ - (P) add -static version first
+ 
+0.4.15.1
+ - (P) force use and require of CryptX to force dll loading
+ 
+0.4.15.0
+ - (P) load Aync::HTTP only when LMS version is too old (HTTP 1.1 support for keep-alive)
+ - (P) force CryptX to be loaded to have dll active (Windows 10)
+ 
+0.4.14.3
+ - do nothing in sighandler when already stopping threads
+ 
+0.4.14.2
+ - add these $*%!@~ dll for good this time
+ 
+0.4.14.1
+ - Windows 10 does has renamed libeay32.dll to libcrypto.dll and ssleay32.dll to libssl.dll (and does not even include it)
+ - do not crash when SSL not found
+ 
+0.4.14.0
+ - openSSL loaded manually for compatibility 
+ 
+0.4.13.2
+ - no updated, but seems to have a problem with SF files, not need to bump up version
+ 
+0.4.13.1 
+ - support SNI for SSL
+ - use strcasestr instead of stristr (do not check for NULL strings)
+ 
+0.4.13.0 
+ - add SSL support
+ - albumart can be local and missing http://
+ 
+0.4.12.0
+ - add RTSP keepalive with an OPTIONS message (needed by HomePod)
+ 
+0.4.11.0
+ - Bi-directionnal volume filtering
+
+0.4.10.0
+ - move all strings from basic.html to strings.txt
+ - output_flush resets frames counter dmp and sets start_time to max value to make sure ms_played does not report incorrect (previous) value
+ - do not send progress every second, just send it once, so no need of track duration and elapsed
+ 
+0.4.9.0
+ - add a timeout option to remove renderers
+ 
+0.4.8.0
+ - rtspcl_connect was setting the URI to the local address ???
+ - do not disconnect a playing player even if mDNS ttl expires
+ 
+0.4.7.2
+ - move mutex and cli_mutex creation/deletion out of the slimprot thread as Volume detection to make sure cli_send_cmd is not called before
+ - rename lib sub-directory (aarch64)
+ 
+0.4.7.1
+ - merge FriendlyName and Name in main context (FriendlyName is not a config item as such)
+ 
+0.4.7.0
+ - add perl 5.28
+ - add solaris build
+ - some players (eg Riva) requires 2 volume commands after RECORD and the first one must be sent "at least 1 sec" after the first one, or the volume is ignored. There is no way to find out a proper trigger mechanism, only timeout is usable. The trigger timeout variable is reused then to repeat the LMS volume command, unless Trigger is explicitely set. This also means that volume feedback is ignored while the repeat volume is pending. Normally, volume trigger should have been used for that, waiting for the 1st setproperty before sending the actual volume, but for some unknown reason that does not work either, only timeout does. iTunes seems to have the same problem
+ 
+0.4.6.2
+ - mad and flac correction, following squeezelite
+ 
+0.4.6.1
+ - keep-alive must be used if no Connection header is present
+ 
+0.4.6.0
+ - check of keep-alive was incorrect in copied Async::HTTP.pm (no impact on ATV pairing though)
+ - move back PCM mode to RAW_ALAC, not just PCM as cheap players don't support PCM (no fmtp)
+ - metadata polling for all remote streams
+ 
+0.4.5.5
+ - codec management simplification in raop_client
+ 
+0.4.5.4
+ - getsockoption for SO_REUSEPORT was resetting parameter
+ 
+0.4.5.3
+ - set SO_REUSEPORT only if option supported
+ - full cross-compiling
+
+0.4.5.2
+ - add SO_REUSEPORT for all except Windows
+ 
+0.4.5.1
+ - small alac corrections (could have run over buffer output)
+ - metadata wait is 2 sec
+ 
+0.4.5.0
+ - add alac support
+ 
+0.4.4.1
+ - use 'et' field to decide auth-setup sending (this MFi)
+ 
+0.4.4.0
+ - send auth-setup when "pk" key found and not AppleTV is needed for AirPlay2 compatibility
+ - use "md" field to block text, artwork or progress sending
+ - enable metadata and coverart by default, now that it's protected
+ 
+4.3.0
+ - get cli port from server
+
+0.4.2.0
+ - add mono for vorbis
+ - fade start might be missed in case bytes / 2 does not align with frame boundary (FADE IN-OUT)
+ 
+0.4.1.0
+ - CryptX and Ed25519 upgraded to 0.60
+ - added binaries for various Perl & CPU
+ - 32 bits comparaison correction
+ 
+0.4.0.3
+ - Change binaries to match CryptX (0.51) and ED25519 (1.04)
+ 
+0.4.0.2
+ - for Windows XP IP_ADD_MULTICAST must be after binding
+ - do not use WSAPoll() in Windows for XP compatibility
+ - fail if mDNS searcher cannot be initialized
+ 
+0.4.0.1
+ - (1) slimproto_close must join thread, not detach it otherwise other _close function might destroy buffer mutexes
+ - (1) move to "status" cmd query to have only a single query for all metadata
+ - (1) metadata path and track_has removed
+ - (2) duration in metadata for raop shall not be adjusted by current position 
+ - add crypto libs for Perl 5.22 (aarch64) and Perl 5.26 (all except osx)
+
+0.4.0.0
+ - new mDNS discovery for instant player addition / removal
+ - memory leak in mad.c when opening an already opened decoder
+ - (2) cli_send_comment uses timeout in connect (for freebsd)
+ - (3) mDNS search was wrong, should have no impact on raop (only when fast googlecast group changes)
+ - (4) MAX_CODECS was not set to 6 (no impact as MPG was not used)
+ - (4) no volume mapping for HomePod
+ - (4) VOLUME_DOWN command was wrong
+ - (5) add aarch64
+ - (5) unified standard types definition
+ - (5) dump command was using an extra parameter
+ - (8) proper handling of HomePod volume feedback scale (using a different dmcp request)
+ - (9) support stereo pairs
+ - (10) in stereo pairs, do not only mute inactive channel, but copy other channel
+ - (11) does not notify volume if it has not changed
+ - When usign AirPlay remote, "previous" command uses "button" instead of "playlist index" to restart at 0 or go to previous track, depnding how early "previous" is requested
+
+0.3.3.0
+ - (1) volume was sent on trigger even in case of SOFT_VOLUME or initial volume not set
+ - (1) do not send *any* volume command in case of Trigger
+ - (1) add a "restart" button
+ - (2) when using trigger, a 3 seconds timeout is used in case the status is never received
+ - (3) fading could be incorrect when cross-fading fails
+ - (4) send empty coverart if none available
+ - (5) when volume trigger timeouts, VolumeReady was not reset
+ - (6) only send artwork if binary content changed
+ - (7) do not reset hash of artwork at beginning of tracks ...
+ - (8) some players do *not* set their volume, so time filtering must disabled when using feedback
+ - (9) added vorbis support
+ - (9) rudimentary migration management
+ - (10) revert to a more simple metadata hash as ATV still flickers when title changes, whether artwork is updated or not 
+ - (11) updated mdns
+ 
+0.3.2.1
+ - bump version number as previous packaging did not work
+ 
+0.3.2.0
+ - set HasDigitalOut = 1 to allow fix volume
+ 
+0.3.1.3
+ - update renderer thread cleaned for better exit
+ 
+0.3.1.3.1
+ - mdns server memory leaks
+ 
+0.3.1.2
+ - AppleTV with iOS 11 does not send timing port anymore (need to wait for connection)
+ 
+0.3.1.1
+ - artwork size sent to AirPlay device was wrong!
+
+0.3.1.0
+ - force file extension to JPG when image extension is PNG but content-type if JPG
+ - Add correct shared libs (multi, thread, 64int) needed for ATV pairing
+ - add option to exclude models (command line and config file)
+ - another silly mistake in 32 bits timer comparison :-(
+ - option to switch off or stop virtual player when AirPlay device disconnects
+
+0.3.0.2
+ - (P) do not refuse to load if crypto libraries are missing
+ - (P) add platform specific libraries sor Perl 5.24 (x86, x64, armv6hf)
+ 
+0.3.0.1
+ - LMS forces content-type to image/jpeg when sending images from cache, even when a PNG is sent
+ 
+0.3.0.0
+ - better correct 32 bits rollover
+ - add support for AppleTV with pairing
+ - clean settings.pm to make it more readable
+ - correct timegaps using gettime_ms() to manage 32 bits rollover (was causing volume command to be ignored)
+ - suppress some angry logs :-)
+ - "down" volume on feedback that was adding a +5 instead of -5
+ - need to set TTL for tinysvcmdns to 255 for some players 
+ - restart immediately after pause w/o synchronization
+ - short file patch was creating STMl to be sent too early
+ - Redesign synchronization logic for GGMM devices that *want* the timestamp to NTP match to be exactly the timestamp that will be send in the next audio packet (strictly like iTunes does)
+ - First audio packet was missing "marker bit" in some cases
+ 
+0.2.2.6.5
+ - Initial server detection should be in slimproto thread, otherwise sq_run_device can block 
+ - Separate RSA encryption from Apple-Challenge and it only for AirPort Express (seems that encryption for new AirPort Expresss is now 4, so use of Apple-Challenge/RSA has been deprecated)
+ 
+0.2.2.6.3
+ - daap type parsing should be char, not int
+
+0.2.2.6.2
+ - damp format for integer was wrong
+
+0.2.2.6.1
+ - correct some strings
+ - add <volume_trigger> parameter to wait 1st setproperty before sending volume
+ 
+0.2.2.5
+ - undefine LINKALL for non-WIN version in resample
+ 
+0.2.2.4
+ - make sure MAC is unique across devices
+ - early AirPort report an active-remote above 11 char that caused a crash
+ - on Windows, retry sending on CLI command socket as it fails with ENOTCONN sometimes at first send after opening ...
+ - development versions now have an extra digit to enable auto-update
+
+0.2.2.3
+- When using LMS as image proxy, artwork_url must be prefixed with http://<server>:<port>
+
+0.2.2.2
+ - just increment version to solve update problem
+ 
+0.2.2.1
+ - default parameters intialization was wrong (sample_rate)
+ 
+0.2.2.0
+ - option to re-encode audio to ALAC
+ - during initial play, set volume to 0 was ignored because state was not set to play (worked after play/pause)
+ - correct user guide on volume feedback
+ 
+0.2.1.4
+ - when raopcl_connect failed, call to disconnect did not happen (RAOP_DOWN state)
+ - when remove_count was set to 0, player was still removed when missing
+ - (dev-2) handle very small files where decode_running state could be missed
+ - (dev-2) limit sample rate when slimproto sends a rate above max_supported
+ - in the UI, rename 'default parameters' to 'common parameters'
+
+0.2.1.3
+ - when IP address of <common> was set, all devices were forced we the same address
+ - correct XML updating of <name>
+
+0.2.1.2
+ - output fullness now takes into account device_frames to avoid telling LMS that buffer is empty when its in fact all in the AirPlay device
+ - add <mute_on_pause> to restore volume (un-mute) when LMS pauses
+ - (dev-8) change in reporting output fullness broke end of track report
+ 
+0.2.1.1 
+ - re-introduce armv5te with soft floating only
+ - limit the binary offering to what's supported by the platform
+ - option to force use of LMS network interface (GUI and -b on command line)
+
+0.2.1.0
+ - Cross-compile toolchain
+ - add "decodedbg" command line
+ 
+0.2.0.5
+ - clean armv6 compilation flags
+ - remove armv5hf build (was not float)
+ 
+0.2.0.4
+ - Add static build for OSX (only static codecs)
+ - glHostName was not set when network interface was set to "?"
+ - DACP name was not ".local"
+
+0.2.0.3
+ - ActiveRemote must be unsigned int
+ 
+0.2.0.2
+ - Codec check should include ALAC not PCM
+ - Do not fail if ALAC not in codecs, just warn
+ - too many CLI socket were consumed when all bridges were opened - open on demand and close after 10sec
+ - ignore AirSonos devices
+ - (dev-5) cli test was made before opening socket in get metadata
+ - (dev-6) do not remove player if connected, even if missing count is 0
+
+0.2.0.1
+ - Move back strings.txt to unix format
+  
+0.2.0.0
+ - re-wrote synchronization mechanism
+ - cli_decode could return wrongly transcoded char (<< 4)
+ - gettime_ms was not returning correct position (missing EPOCH)
+ - update when changing metadata on live stream
+ - check that device is still in use on sq_xxx functions
+ - do not try to re-take control of AirPlay device when it's changing source
+ - (windows) : pthread_detach was missing on slimprotostop
+ - setname was not working when device was powered off
+ - re-connect if CLI socket is closed
+ - (dev-2) only send updated metadata if they are valid
+ - (dev-2) use coarse position to avoid overloading LMS with time position request
+ - (dev-2) cli_send_cmd returns immediately in case of socket error (no wait)
+ - (dev-2) server address is memorized on LMS change
+ - (dev-3) audio UDP socket *must* be non-blocking to maintain realtime even if bridge is loaded
+ - (dev-3) remote command buffer was too short
+ - (dev-3) CLI commands can return empty string !
+ - (dev-3) path can be NULL in metadata if index is wrong
+ - (dev-4) cli_cmd parser checks for exact sent string as LMS seems to send garbage at the beginning from time to time
+ - (dev-5) exclude shairtunes created players
+ - (dev-5) change modelname to "Squeeze2Raop" for ShairTunes2 co-existence
+ - (dev-6) volume was not translated from LMS 0..128 to 0..100
+ - (dev-6) feedback remote volume changes (add< volume_feedback>)
+ - (dev-6) full volume management with <volume_mapping> and <volume_mode>
+  
+0.1.3.0
+ - added coverart
+ - added airplay remote control support
+ - Time was still counting when track was paused
+ - Time was wrong when repositioning (simplifed calculation, ahead by <read_ahad>)
+ - DAAP parameters where missing mlit & mikd fields
+ - Normal end of tracks was not flushing the connection
+ - Improved network interface address detection
+    
+0.1.2.2
+ - Metadata was always sent even if disabled (only elapsed time was filtered)
+ - NTP port log was wrong
+ - Filter out LocalLink addresses (AirPort Express)
+ - when using "songinfo" query, LMS wants a client_id, although documented differently
+ - cli_wait set at 1s
+ - Refresh of configuration file was not adding missing parameters
+  
+0.1.2.1 
+ - Player name set from LMS are now persistent, no need to set it from the plugin settings
+ - adding <friendly_name> parameter to keep trace or true player name
+ - Player auto refresh could be in conflict wihh external modifications
+ 
+0.1.2.0
+ - mad was registered twice
+ - do not declare a codec to LMS if the shared lib has not been loaded
+ - move <server> parameter from global to <common> (parameter copy for compatibility needs to be removed later)
+ - fix server switch & rediscovery
+ - all -static version now include mp3, flac and aac decoder built-in
+ 
+0.1.1.0
+ - if MAC cannot be retrieved, create a fake one from UDN
+ - force first 2 bytes of MAC to be 0xaa unless <mac_address> is set in config file
+
+0.1.0.6 (not released)
+ - Volume can be set -1 ... -100 to be fixed
+ - hash32 check for NULL string
+ - (dev-4) 32 bits overflow lead to high CPU usage in raop_send_sample
+ 
+0.1.0.5
+ - Interface parameter was not taken into account
+ - in stream thread, endtok static parameter was breaking multi-thread !
+ 
+0.1.0.4
+ - disable jack audio test
+ - proper cleanup of headers when raopcl_connect fails
+ - don't send Apple-Challenge when there is no encryption
+ - remote client-instance upon every disconnect
+ - sid must not have leading space
+ - true random for ssrc
+ - add 64 bits Linux static version (needed for -eg- fedora)
+ - timing thread must start before ANNOUNCE for AppleTV
+ - armv5 build with full static libs (including codecs)
+ - armv5el renamed armv5hf as it requires hard float
+ - mdns search was missing some answers ==> causing device to be missed
+ - detect ip:port change
+ 
+0.1.0.2
+ - pace down UDP audio packet sending
+ 
+0.1.0.1
+ - First release attempt
+ 
+0.1.0.0
+ dev-12
+  - add pthread_join in Windows now that everything is pthread
+  - msdns can now bound to <interface> only for better detection
+ dev-11
+  - All thread are now pthread on Windows - including the old squeezelite ones
+ dev-10
+  - Move back to blocking sockets but keep select() to ensure audio socket is ready to write 
+  - no SIGPIPE on Linux (was exiting the application on attempt to re-establish connection)
+ dev-9
+ - UDP sockets are non blocking
+ - detect failed UDP socket for audio (every frame send), ctrl, time and TCP socket main (every second)
+ - wait up to 100ms for audio socket to be available in send_sample
+ 
+ 

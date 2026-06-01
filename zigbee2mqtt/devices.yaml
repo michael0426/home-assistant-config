@@ -1,0 +1,13 @@
+'0x00158d0006ec6454':
+  friendly_name: 3F曬衣間窗戶
+'0x00158d0006d6461f':
+  friendly_name: 3F前陽台窗戶
+'0x00158d000709b4f3':
+  friendly_name: 3F浴室感應器
+  occupancy_timeout: 5
+'0x00158d00070b3789':
+  friendly_name: 洗衣機
+'0x00158d000706c99b':
+  friendly_name: 3F客房
+'0x00158d00031c7448':
+  friendly_name: 3F樓梯感應器

@@ -1,0 +1,939 @@
+---
+ACLFiletest:
+  basedir: /usr/share/perl5/Slim/Plugin/ACLFiletest
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_ACL_FILETEST_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: ee753400-eba0-11e3-ac10-0800200c9a66
+  importmodule: Slim::Plugin::ACLFiletest::Plugin
+  module: Slim::Plugin::ACLFiletest::Plugin
+  name: PLUGIN_ACL_FILETEST
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.9.0
+  targetPlatform:
+  - Darwin
+  - Unix
+  - Linux
+  type: '2'
+  version: '1.0'
+Amazon:
+  basedir: /usr/share/perl5/Slim/Plugin/Amazon
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_AMAZON_MODULE_NAME
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Amazon
+  icon: plugins/Amazon/html/images/icon.png
+  id: 587A25E9-49AB-4497-BE47-2962E5742DC4
+  module: Slim::Plugin::Amazon::Plugin
+  name: PLUGIN_AMAZON_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  type: '2'
+  version: '1.0'
+AppGallery:
+  basedir: /usr/share/perl5/Slim/Plugin/AppGallery
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_APP_GALLERY_MODULE_NAME
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery
+  icon: plugins/AppGallery/html/images/icon.png
+  id: 855EC660-D604-4B08-B06C-E6991DA83D34
+  module: Slim::Plugin::AppGallery::Plugin
+  name: PLUGIN_APP_GALLERY_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.4'
+  type: '2'
+  version: '1.0'
+AudioScrobbler:
+  basedir: /usr/share/perl5/Slim/Plugin/AudioScrobbler
+  creator: Logitech
+  defaultState: enabled
+  description: SETUP_PLUGIN_AUDIOSCROBBLER_OVERVIEW
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/LastFM
+  id: A6AE68BF-2C7F-437A-801B-90298DC62E73
+  module: Slim::Plugin::AudioScrobbler::Plugin
+  name: PLUGIN_AUDIOSCROBBLER_MODULE_NAME
+  optionsURL: plugins/AudioScrobbler/settings/basic.html
+  playerMenu: SETTINGS
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+CLI:
+  basedir: /usr/share/perl5/Slim/Plugin/CLI
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_CLI_DESC
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 663969E4-9824-4553-AF9C-BB55797048D2
+  module: Slim::Plugin::CLI::Plugin
+  name: PLUGIN_CLI
+  optionsURL: plugins/CLI/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+Classical:
+  basedir: /usr/share/perl5/Slim/Plugin/Classical
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_CLASSICAL_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Classical
+  icon: plugins/Classical/html/images/icon.png
+  id: 5A1A7A01-F86E-4363-BA68-946C012DEE16
+  module: Slim::Plugin::Classical::Plugin
+  name: PLUGIN_CLASSICAL_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  type: '2'
+  version: '1.0'
+DateTime:
+  basedir: /usr/share/perl5/Slim/Plugin/DateTime
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_SCREENSAVER_DATETIME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: FE8130FE-84DA-470B-BC73-EBBD50D70E4F
+  module: Slim::Plugin::DateTime::Plugin
+  name: PLUGIN_SCREENSAVER_DATETIME
+  optionsURL: plugins/DateTime/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+Deezer:
+  basedir: /usr/share/perl5/Slim/Plugin/Deezer
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_DEEZER_MODULE_NAME
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Deezer
+  icon: plugins/Deezer/html/images/icon.png
+  id: 5B30DC4B-FACD-455D-8385-D0B030DED8A7
+  importmodule: Slim::Plugin::Deezer::Importer
+  module: Slim::Plugin::Deezer::Plugin
+  name: PLUGIN_DEEZER_MODULE_NAME
+  needsMySB: 'true'
+  onlineLibrary: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  type: '2'
+  version: '1.0'
+DigitalInput:
+  basedir: /usr/share/perl5/Slim/Plugin/DigitalInput
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_DIGITAL_INPUT_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/DigitalInput/html/images/icon.png
+  id: BB7E7AAF-6587-4733-B12F-CB6EE6AA6715
+  module: Slim::Plugin::DigitalInput::Plugin
+  name: PLUGIN_DIGITAL_INPUT
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+DnDPlay:
+  basedir: /usr/share/perl5/Slim/Plugin/DnDPlay
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_DNDPLAY_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 9434210e-bc51-4997-ba91-fcc37b66677b
+  module: Slim::Plugin::DnDPlay::Plugin
+  name: PLUGIN_DNDPLAY
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.9'
+  type: '2'
+  version: '0.1'
+DontStopTheMusic:
+  basedir: /usr/share/perl5/Slim/Plugin/DontStopTheMusic
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_DSTM_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 99b33cfe-f43c-4de0-a7cc-8c93b7dce2db
+  module: Slim::Plugin::DontStopTheMusic::Plugin
+  name: PLUGIN_DSTM
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.9'
+  type: '2'
+  version: 1.0.0
+ExtendedBrowseModes:
+  basedir: /usr/share/perl5/Slim/Plugin/ExtendedBrowseModes
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_EXTENDED_BROWSEMODES_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/ExtendedBrowseModes/html/icon.png
+  id: 6e5e0a00-e18a-11e3-8b68-0800200c9a66
+  importmodule: Slim::Plugin::ExtendedBrowseModes::Libraries
+  module: Slim::Plugin::ExtendedBrowseModes::Plugin
+  name: PLUGIN_EXTENDED_BROWSEMODES
+  optionsURL: plugins/ExtendedBrowseModes/settings/browsemodes.html
+  playerMenu: BROWSE_MUSIC
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.9.0
+  type: '2'
+  version: '1.0'
+Extensions:
+  basedir: /usr/share/perl5/Slim/Plugin/Extensions
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_EXTENSIONS_DESC
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  module: Slim::Plugin::Extensions::Plugin
+  name: PLUGIN_EXTENSIONS
+  optionsURL: plugins/Extensions/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  version: '1.0'
+Favorites:
+  basedir: /usr/share/perl5/Slim/Plugin/Favorites
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_FAVORITES_DESC
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: B9145737-A509-4DD9-8DCA-A2D31D0FF1B5
+  module: Slim::Plugin::Favorites::Plugin
+  name: FAVORITES
+  optionsURL: plugins/Favorites/settings/basic.html
+  playerMenu: HOME
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.1'
+FullTextSearch:
+  basedir: /usr/share/perl5/Slim/Plugin/FullTextSearch
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_FULLTEXT_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 7d1c0210-55fa-11e4-8ed6-0800200c9a66
+  importmodule: Slim::Plugin::FullTextSearch::Plugin
+  module: Slim::Plugin::FullTextSearch::Plugin
+  name: PLUGIN_FULLTEXT
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.9'
+  type: '2'
+  version: 1.0.0
+ImageBrowser:
+  basedir: /usr/share/perl5/Slim/Plugin/ImageBrowser
+  creator: Michael Herger
+  defaultState: enabled
+  description: PLUGIN_IMAGEBROWSER_MODULE_NAME_DESC
+  email: michael@slimdevices.com
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.slimdevices.com/
+  icon: plugins/ImageBrowser/html/images/icon.png
+  id: e102b4d0-b86a-11e0-aff2-0800200c9a66
+  module: Slim::Plugin::ImageBrowser::Plugin
+  name: PLUGIN_IMAGEBROWSER_MODULE_NAME
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.6'
+  type: '2'
+  version: '1.0'
+InfoBrowser:
+  basedir: /usr/share/perl5/Slim/Plugin/InfoBrowser
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_INFOBROWSER_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/InfoBrowser/html/images/icon.png
+  module: Slim::Plugin::InfoBrowser::Plugin
+  name: PLUGIN_INFOBROWSER
+  optionsURL: plugins/InfoBrowser/settings/basic.html
+  playerMenu: PLUGINS
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+InternetRadio:
+  basedir: /usr/share/perl5/Slim/Plugin/InternetRadio
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_INTERNET_RADIO_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: BE2325E0-009E-49DB-B032-B6C13799BC4F
+  module: Slim::Plugin::InternetRadio::Plugin
+  name: RADIO
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  type: '2'
+  version: '1.0'
+JiveExtras:
+  basedir: /usr/share/perl5/Slim/Plugin/JiveExtras
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_JIVEEXTRAS_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  module: Slim::Plugin::JiveExtras::Plugin
+  name: PLUGIN_JIVEEXTRAS
+  optionsURL: plugins/JiveExtras/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  version: '1.0'
+LMA:
+  basedir: /usr/share/perl5/Slim/Plugin/LMA
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_LMA_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/LMA
+  icon: plugins/LMA/html/images/icon.png
+  id: B9145737-A509-4DD9-8DCA-A2D31D0FF1B5
+  module: Slim::Plugin::LMA::Plugin
+  name: PLUGIN_LMA_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+LibraryDemo:
+  basedir: /usr/share/perl5/Slim/Plugin/LibraryDemo
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_LIBRARY_DEMO_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 91d8fb10-ecbc-11e3-ac10-0800200c9a66
+  importmodule: Slim::Plugin::LibraryDemo::Plugin
+  module: Slim::Plugin::LibraryDemo::Plugin
+  name: PLUGIN_LIBRARY_DEMO
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.9.0
+  version: '1.0'
+LineIn:
+  basedir: /usr/share/perl5/Slim/Plugin/LineIn
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_LINE_IN_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/LineIn/html/images/icon.png
+  id: BB7E7AAF-4711-4711-4711-CB6EE6AA6715
+  module: Slim::Plugin::LineIn::Plugin
+  name: PLUGIN_LINE_IN
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+LineOut:
+  basedir: /usr/share/perl5/Slim/Plugin/LineOut
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_LINE_OUT_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/LineOut/html/images/icon.png
+  module: Slim::Plugin::LineOut::Plugin
+  name: PLUGIN_LINE_OUT
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.3'
+  type: '2'
+  version: '1.0'
+MP3tunes:
+  basedir: /usr/share/perl5/Slim/Plugin/MP3tunes
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_MP3TUNES_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/MP3tunes
+  icon: plugins/MP3tunes/html/images/icon.png
+  id: D91733B9-C52A-4D15-AEBC-8C0257FC3E0A
+  module: Slim::Plugin::MP3tunes::Plugin
+  name: PLUGIN_MP3TUNES_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+MusicMagic:
+  basedir: /usr/share/perl5/Slim/Plugin/MusicMagic
+  creator: Logitech
+  defaultState:
+    mac: enabled
+    other: disabled
+    win: enabled
+  description: MUSICMAGIC_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/MusicMagic/html/images/icon.png
+  id: 2A25E5C4-036E-493F-890C-2BFC07944110
+  importmodule: Slim::Plugin::MusicMagic::Importer
+  module: Slim::Plugin::MusicMagic::Plugin
+  name: MUSICMAGIC
+  optionsURL: plugins/MusicMagic/settings/musicmagic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+MyApps:
+  basedir: /usr/share/perl5/Slim/Plugin/MyApps
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_MY_APPS_MODULE_NAME
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/MyApps/html/images/icon.png
+  id: 2E3ACD53-B9A8-4440-9C5B-517B1EB28E34
+  module: Slim::Plugin::MyApps::Plugin
+  name: PLUGIN_MY_APPS_MODULE_NAME
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.4'
+  type: '2'
+  version: '1.0'
+NetTest:
+  basedir: /usr/share/perl5/Slim/Plugin/NetTest
+  creator: Triode
+  defaultState: enabled
+  description: PLUGIN_NETTEST_DESC
+  email: triode1@btinternet.com
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  module: Slim::Plugin::NetTest::Plugin
+  name: PLUGIN_NETTEST
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.4'
+  type: '2'
+  version: '1.0'
+OPMLGeneric:
+  basedir: /usr/share/perl5/Slim/Plugin/OPMLGeneric
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_OPML_GENERIC_MODULE_NAME
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 4666C799-7B54-4A2F-BF1A-D9EAFC35E67D
+  module: Slim::Plugin::OPMLGeneric::Plugin
+  name: PLUGIN_OPML_GENERIC_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.4'
+  type: '2'
+  version: '1.0'
+OnlineLibrary:
+  basedir: /usr/share/perl5/Slim/Plugin/OnlineLibrary
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_ONLINE_LIBRARY_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/
+  id: 1b8f1315-d9ae-4ad1-8edf-de0eddbdcd15
+  importmodule: Slim::Plugin::OnlineLibrary::Importer
+  module: Slim::Plugin::OnlineLibrary::Plugin
+  name: PLUGIN_ONLINE_LIBRARY_MODULE_NAME
+  optionsURL: plugins/OnlineLibrary/settings.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 8.0.0
+  version: '1.0'
+Orange:
+  basedir: /usr/share/perl5/Slim/Plugin/Orange
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_ORANGE_LIVERADIO
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Orange
+  icon: plugins/Orange/html/images/icon.png
+  id: 659FB200-642F-11E0-AE3E-0800200C9A66
+  module: Slim::Plugin::Orange::Plugin
+  name: PLUGIN_ORANGE_LIVERADIO
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.5'
+  type: '2'
+  version: '1.0'
+Pandora:
+  basedir: /usr/share/perl5/Slim/Plugin/Pandora
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_PANDORA_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Pandora
+  icon: plugins/Pandora/html/images/icon.png
+  id: EAF3A57B-2698-4244-A895-CE1FC6BAB52B
+  module: Slim::Plugin::Pandora::Plugin
+  name: PLUGIN_PANDORA_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '3.0'
+Podcast:
+  basedir: /usr/share/perl5/Slim/Plugin/Podcast
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_PODCAST_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Podcasts
+  icon: plugins/Podcast/html/images/icon.png
+  id: 6B19E1A4-3C82-415D-A4C1-5B706B8D2ED1
+  module: Slim::Plugin::Podcast::Plugin
+  name: PLUGIN_PODCAST
+  optionsURL: plugins/Podcast/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '2.0'
+PresetsEditor:
+  basedir: /usr/share/perl5/Slim/Plugin/PresetsEditor
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_PRESETS_EDITOR_DESC
+  error: INSTALLERROR_SUCCESS
+  id: c7171249-fcde-43bc-97e5-1be92854d137
+  module: Slim::Plugin::PresetsEditor::Plugin
+  name: PLUGIN_PRESETS_EDITOR
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.7.0
+  type: '2'
+  version: '1.0'
+RS232:
+  basedir: /usr/share/perl5/Slim/Plugin/RS232
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_RS232_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 51F21801-AAF1-4FEF-A59D-799A9248DC41
+  module: Slim::Plugin::RS232::Plugin
+  name: PLUGIN_RS232_NAME
+  optionsURL: plugins/RS232/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.1'
+RSSNews:
+  basedir: /usr/share/perl5/Slim/Plugin/RSSNews
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_RSSNEWS_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 98E6D04C-F4F5-434C-8857-9AF1FD0D2051
+  module: Slim::Plugin::RSSNews::Plugin
+  name: PLUGIN_RSSNEWS
+  optionsURL: plugins/RSSNews/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+RandomPlay:
+  basedir: /usr/share/perl5/Slim/Plugin/RandomPlay
+  canConflictWithDSTM: '1'
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_RANDOM_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  icon: plugins/RandomPlay/html/images/icon.png
+  id: 8946D8D2-4C44-470C-ACF9-74E91E8F29AE
+  module: Slim::Plugin::RandomPlay::Plugin
+  name: PLUGIN_RANDOMPLAY
+  playerMenu: BROWSE_MUSIC
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+RaopBridge:
+  basedir: /config/lms/cache/InstalledPlugins/Plugins/RaopBridge
+  creator: Philippe
+  defaultState: enabled
+  description: PLUGIN_RAOPBRIDGE_DESC
+  email: philippe_44@outlook.com
+  error: INSTALLERROR_SUCCESS
+  module: Plugins::RaopBridge::Plugin
+  name: PLUGIN_RAOPBRIDGE
+  optionsURL: plugins/RaopBridge/settings/basic.html
+  targetApplication:
+    id: SlimServer
+    maxVersion: '*'
+    minVersion: '7.7'
+  version: 0.4.62.3
+RemoteLibrary:
+  basedir: /usr/share/perl5/Slim/Plugin/RemoteLibrary
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_REMOTE_LIBRARY_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/
+  icon: plugins/RemoteLibrary/html/icon.png
+  id: 21865f76-C204-475C-B46E-50370DAC7EDE
+  module: Slim::Plugin::RemoteLibrary::Plugin
+  name: PLUGIN_REMOTE_LIBRARY_MODULE_NAME
+  optionsURL: plugins/RemoteLibrary/settings.html
+  playerMenu: BROWSE_MUSIC
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.9'
+  version: '1.0'
+Rescan:
+  basedir: /usr/share/perl5/Slim/Plugin/Rescan
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_RESCAN_MUSIC_LIBRARY_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 665291B7-02A3-4623-9152-FD30B6217C8B
+  module: Slim::Plugin::Rescan::Plugin
+  name: PLUGIN_RESCAN_MUSIC_LIBRARY
+  optionsURL: plugins/Rescan/settings/basic.html
+  playerMenu: SETTINGS
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+RhapsodyDirect:
+  basedir: /usr/share/perl5/Slim/Plugin/RhapsodyDirect
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_RHAPSODY_DIRECT_MODULE_NAME_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/RhapsodyDirect
+  icon: plugins/RhapsodyDirect/html/images/icon.png
+  id: C1289A9D-4576-4A35-B431-67E13C2FCE42
+  module: Slim::Plugin::RhapsodyDirect::Plugin
+  name: PLUGIN_RHAPSODY_DIRECT_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+SN:
+  basedir: /usr/share/perl5/Slim/Plugin/SN
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_SN_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 186d05b6-c3a6-4481-bc0b-ae8cd381dc6d
+  module: Slim::Plugin::SN::Plugin
+  name: PLUGIN_SN
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.5'
+  type: '2'
+  version: '1.0'
+SavePlaylist:
+  basedir: /usr/share/perl5/Slim/Plugin/SavePlaylist
+  creator: Logitech
+  defaultState: enabled
+  description: SAVE_PLAYLIST_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: E8513A32-71B8-4447-97E0-17FA4AD80B12
+  module: Slim::Plugin::SavePlaylist::Plugin
+  name: SAVE_PLAYLIST
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+Slacker:
+  basedir: /usr/share/perl5/Slim/Plugin/Slacker
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_SLACKER_MODULE_NAME
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Slacker
+  icon: plugins/Slacker/html/images/icon.png
+  id: CE9FBA95-3EA7-4569-9167-7E2429915D22
+  module: Slim::Plugin::Slacker::Plugin
+  name: PLUGIN_SLACKER_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+SlimTris:
+  basedir: /usr/share/perl5/Slim/Plugin/SlimTris
+  creator: Logitech
+  defaultState: disabled
+  description: SLIMTRIS_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 6D96B9BB-832E-4E4A-8C00-0742AF7A117A
+  module: Slim::Plugin::SlimTris::Plugin
+  name: SLIMTRIS
+  playerMenu: GAMES
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+Snow:
+  basedir: /usr/share/perl5/Slim/Plugin/Snow
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_SCREENSAVER_SNOW
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: F0D255D0-FEE8-4EE8-B244-EAF780046D2D
+  module: Slim::Plugin::Snow::Plugin
+  name: PLUGIN_SCREENSAVER_SNOW
+  playerMenu: SETTINGS
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.1'
+SongScanner:
+  basedir: /usr/share/perl5/Slim/Plugin/SongScanner
+  creator: Kevin Deane-Freeman, Logitech
+  defaultState: enabled
+  description: PLUGIN_SONGSCANNER_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: e490c2fe-1d5b-4ecc-ba90-d15747a82589
+  module: Slim::Plugin::SongScanner::Plugin
+  name: PLUGIN_SONGSCANNER
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '2.0'
+Sounds:
+  basedir: /usr/share/perl5/Slim/Plugin/Sounds
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_SOUNDS_MODULE_NAME
+  enforce: '1'
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/Sounds
+  icon: plugins/Sounds/html/images/icon.png
+  id: 0381A1D8-7CDF-4236-BA8B-E92553162EDE
+  module: Slim::Plugin::Sounds::Plugin
+  name: PLUGIN_SOUNDS_MODULE_NAME
+  needsMySB: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.0'
+  type: '2'
+  version: '1.0'
+UPnP:
+  basedir: /usr/share/perl5/Slim/Plugin/UPnP
+  creator: Andy Grundman
+  defaultState: disabled
+  description: PLUGIN_UPNP_MODULE_NAME_DESC
+  email: andy@slimdevices.com
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.slimdevices.com/
+  id: C5282612-483D-4B22-8FBF-19F166B1887E
+  module: Slim::Plugin::UPnP::Plugin
+  name: PLUGIN_UPNP_MODULE_NAME
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.6'
+  type: '2'
+  version: '1.0'
+Visualizer:
+  basedir: /usr/share/perl5/Slim/Plugin/Visualizer
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_SCREENSAVER_VISUALIZER
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: 638DB963-2492-4C89-9547-8B07465565D7
+  module: Slim::Plugin::Visualizer::Plugin
+  name: PLUGIN_SCREENSAVER_VISUALIZER
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+WiMP:
+  basedir: /usr/share/perl5/Slim/Plugin/WiMP
+  creator: Logitech
+  defaultState: enabled
+  description: PLUGIN_WIMP_MODULE_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/appgallery/WiMP
+  icon: plugins/WiMP/html/images/icon.png
+  id: DEB1A433-A53C-4D14-ADB4-537C05A6D29B
+  importmodule: Slim::Plugin::WiMP::Importer
+  module: Slim::Plugin::WiMP::Plugin
+  name: PLUGIN_WIMP_MODULE_NAME
+  needsMySB: 'true'
+  onlineLibrary: 'true'
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: '7.5'
+  type: '2'
+  version: '2.0'
+YALP:
+  basedir: /usr/share/perl5/Slim/Plugin/YALP
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_YALP
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: b29433d0-e9bc-4e3d-8907-89aa77bab5b8
+  module: Slim::Plugin::YALP::Plugin
+  name: PLUGIN_YALP
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'
+__cacheinfo:
+  bin: /usr/sbin
+  count: 53
+  mtimesum: 66599253012
+  osArch: armv7l-linux
+  osType: Linux
+  revision: '1627922070'
+  server: 8.2.0
+  version: 4
+iTunes:
+  basedir: /usr/share/perl5/Slim/Plugin/iTunes
+  creator: Logitech
+  defaultState:
+    mac: enabled
+    other: disabled
+    win: enabled
+  description: ITUNES_DESC
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  importmodule: Slim::Plugin::iTunes::Importer
+  module: Slim::Plugin::iTunes::Plugin
+  name: ITUNES
+  optionsURL: plugins/iTunes/settings/itunes.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  version: '1.0'
+xPL:
+  basedir: /usr/share/perl5/Slim/Plugin/xPL
+  creator: Logitech
+  defaultState: disabled
+  description: PLUGIN_XPL
+  error: INSTALLERROR_SUCCESS
+  homepageURL: http://www.mysqueezebox.com/support
+  id: D267DE2D-7544-4708-AB82-58CCC078D454
+  module: Slim::Plugin::xPL::Plugin
+  name: PLUGIN_XPL
+  optionsURL: plugins/xPL/settings/basic.html
+  targetApplication:
+    id: Logitech Media Server
+    maxVersion: '*'
+    minVersion: 7.0a
+  type: '2'
+  version: '1.0'

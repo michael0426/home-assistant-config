@@ -1,0 +1,148 @@
+type: custom:button-card
+variables:
+  clockcardversion: 1.5.1
+  var_background: >-
+    [[[ try {if (hass.states[variables.var_assistsat_entity] && 
+    hass.states[variables.var_assistsat_entity].attributes.mode === "night")
+    return ""; else return hass.states[variables.var_assistsat_entity] ? 
+    hass.states[variables.var_assistsat_entity].attributes.background : ""}
+    catch {return ""}]]]
+  var_font_color: >-
+    [[[ try {if (hass.states[variables.var_assistsat_entity] && 
+    hass.states[variables.var_assistsat_entity].attributes.mode === "night")
+    return "red"; else return "white";} catch {return "white";} ]]]
+  var_font_color_night: >-
+    [[[ try {if (hass.states[variables.var_assistsat_entity] && 
+    hass.states[variables.var_assistsat_entity].attributes.mode === "night")
+    return "transparent"; else return "white";} catch {return "white";} ]]]
+template:
+  - variable_template
+  - responsive_base
+  - body_template
+styles:
+  grid:
+    - grid-template-areas: |
+        "title status"
+        "time time"
+        "date date"
+    - grid-template-rows: |-
+        [[[
+          if (window.viewAssistResponsive && window.viewAssistResponsive.orientation === "portrait") {
+            return "15vh 35vh 15vh";
+          } else {
+            return "15vh 50vh 15vh";
+          }
+        ]]]
+    - grid-template-columns: 1fr 1fr
+  card:
+    - background: >-
+        [[[ return `center / cover no-repeat url(${variables.var_background})`
+        ]]]
+    - background-size: cover
+    - background-color: black
+    - position: relative
+  custom_fields:
+    title:
+      - display: grid
+      - color: "[[[ return variables.var_font_color_night ]]]"
+    time:
+      - display: grid
+      - justify-self: center
+      - align-self: center
+      - z-index: 1
+      - font-size: |-
+          [[[
+            if (window.viewAssistResponsive && window.viewAssistResponsive.orientation === "portrait") {
+              return "25vh";
+            } else {
+              return "55vh";
+            }
+          ]]]
+      - font-weight: bold
+      - opacity: >-
+          [[[ try {if (hass.states[variables.var_assistsat_entity] && 
+          hass.states[variables.var_assistsat_entity].attributes.mode ===
+          "night") return "35%"; else return "100%";} catch {return "100%";}
+          ]]] 
+      - color: "[[[ return variables.var_font_color ]]]"
+      - padding-top: 0
+      - margin-top: 0
+    date:
+      - display: grid
+      - justify-self: center
+      - align-self: center
+      - z-index: 1
+      - font-size: |-
+          [[[
+            if (window.viewAssistResponsive && window.viewAssistResponsive.orientation === "portrait") {
+              return "8vh";
+            } else {
+              return "15vh";
+            }
+          ]]]
+      - width: max-content
+      - color: "[[[ return variables.var_font_color_night ]]]"
+    night:
+      - position: absolute
+      - top: 0
+      - min-height: 100%
+      - width: 100%
+      - overflow: hidden
+      - display: >-
+          [[[ try {if (hass.states[variables.var_assistsat_entity] &&
+          hass.states[variables.var_assistsat_entity].attributes.mode ===
+          "night") return "block"; else return "none";} catch { return  "none"}
+           ]]]
+      - z-index: 2
+    shader:
+      - position: absolute
+      - top: 0
+      - height: 100%
+      - width: 100%
+      - background-color: rgba(0,0,0,0.15)
+custom_fields:
+  title:
+    card:
+      type: custom:button-card
+      icon: "[[[ return variables.var_weather_icon ]]]"
+      name: "[[[ return variables.var_weather_temperature ]]]"
+      template: null
+      tap_action:
+        action: call-service
+        service: view_assist.navigate
+        service_data:
+          device: "[[[ return variables.var_assistsat_entity ]]]"
+          path: '[[[ return `${variables.var_dashboard}/weather` ]]]'
+      styles:
+        card:
+          - background-color: transparent
+          - border-width: 0px
+          - width: 100%
+          - top: "-5%"
+          - left: 5%
+        grid:
+          - grid-template-areas: "\"i n\""
+        name:
+          - font-size: |-
+              [[[
+                if (window.viewAssistResponsive && window.viewAssistResponsive.orientation === "portrait") {
+                  return "10vh";
+                } else {
+                  return "15vh";
+                }
+              ]]]
+          - color: "[[[ return variables.var_font_color_night ]]]"
+        icon:
+          - width: |-
+              [[[
+                if (window.viewAssistResponsive && window.viewAssistResponsive.orientation === "portrait") {
+                  return "10vh";
+                } else {
+                  return "13vh";
+                }
+              ]]]
+          - color: "[[[ return variables.var_font_color_night ]]]"
+  time: "[[[ return variables.var_current_time ]]]"
+  date: "[[[ return variables.var_date_short ]]]"
+  night: ""
+  shader: ""

@@ -1,0 +1,95 @@
+{
+  "manufacturer": "Hitachi",
+  "supportedModels": [
+    "Ras-36-job"
+  ],
+  "commandsEncoding": "Base64",
+  "supportedController": "Broadlink",
+  "minTemperature": 25,
+  "maxTemperature": 25,
+  "precision": 1,
+  "operationModes": [
+    "cool",
+    "heat",
+    "dry",
+    "fan_only"
+  ],
+  "fanModes": [
+    "auto",
+    "high",
+    "med",
+    "low",
+    "quiet"
+  ],
+  "commands": {
+    "off": "",
+    "cool": {
+      "auto": {
+        "25": "JgAgAAhICEYHBQcAAuUJAAONCQAGwggADLYKAAOtCQcHAA0FAAAAAAAAAAA="
+      },
+      "high": {
+        "25": ""
+      },
+      "med": {
+        "25": ""
+      },
+      "low": {
+        "25": ""
+      },
+      "quiet": {
+        "25": ""
+      }
+    },
+    "heat": {
+      "auto": {
+        "25": ""
+      },
+      "high": {
+        "25": ""
+      },
+      "med": {
+        "25": ""
+      },
+      "low": {
+        "25": ""
+      },
+      "quiet": {
+        "25": ""
+      }
+    },
+    "dry": {
+      "auto": {
+        "25": ""
+      },
+      "high": {
+        "25": ""
+      },
+      "med": {
+        "25": ""
+      },
+      "low": {
+        "25": ""
+      },
+      "quiet": {
+        "25": ""
+      }
+    },
+    "fan_only": {
+      "auto": {
+        "25": ""
+      },
+      "high": {
+        "25": ""
+      },
+      "med": {
+        "25": ""
+      },
+      "low": {
+        "25": ""
+      },
+      "quiet": {
+        "25": ""
+      }
+    }
+  }
+}

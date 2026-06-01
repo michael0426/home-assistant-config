@@ -1,0 +1,71 @@
+blueprint:
+  name: View Assist - Show Webpage
+  description: Ask View Assist to show a website as defined by the blueprint (View
+    Assist showwebpage v 1.1.2)
+  domain: automation
+  input:
+    command:
+      name: Command Text
+      description: The command to use to trigger the automation
+      default: Show Home Assistant
+    response:
+      name: Response Text
+      description: The response to give when launching website
+      default: Here comes Home Assistant
+    view:
+      name: Dashboard Webpage view
+      description: The View Assist dashboard view designed to show the webpage (example
+        /view-assist/webpage)
+      default: /view-assist/webpage
+    url:
+      name: Webpage
+      description: The website url to display (example https://www.home-assistant.io/)
+      default: https://www.home-assistant.io/
+    hold_mode:
+      name: Hold Mode
+      description: Set on to keep the page from automatically switching after timeout
+      default: true
+      selector:
+        boolean: {}
+alias: View Assist - Show website
+description: ''
+trigger:
+- platform: conversation
+  command: !input command
+condition: []
+action:
+- variables:
+    target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+    target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')}}'
+    target_satellite_device_type: '{{ state_attr(target_satellite_device, ''type'')}}'
+    target_musicplayer_device: '{{ state_attr(target_satellite_device, ''musicplayer_device'')
+      }}'
+    url: !input url
+    hold_mode: !input hold_mode
+    view: !input view
+    response: !input response
+- action: view_assist.set_state
+  target:
+    entity_id: '{{ target_satellite_device }}'
+  data:
+    url: '{{ url }}'
+- action: view_assist.navigate
+  data:
+    device: '{{ target_satellite_device }}'
+    path: '{{ view }}'
+- if:
+  - condition: template
+    value_template: '{% if hold_mode %}true{%endif%}'
+  then:
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      mode: hold
+- set_conversation_response: '{{ response }}'
+- action: view_assist.set_state
+  target:
+    entity_id: '{{ target_satellite_device }}'
+  data:
+    last_said: '{{ response }}'
+mode: single

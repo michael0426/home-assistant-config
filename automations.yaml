@@ -1,0 +1,381 @@
+- alias: airpurifier turn on
+  trigger:
+  - platform: state
+    entity_id: script.airpurifier_power
+    to: 'on'
+  action:
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.airpurifier_power_state
+  id: airpurifier turn on
+- alias: airpurifier turn off
+  trigger:
+  - platform: state
+    entity_id: script.airpurifier_power
+    to: 'off'
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.airpurifier_power_state
+  id: airpurifier turn off
+- id: '1639128230772'
+  alias: washing machine done
+  description: ''
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 931113e9e2a9154b84320066eee8b09b
+    entity_id: binary_sensor.xi_yi_ji_contact
+    domain: binary_sensor
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  - platform: state
+    entity_id: binary_sensor.xi_yi_ji_contact
+    for:
+      hours: 2
+      minutes: 0
+      seconds: 0
+    to: 'off'
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      title: 衣服洗好了
+      message: 趕快去曬衣服
+  - service: tts.speak
+    data:
+      cache: true
+      media_player_entity_id: media_player.living_room
+      message: 衣服洗好了快去曬
+  mode: single
+- id: '1642681063509'
+  alias: 熱水器on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.100164df83
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 3
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: 熱水器已打開
+  mode: single
+- id: '1642681314430'
+  alias: 熱水器off
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: bdea934cfd51ee7822f0768d08714f6f
+    entity_id: 8a98782ccb86dc170aa1fd2ab6eb58c5
+    domain: switch
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: 熱水器已關閉
+  mode: single
+- id: '1648732846187'
+  alias: CO2
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.cgllc_cgdn1_5f75_co2_density
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+    above: 1000
+  condition:
+  - condition: time
+    before: '22:00:00'
+    after: 09:00:00
+  action:
+  - service: notify.notify
+    data:
+      message: 請打開窗戶通風
+      title: 注意CO2濃度較高
+  - service: tts.speak
+    data:
+      cache: true
+      media_player_entity_id: media_player.living_room
+      message: CO2高於1000
+  mode: single
+- id: '1648780236611'
+  alias: PM2.5
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.cgdn1_cloud_625248_density
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+    attribute: environment.pm2_5_density
+    above: '75'
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      title: PM2.5已逹輕度污染
+      message: 請緊閉門窗
+  - service: tts.google_translate_say
+    data:
+      entity_id: media_player.living_room
+      message: PM2.5已逹輕度污染 請緊閉門窗
+  mode: single
+- id: '1721536762138'
+  alias: 打開客廳冷氣
+  description: 到家後自動開客廳冷氣
+  trigger:
+  - platform: zone
+    entity_id: person.susan
+    zone: zone.home
+    event: enter
+  - platform: numeric_state
+    entity_id:
+    - sensor.cgllc_cgdn1_5f75_temperature
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    attribute: entity_class
+    above: 35
+  condition:
+  - condition: time
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    after: '10:00:00'
+    before: '22:00:00'
+  - condition: not
+    conditions:
+    - condition: zone
+      entity_id: person.michael
+      zone: zone.home
+  action:
+  - service: climate.set_hvac_mode
+    target:
+      entity_id: climate.livingroom_ac
+    data:
+      hvac_mode: cool
+  mode: single
+- id: '1721717256352'
+  alias: 打開吊扇
+  description: 人在家 溫度超過37度
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.3fqian_yang_tai_chuang_hu_device_temperature
+    attribute: device_temperature
+    above: 37
+  condition:
+  - condition: zone
+    entity_id: person.susan
+    zone: zone.home
+  - condition: time
+    after: '10:00:00'
+    before: '17:00:00'
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  action:
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      area_id: living_room
+      device_id: 9cf31aba4ad4df1f5bd44a32605104eb
+      entity_id: switch.sonoff_10011ca545
+  - service: notify.mobile_app_susan_ipad
+    metadata: {}
+    data:
+      message: 3F溫度達37度開吊扇
+      title: 開吊扇
+  mode: single
+- id: '1722322915326'
+  alias: 關吊扇
+  description: 氣溫低於35度關吊扇
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.3fqian_yang_tai_chuang_hu_device_temperature
+    below: 35
+  - platform: time
+    at: '17:00:00'
+  condition:
+  - condition: state
+    entity_id: switch.sonoff_10011ca545
+    state: 'on'
+  action:
+  - service: switch.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.sonoff_10011ca545
+  mode: single
+- id: '1722323412218'
+  alias: 開魔鏡
+  description: '3樓樓梯間偵測人上樓
+
+    打開魔鏡'
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.3flou_ti_gan_ying_qi_occupancy
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: '10:00:00'
+    before: '17:00:00'
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  action:
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - switch.sonoff_10012b7b40
+  mode: single
+- id: '1722592289782'
+  alias: 下雨囉
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.esphome_web_61ea0d_regensensor
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.3fshai_yi_jian_chuang_hu_contact
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.3fqian_yang_tai_chuang_hu_contact
+        state: 'on'
+  action:
+  - data:
+      message: 3F窗戶未關
+      title: 下雨囉
+    action: notify.mobile_app_susan_ipad
+  - metadata: {}
+    data:
+      message: 3F窗戶未關
+      title: 下雨囉
+    action: notify.mobile_app_pn
+  - action: notify.mobile_app_bi_jian_liang_de_ipad
+    metadata: {}
+    data:
+      title: 下雨囉
+      message: 3F窗戶未關
+  mode: single
+- id: '1723538039616'
+  alias: 關魔鏡
+  description: 17時如魔鏡未關，則關魔鏡
+  trigger:
+  - platform: time
+    at: '17:00:00'
+  condition:
+  - condition: state
+    entity_id: switch.sonoff_10012b7b40
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.sonoff_10012b7b40
+  mode: single
+- id: '1733927121534'
+  alias: 夜間3F樓吊燈
+  description: 3分鐘後關吊燈
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: 0
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.3flou_ti_gan_ying_qi_occupancy
+    state: 'on'
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.ceiling_light_light
+  - condition: state
+    entity_id: switch.ceiling_light_switch
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+    state: ''
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.ceiling_light_light
+  mode: single
+- id: '1771997179642'
+  alias: 廚房門
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.aqara_door_and_window_sensor_men
+    from:
+    - 'off'
+    to:
+    - 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  conditions: []
+  actions:
+  - action: notify.mobile_app_susan_ipad
+    metadata: {}
+    data:
+      message: 請注意廚房門沒關
+      title: 廚房門沒關
+  - action: notify.mobile_app_pn
+    metadata: {}
+    data:
+      message: 請注意廚房門沒關
+      title: 廚房門沒關
+  mode: single

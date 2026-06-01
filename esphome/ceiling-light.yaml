@@ -1,0 +1,82 @@
+substitutions:
+  device_name: sonoffmini
+  device_ip: 10.0.0.60
+
+esphome:
+  name: ceiling-light
+  compile_process_limit: 1
+
+esp8266: 
+  board: esp01_1m
+
+wifi:
+  ssid: "ORBI97"
+  password: "elatednest901"
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 10.0.0.60
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 10.0.0.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0
+  min_auth_mode: WPA2    
+
+  ap:
+    ssid: "ESPHOME"
+    password: "babypig1"
+
+
+logger:
+  
+api:
+#  reboot_timeout: 15min
+#  password: babypig1
+
+ota:
+  - platform: esphome
+    password: babypig1
+
+# the web_server & sensor components can be removed without affecting core functionaility.
+
+web_server:
+  port: 80
+  version: 2
+  
+sensor:
+  - platform: wifi_signal
+    name: ceiling-light Wifi Signal Strength
+    update_interval: 60s
+  - platform: uptime
+    name: ceiling-light Uptime
+#######################################
+# Device specific Config Begins Below #
+#######################################
+
+binary_sensor:
+  # the 7 lines below define the reset button
+  - platform: gpio
+    pin: GPIO14
+    id: switch_1
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay_1
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay_1
+
+switch:
+  - platform: gpio
+    name:  ceiling-light switch
+    icon: "mdi:light-recessed"
+    pin: GPIO12
+    id: relay_1
+    restore_mode: restore_default_off
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true 
+
+

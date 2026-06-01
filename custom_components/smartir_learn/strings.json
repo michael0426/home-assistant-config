@@ -1,0 +1,456 @@
+{
+    "title": "SmartIR学码",
+    "steps": {
+        "user": {
+            "title": "设置 Broadlink 设备"
+        }
+    },
+    "config": {
+        "step": {
+            "user": {
+                "title": "设置您的设备",
+                "description": "输入您的 Broadlink 设备详情。",
+                "data": {
+                    "device_ip": "博联设备IP地址"
+                }
+            },
+            "manual_input": {
+                "title": "设置您的设备",
+                "description": "请输入设备IP地址",
+                "data": {
+                    "device_ip": "博联设备IP地址"
+                }
+            }
+        },
+        "error": {
+            "invalid_device": "无效的设备IP，请重试。"
+        }
+    },
+    "options": {
+        "step": {
+            "device_configuration": {
+                "title": "学码配置",
+                "description": "为您的设备配置必要的信息",
+                "data": {
+                    "type": "设备类型"
+                }
+            },
+            "template_and_temperature": {
+                "title": "学码配置",
+                "description": "选择温度范围并选择模板 {message}",
+                "data": {
+                    "min_temperature": "最低温度",
+                    "max_temperature": "最高温度",
+                    "template": "模版"
+                }
+            },
+            "commands_step": {
+                "title": "设备信息和指令列表",
+                "description": "请填写设备信息，勾选需要处理的指令",
+                "data": {
+                    "commands": "指令",
+                    "select_all": "✅ 全选所有指令",
+                    "deselect_all": "❌ 清空所有指令",
+                    "manufacturer": "制造商",
+                    "models": "型号（用逗号分隔）"
+                }
+            },
+            "select_existing_file": {
+                "title": "选择现有模板文件",
+                "description": "选择一个现有的SmartIR文件。",
+                "data": {
+                    "existing_file": "文件",
+                    "template_deal_mode": "操作方式"
+                }
+            },
+            "view_smartir_content": {
+                "title": "查看SmartIR文件",
+                "description": "文件内容：\n{file_contents}",
+                "data": {
+
+                }
+            },
+            "receive_ir_code": {
+                "title": "接收 IR 码",
+                "description": "请确保设备正在发送 {command} 的 IR 码，并等待接收。",
+                "data": {
+                    "command": "指令"
+                }
+            },
+            "learn_ir_code": {
+                "title": "学习指令红外码",
+                "description": "准备重新学习 {command} 指令的红外码",
+                "data": {
+                    "command": "指令"
+                }
+            },
+            "learn_ir_code_progres": {
+                "title": "学习指令红外码",
+                "description": "请先通过遥控器切换到 {command_pre}，然后点击提交",
+                "data": {
+                    "command": "指令"
+                }
+            },
+            "test_command": {
+                "title": "测试红外码指令",
+                "description": "测试指令：\n{command}\n\n指令值：\n{command_value}",
+                "data": {
+                    "test_result": "结果"
+                },
+                "options": {
+                    "test_result": {
+                        "pass": "通过",
+                        "fail": "未通过"
+                    }
+                }
+            },
+            "finish_failed_tests": {
+                "title": "未通过的指令",
+                "description": "以下是未通过测试的指令：\n{failed_commands}",
+                "data": {
+                    "retry_learning": "是否重新学习这些指令"
+                },
+                "options": {
+                    "retry_learning": {
+                        "yes": "是",
+                        "no": "否"
+                    }
+                }
+            },
+            "finish": {
+                "title": "确认信息",
+                "description": "device_code:\n{device_code}\n\nSmartIR文件将存放到：\n{file_path}\n{file_contents}",
+                "data": {
+
+                }
+            }
+        },
+        "progress": {
+            "learn_ir_code_progres": "请拿起遥控器，在30秒内按下 {command} 键..."
+        }
+    },
+    "common": {
+        "device_ip_mode": {
+            "scan": "自动扫描",
+            "manual": "手动输入"
+        },
+        "template_from_file": "选择SmartIR文件",
+        "command_replace_map": {
+            "climate": {
+                "3dauto": "3D自动",
+                "_comment": "注释",
+                "_note": "备注",
+                "ai": "人工智能",
+                "auto": "风速自动",
+                "auto + no swing": "自动模式 + 不摆动",
+                "auto + swing": "自动模式 + 摆动",
+                "both": "两者",
+                "bottom": "底部",
+                "breeze": "微风",
+                "center": "中间",
+                "cold": "冷气",
+                "comfort": "舒适",
+                "cool": "制冷模式",
+                "diffuse": "扩散",
+                "down": "向下",
+                "down_off": "关闭向下",
+                "dry": "除湿模式",
+                "eco": "节能",
+                "econo": "经济模式",
+                "fan": "风扇",
+                "fan_auto": "风扇自动",
+                "fan_high": "高风扇",
+                "fan_l": "低风扇",
+                "fan_low": "低风扇",
+                "fan_medium": "中风扇",
+                "fan_mid": "中风扇",
+                "fan_only": "送风模式",
+                "fan_quiet": "安静风扇",
+                "feal": "感觉",
+                "feel": "感觉",
+                "hda": "高精度",
+                "heat": "制热模式",
+                "heat_auto_": "自动加热",
+                "heat_cool": "冷热交替",
+                "hi-power": "高功率",
+                "high": "风速高",
+                "highest": "最高风",
+                "hight": "高",
+                "horizontal": "水平",
+                "horizontal swing": "水平摆动",
+                "hswing": "水平摆动",
+                "humidity": "湿度",
+                "ifeel": "智能感应",
+                "ion": "离子",
+                "l": "低",
+                "led": "LED",
+                "level": "级别",
+                "lo": "低",
+                "low": "风速低",
+                "lowest": "最低风",
+                "lowmedium": "低中风",
+                "max": "最大",
+                "maximum": "最大值",
+                "med": "风速中",
+                "medium": "中风",
+                "mediumhigh": "中高风",
+                "mediumlow": "中低风",
+                "mid": "中",
+                "mid_off": "关闭中风",
+                "middle": "中间",
+                "min": "最小",
+                "money_saver": "节省能源",
+                "nature": "自然风",
+                "night": "夜间",
+                "normal": "正常",
+                "off": "关闭",
+                "on": "开启",
+                "on_once": "一次开启",
+                "position": "位置",
+                "powerful": "强力",
+                "quiet": "风速安静",
+                "set_angle": "设置角度",
+                "silence": "沉默",
+                "silent": "静音",
+                "sleep": "睡眠",
+                "static": "静态",
+                "stop": "停止",
+                "stop_swing": "停止摆动",
+                "stop_swing_eko": "停止摆动节能",
+                "super high": "超高风",
+                "superhigh": "超高风",
+                "sweep": "扫风",
+                "swing": "摆动",
+                "swing off": "关闭摆动",
+                "swing_eko": "节能摆动",
+                "top": "顶部",
+                "turbo": "涡轮",
+                "ultralow": "超低风",
+                "up": "向上",
+                "up_off": "关闭向上",
+                "updown": "上下风",
+                "updown_off": "关闭上下风",
+                "vertical": "垂直",
+                "vertical swing": "垂直摆动",
+                "vswing": "垂直摆动",
+                "minTemperature-maxTemperature": "区间温度"
+            },
+            "fan": {
+                "boost": "加速模式",
+                "default": "默认模式",
+                "forward": "向前",
+                "high": "高风",
+                "low": "低风",
+                "lowest": "最低风速",
+                "medium": "中等风",
+                "mediumHigh": "中高风",
+                "mediumLow": "中低风",
+                "mediumhigh": "中高风",
+                "mediumlow": "中低风",
+                "off": "关闭",
+                "oscillate": "摆动",
+                "reverse": "反向",
+                "rhythm": "节奏模式"
+            },
+            "media_player": {
+                "2_1chooutput": "2.1声道输出",
+                "3dsoundmode": "3D声音模式",
+                "3dsurround": "3D环绕声",
+                "5.1ch/dvd": "5.1声道/DVD",
+                "5_1choutput": "5.1声道输出",
+                "6channel": "6声道",
+                "a": "A",
+                "alexa": "Alexa",
+                "am": "AM",
+                "am-fm": "AM-FM",
+                "antenna": "天线",
+                "aspect ratio": "宽高比",
+                "atv": "ATV",
+                "audio": "音频",
+                "audiomodegame": "音频模式-游戏",
+                "audiomodemovietv": "音频模式-电影电视",
+                "audiomodemusic": "音频模式-音乐",
+                "audiomodestereo": "音频模式-立体声",
+                "aux": "辅助输入",
+                "av": "AV",
+                "av side": "AV侧面",
+                "back": "后退",
+                "band": "波段",
+                "bass ext": "低音扩展",
+                "bassdown": "低音减弱",
+                "bassup": "低音增强",
+                "bd/dvd": "BD/DVD",
+                "blue": "蓝色",
+                "blue_button": "蓝色按钮",
+                "bluetooth": "蓝牙",
+                "brightness": "亮度",
+                "cbl/sat": "有线/卫星",
+                "cc": "字幕",
+                "cd": "CD",
+                "channel": "频道",
+                "clearvoice": "清晰语音",
+                "clr": "清除",
+                "cmp": "比较",
+                "coax": "同轴",
+                "coaxial": "同轴",
+                "contrast": "对比度",
+                "d": "D",
+                "db": "分贝",
+                "direct": "直通",
+                "display": "显示",
+                "dmp": "DMP",
+                "dmp_exit": "DMP退出",
+                "dmp_fast_forward": "DMP快进",
+                "dmp_play_pause": "DMP播放/暂停",
+                "dmp_repeat": "DMP重复",
+                "dmp_rewind": "DMP倒带",
+                "dmp_stop": "DMP停止",
+                "dmp_zoom": "DMP缩放",
+                "down": "向下",
+                "down arrow": "下箭头",
+                "down_arrow": "下箭头",
+                "dsp movie": "DSP电影",
+                "dsp music": "DSP音乐",
+                "dsp straight": "DSP直通",
+                "dsp surround": "DSP环绕",
+                "dtv": "数字电视",
+                "dvd": "DVD",
+                "eco": "节能",
+                "end": "结束",
+                "enter": "确认",
+                "epg": "电子节目指南",
+                "exit": "退出",
+                "ext": "外部",
+                "fast_forward": "快进",
+                "fastforward": "快进",
+                "fm": "FM",
+                "game": "游戏",
+                "green": "绿色",
+                "green_button": "绿色按钮",
+                "guide": "指南",
+                "hdmi": "HDMI",
+                "hdmi side": "HDMI侧面",
+                "home": "主页",
+                "info": "信息",
+                "information": "信息",
+                "input": "输入",
+                "keystone": "梯形校正",
+                "left": "左",
+                "left arrow": "左箭头",
+                "left_arrow": "左箭头",
+                "line": "线路",
+                "list": "列表",
+                "menu": "菜单",
+                "mode": "模式",
+                "movie": "电影",
+                "music": "音乐",
+                "mute": "静音",
+                "navdown": "导航向下",
+                "navleft": "导航向左",
+                "navright": "导航向右",
+                "navup": "导航向上",
+                "net": "网络",
+                "netflix": "Netflix",
+                "news": "新闻",
+                "nextchannel": "下一个频道",
+                "off": "关闭",
+                "ok": "确定",
+                "on": "开启",
+                "opt": "选项",
+                "optical": "光纤",
+                "options": "选项",
+                "pause": "暂停",
+                "phono": "唱机",
+                "picture": "画面",
+                "play": "播放",
+                "port": "端口",
+                "power": "电源",
+                "previouschannel": "上一个频道",
+                "prime video": "Prime Video",
+                "radio": "收音机",
+                "rca": "RCA",
+                "rearward": "后退",
+                "rec": "录制",
+                "recall": "回放",
+                "red": "红色",
+                "red_button": "红色按钮",
+                "reset": "重置",
+                "resync": "重新同步",
+                "return": "返回",
+                "right": "右",
+                "right arrow": "右箭头",
+                "right_arrow": "右箭头",
+                "sap": "第二音频节目",
+                "scart": "SCART",
+                "scene": "场景",
+                "search": "搜索",
+                "settings": "设置",
+                "setup": "设置",
+                "sleep": "睡眠",
+                "sleep timer": "睡眠定时器",
+                "sound": "声音",
+                "sound game": "声音-游戏",
+                "sound movie": "声音-电影",
+                "sound music": "声音-音乐",
+                "sound sports": "声音-体育",
+                "sound stereo": "声音-立体声",
+                "sound tv": "声音-电视",
+                "sound_modes": "声音模式",
+                "source": "来源",
+                "sources": "来源",
+                "stereo": "立体声",
+                "still": "静止",
+                "stop": "停止",
+                "tape": "磁带",
+                "trebledown": "降低高音",
+                "trebleup": "增强高音",
+                "tuner": "调谐器",
+                "tv": "电视",
+                "tv/cd": "电视/CD",
+                "up": "向上",
+                "up arrow": "上箭头",
+                "up_arrow": "上箭头",
+                "usb": "USB",
+                "user": "用户",
+                "v-aux": "V-aux",
+                "vcr/dvd": "VCR/DVD",
+                "vga": "VGA",
+                "video": "视频",
+                "volumedown": "音量减小",
+                "volumedowncenter": "中置音量减小",
+                "volumedownfront": "前置音量减小",
+                "volumedownrear": "后置音量减小",
+                "volumedownsubwoofer": "低音炮音量减小",
+                "volumeup": "音量增大",
+                "volumeupcenter": "中置音量增大",
+                "volumeupfront": "前置音量增大",
+                "volumeuprear": "后置音量增大",
+                "volumeupsubwoofer": "低音炮音量增大",
+                "yellow": "黄色",
+                "yellow_button": "黄色按钮",
+                "ypbpr": "YPbPr",
+                "zoom": "缩放"
+            },
+            "light": {
+                "brighten": "增亮",
+                "colder": "更冷",
+                "dim": "调暗",
+                "night": "夜间模式",
+                "off": "关闭",
+                "on": "开启",
+                "warmer": "更暖"
+            }
+        },
+        "device_template_name": {
+            "Template1": "标准模板1",
+            "DEBUG": "调试模板"
+        },
+        "template_deal_mode": {
+            "ref": "引用",
+            "replace": "替换",
+            "view": "查看",
+            "test": "验证",
+            "delete": "删除"
+        }
+    }
+}

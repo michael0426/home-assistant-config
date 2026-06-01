@@ -1,0 +1,47 @@
+type: custom:button-card
+variables:
+  alarmcardversion: 1.1.0
+  var_background: >-
+    [[[ try {if (variables.var_assistsat_entity &&
+    hass.states[variables.var_assistsat_entity].attributes.mode === "night")
+    return ""; else return
+    hass.states[variables.var_assistsat_entity].attributes.background} catch
+    {return ""}]]]
+template:
+  - variable_template
+  - body_template
+styles:
+  grid:
+    - grid-template-areas: |
+        "title status"
+        "timers timers"
+        "assist assist"
+    - grid-template-rows: 15vh max-content 10vh
+    - grid-template-columns: 1fr 1fr
+  card:
+    - background: |-
+        [[[ 
+          return `center / cover no-repeat url(${variables.var_background})`;
+        ]]]
+    - background-size: cover
+    - background-color: "#24292c"
+  custom_fields:
+    title:
+      - padding: 10px 0
+    timers:
+      - justify-items: center
+      - overflow-y: >-
+          [[[ return viewassist.config.timers.length > 1 ? 'scroll' : 'hidden'
+          ]]]
+      - max-height: 75vh
+    shader:
+      - position: absolute
+      - top: 0
+      - height: 100%
+      - width: 100%
+      - background-color: rgba(0,0,0,0.15)
+custom_fields:
+  title: Timers & Alarms
+  shader: ""
+  timers:
+    card: "[[[ return viewassist.helpers.timerCards() ]]]"

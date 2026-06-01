@@ -1,0 +1,16 @@
+---
+_ts_feeds: 1632049048
+_ts_items_per_feed: 1632049048
+_version: 3
+feeds:
+- name: BBC News World Edition
+  value: http://news.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml
+- name: CNET News.com
+  value: http://news.com.com/2547-1_3-0-5.xml
+- name: New York Times Home Page
+  value: http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml
+- name: Slashdot
+  value: http://rss.slashdot.org/Slashdot/slashdot
+- name: 'Yahoo! News: Business'
+  value: http://rss.news.yahoo.com/rss/business
+items_per_feed: 3

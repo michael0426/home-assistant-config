@@ -1,0 +1,22 @@
+---
+_ts_autorun: 1632049430
+_ts_autosave: 1632049430
+_ts_baseport: 1632049430
+_ts_bin: 1632100502
+_ts_configfile: 1632049430
+_ts_debugs: 1632100502
+_ts_eraselog: 1632049430
+_ts_logging: 1632049430
+_ts_opts: 1632049430
+_ts_profilesURL: 1632049430
+_version: 0
+autorun: 1
+autosave: 1
+baseport: ''
+bin: squeeze2upnp-armv6hf-static
+configfile: upnpbridge.xml
+debugs: all
+eraselog: 0
+logging: 0
+opts: ''
+profilesURL: https://raw.githubusercontent.com/philippe44/LMS-to-uPnP/master/plugin/profiles.xml

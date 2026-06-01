@@ -1,0 +1,20 @@
+---
+_ts_autorun: 1632049223
+_ts_autosave: 1632049223
+_ts_bin: 1632625474
+_ts_configfile: 1632049223
+_ts_debugs: 1632049223
+_ts_eraselog: 1632049223
+_ts_logging: 1632049223
+_ts_opts: 1632049223
+_ts_profilesURL: 1643936356
+_version: 0
+autorun: 1
+autosave: 1
+bin: squeeze2raop-armv6hf-static
+configfile: raopbridge.xml
+debugs: ''
+eraselog: 0
+logging: 0
+opts: ''
+profilesURL: ~

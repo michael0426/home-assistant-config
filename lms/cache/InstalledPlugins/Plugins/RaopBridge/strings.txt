@@ -1,0 +1,344 @@
+PLUGIN_RAOPBRIDGE
+	EN	AirPlay bridge
+
+PLUGIN_RAOPBRIDGE_DESC
+	EN	Use AirPlay compatible devices in LMS 
+	
+PLUGIN_RAOPBRIDGE_YES
+	EN	Yes
+		
+PLUGIN_RAOPBRIDGE_NO
+	EN	No
+	
+PLUGIN_RAOPBRIDGE_AUTORUN
+	EN	Start the Bridge
+
+PLUGIN_RAOPBRIDGE_AUTORUN_DESC
+	EN	Automatically start the AirPlay bridge instance when the server starts.
+
+PLUGIN_RAOPBRIDGE_RUNNING_0
+	EN	Not Running
+
+PLUGIN_RAOPBRIDGE_RUNNING_1
+	EN	Running
+	
+PLUGIN_RAOPBRIDGE_USERGUIDELINK
+	EN	View User Guide
+	
+PLUGIN_RAOPBRIDGE_BINARIES
+	EN	Select Binary
+	
+PLUGIN_RAOPBRIDGE_RESTART
+	EN	Restart
+	
+PLUGIN_RAOPBRIDGE_BINARIES_DESC
+	EN	Select the squeeze2raop binary which best matches your machine's architecture. 
+	EN	<br>- on raspi, use only armv6hf version
+	EN	<br>- armv5te emulates floating point
+
+PLUGIN_RAOPBRIDGE_WARNING
+	EN	It is HIGHLY recommended to stop the bridge before changing parameters
+	
+PLUGIN_RAOPBRIDGE_PARAMINFO
+	EN	An EMPTY parameter value means that [default parameter] is used
+	
+PLUGIN_RAOPBRIDGE_COMMONPARAMINFO
+	EN	These parameters set the defaults for all players (EMPTY value means use built-in default)
+
+PLUGIN_RAOPBRIDGE_OPTIONS
+	EN	Extra command line options
+
+PLUGIN_RAOPBRIDGE_OPTIONS_DESC
+	EN	Add additional squeeze2raop startup command line options here.  See the user guide in https://github.com/philippe44/LMS-to-Raop 
+	EN	for details.
+
+PLUGIN_RAOPBRIDGE_DEBUG
+	EN	Additional debugging
+
+PLUGIN_RAOPBRIDGE_DEBUG_DESC
+	EN	Specify debugging level for writing to the log file.
+
+PLUGIN_RAOPBRIDGE_
+	EN	none
+	
+PLUGIN_RAOPBRIDGE_ALL
+	EN	All items below
+	
+PLUGIN_RAOPBRIDGE_OUTPUT
+	EN	Output device debugging
+
+PLUGIN_RAOPBRIDGE_STREAM
+	EN	Stream debugging
+
+PLUGIN_RAOPBRIDGE_SLIMPROTO
+	EN	Control protocol debugging (slimproto)
+
+PLUGIN_RAOPBRIDGE_DECODE
+	EN	Decode debugging
+
+PLUGIN_RAOPBRIDGE_RAOP
+	EN	Raop debugging
+
+PLUGIN_RAOPBRIDGE_UTIL
+	EN	Utilities debugging
+
+PLUGIN_RAOPBRIDGE_SLIMMAIN
+	EN	Main slimdevice debugging
+
+PLUGIN_RAOPBRIDGE_MAIN
+	EN	Main application debugging
+
+PLUGIN_RAOPBRIDGE_LOGGING
+	EN	Logging options
+	
+PLUGIN_RAOPBRIDGE_LOGGING_DESC
+	EN	Enable logging of error and debug messages.
+	EN	<br>- Set a value in MB to limit log size (-1 for unlimited)
+
+PLUGIN_RAOPBRIDGE_LOGENABLE
+	EN	Enable
+
+PLUGIN_RAOPBRIDGE_LOGLINK
+	EN	View
+	
+PLUGIN_RAOPBRIDGE_ERASELOG
+	EN	Erase at start
+	
+PLUGIN_RAOPBRIDGE_LOGSIZE
+	EN	Max size (MB)
+
+PLUGIN_RAOPBRIDGE_CLEANLOG
+	EN	Clean
+	
+PLUGIN_RAOPBRIDGE_PLAYER
+	EN	Select AirPlay player
+		
+PLUGIN_RAOPBRIDGE_CONFIG
+	EN	Configuration file
+
+PLUGIN_RAOPBRIDGE_CONFIG_DESC
+	EN	<i>Generate</i> re-scans the network and builds a configuration file including all discovered players while retaining
+	EN	existing parameters and players (this will stop the bridge for ~30s)
+	EN	<br>When autosave is checked, the configuration file will be automatically updated every time a player connects or disconnects
+
+PLUGIN_RAOPBRIDGE_CONFLINK
+	EN	View
+	
+PLUGIN_RAOPBRIDGE_GENCONFIG
+	EN	Generate
+
+PLUGIN_RAOPBRIDGE_AUTOSAVECONFIG
+	EN	Autosave
+
+PLUGIN_RAOPBRIDGE_DELCONFIG
+	EN	Erase
+	
+PLUGIN_RAOPBRIDGE_NETWORK
+	EN	Networking
+	
+PLUGIN_RAOPBRIDGE_NETWORK_DESC
+	EN	This set different global parameters for networking 
+	EN	<br>- <i>Authorized ports</i>: set usable ports for incoming connection (RTP & HTTP) with format &lt;base port&gt;[:&lt;count&gt;]. Leave it to empty or
+	EN	to 0:0 for automatic (random) port selection. Use this to limit your firewall opened ports. Note that 3 ports are needed per player. 
+	EN	<br>- <i>interface</i>: The network interface (ip address in format xxx.xxx.xxx.xxx) used by the bridge. This is especially useful if you have a
+	EN	computer with multiple network interfaces. Use ? to let the bridge decide or check "use LMS' network
+	EN	interface" to make sure the Bridge uses the same network as LMS
+
+PLUGIN_RAOPBRIDGE_INBOUNDPORTS
+	EN	Authorized ports 
+			
+PLUGIN_RAOPBRIDGE_INTERFACE
+	EN	Interface 
+	
+PLUGIN_RAOPBRIDGE_USELMSSOCKET
+	EN	Use LMS' network interface
+	
+PLUGIN_RAOPBRIDGE_TEXTDEFAULT
+	EN	The following parameters apply to ALL players - enter "default" (without ") in text boxes to set to default values
+
+PLUGIN_RAOPBRIDGE_AUDIOPARAM
+	EN	Audio parameters
+
+PLUGIN_RAOPBRIDGE_CODECS
+	EN	Codecs
+
+PLUGIN_RAOPBRIDGE_AUDIOPARAM_DESC
+	EN	Several codecs are supported by an AirPlay player. They will be reported to LMS that will decide 
+	EN	when to do transcoding. They can be a combination of <b>lossy</b>:aac,ogg,ops,mp3 <b>lossless</b>:flc,ogf,alc <b>uncompressed</b>:wav,pcm,aif 
+
+PLUGIN_RAOPBRIDGE_VOLUMEMGMT
+	EN	Volume management
+	
+PLUGIN_RAOPBRIDGE_VOLUMEIGNORE
+	EN	ignore
+	
+PLUGIN_RAOPBRIDGE_VOLUMESOFT
+	EN	software
+	
+PLUGIN_RAOPBRIDGE_VOLUMEHARD
+	EN	hardware
+	
+PLUGIN_RAOPBRIDGE_VOLUMERAW
+	EN	raw
+
+PLUGIN_RAOPBRIDGE_VOLUMEMGMT_DESC
+	EN	<b>Default</b>: Set the initial volume value when the bridge connects to the player. This will be over-ridden by 
+	EN	LMS if authorized by "mode" parameter. Set to -1 to disable it
+	EN	<br><b>Mode</b>: Sets how LMS volume commands are handled
+	EN	<br>- <i>ignore</i>: LMS cannot control volume (only the "Volume" command will be send if set at connection)
+	EN	<br>- <i>hardware</i>: LMS volume is transcoded into AirPlay commands (<b>HIGHLY recommended</b>)
+	EN	<br>- <i>software</i>: LMS volume is rendered by applying gain on digital samples. Note that volume feedback is disabled
+	EN	<br><b>Mute on Pause</b>: Allow LMS to mute player while paused 
+	EN	<br><b>Trigger</b>: Volume triggered by reception of player's volume status (set if volume is muted/ignored after un-pause)
+	EN	<br><b>Feedback</b>: Allows device's remote control to change LMS volume - please see the "Mapping" parameter and read User's Guide to set it to "raw"
+	EN	<br><b>Mapping</b>: Defines a few matching points between AirPlay volume (-30...0) and LMS volume (1..100). 
+	EN	This is a comma-separated set of pairs like "a1:l1, a2:l2 ... an:ln" (a=AirPlay, l=LMS).
+	EN	This is needed for players whose volume scale 1..100 is not proportional to AirPlay scale -30..0 in which case
+	EN	the volume feedback will be incorrect (eg: -17.5 on an AirPlay scale is 50 on LMS scale). Set a few matching point 
+	EN	and the bridge will compute missing values. Note that LMS volume 0 is mute and is by default translated to -144.0, 
+	EN	so do *not* add this matching point
+	
+PLUGIN_RAOPBRIDGE_PLAYERVOLUME
+	EN	Default
+
+PLUGIN_RAOPBRIDGE_VOLUMEMODE
+	EN	Mode
+	
+PLUGIN_RAOPBRIDGE_MUTEONPAUSE
+	EN	Mute on Pause
+
+PLUGIN_RAOPBRIDGE_VOLUMEFEEDBACK
+	EN	Feedback
+
+PLUGIN_RAOPBRIDGE_VOLUMEMAPPING
+	EN	Mapping
+
+PLUGIN_RAOPBRIDGE_VOLUMETRIGGER
+	EN	Trigger	
+
+PLUGIN_RAOPBRIDGE_SERVER
+	EN	LMS Server
+	
+PLUGIN_RAOPBRIDGE_REMOVETIMEOUT
+	EN	Remove timeout
+
+PLUGIN_RAOPBRIDGE_ENABLED
+	EN	Enabled
+	
+PLUGIN_RAOPBRIDGE_PLAYERINFO
+	EN	Player information
+	
+PLUGIN_RAOPBRIDGE_PLAYERINFO_DESC
+	EN	The Name and MAC address of the player can be changed here. The <i>Name</i> is superseeded by value in LMS player's configuration page
+		
+PLUGIN_RAOPBRIDGE_PLAYERNAME
+	EN	Name
+	
+PLUGIN_RAOPBRIDGE_PLAYERMAC
+	EN	MAC address
+
+PLUGIN_RAOPBRIDGE_DELETEPLAYER
+	EN	Delete
+
+PLUGIN_RAOPBRIDGE_MDNSMGMT
+	EN	Player discovery options
+	
+PLUGIN_RAOPBRIDGE_MDNSMGMT_DESC
+	EN	Misc options
+	EN	<br>- For the default list newly discovered players can be automatically added to LMS 
+	EN	<br>– For individual players a player can be enabled or disabled
+	EN	<br>- Force LMS server (? for auto-discovery)
+	EN	<br>- Remove timeout sets the time (ms) to keep a player in LMS after is has disconnected (-1 = never, 0 = automatic)
+
+PLUGIN_RAOPBRIDGE_ENABLEDEFS
+	EN	Player is enabled
+
+PLUGIN_RAOPBRIDGE_SENDMETADATA
+	EN	Send LMS metadata to player
+	
+PLUGIN_RAOPBRIDGE_SEND_COVERART
+	EN	Include cover art
+
+PLUGIN_RAOPBRIDGE_SENDMETADATA_DESC
+	EN	When using an AirPlay device with display capabilities, LMS can send metadata (title, artist, album) to it. 
+	EN	This <b>DOES NOT</b> work if you have set a password for LMS command access
+	
+PLUGIN_RAOPBRIDGE_PLAYEROPTIONS
+	EN	AirPlay options
+
+PLUGIN_RAOPBRIDGE_PLAYEROPTIONS_DESC
+	EN	<b>Connection timeout</b>: The bridge takes exclusive ownership of the device when playing. Establishing such connection can take a
+	EN	a few seconds hence it is not released when the player is stopped/pause, so that restart can be quick. But a release must happen for
+	EN	other AirPlay controller to connect. So after the timeout, the connection is released
+	EN	<br><b>Audio buffer</b>: Sets the number of milliseconds of audio buffer in the player. This is important to absorb network throughput jitter
+	EN	Note that the resume after pause will be skipping that amount of time and volume changes will be delayed by the same amount, when
+	EN	using digital volume
+	EN	<br><b>Encrypt</b>: Use encryption if available (needed for ShairTunes and all cheap AirPlay boxes)
+	EN	<br><b>Compress</b>: Re-encode audio using ALAC (saves network bandwidth but uses CPU)
+
+PLUGIN_RAOPBRIDGE_READAHEAD
+	EN	Audio buffer (ms)	 
+	
+PLUGIN_RAOPBRIDGE_IDLETIMEOUT
+	EN	Connection timeout
+
+PLUGIN_RAOPBRIDGE_IDLETIMEOUT_2
+	EN	(s)
+
+PLUGIN_RAOPBRIDGE_ENCRYPTION
+	EN	Encrypt
+
+PLUGIN_RAOPBRIDGE_ALACENCODE
+	EN	Compress
+	
+PLUGIN_RAOPBRIDGE_PLAYERLIST
+	EN	List of players currently in configuration file - Note that more devices might have been discovered
+
+PLUGIN_RAOPBRIDGE_PAIR
+	EN	Pair
+
+PLUGIN_RAOPBRIDGE_SUBMIT
+	EN	Submit
+		
+PLUGIN_RAOPBRIDGE_PINCODE
+	EN	Enter PIN code
+
+PLUGIN_RAOPBRIDGE_OTHEROPTIONS
+	EN	Various Options
+
+PLUGIN_RAOPBRIDGE_PREVENTPLAYBACK
+	EN	When AirPlay disconnects
+	
+PLUGIN_RAOPBRIDGE_POWEROFF
+	EN	Off
+	
+PLUGIN_RAOPBRIDGE_STOP
+	EN	Stop
+	
+PLUGIN_RAOPBRIDGE_PERSISTENT
+	EN	Re-connect on error
+	
+PLUGIN_RAOPBRIDGE_OTHEROPTIONS_DESC
+	EN	- When AirPlay device disconnects locally (e.g. by using the remote of an AV amplifier to switch source, should LMS stop or poweroff the virtual SB player)
+	EN	<br>- When there is a communication error, should the bridge try to reconnect (can happen when using another AirPlay controller)
+		
+PLUGIN_RAOPBRIDGE_NOCONFIG
+	EN	Configuration file missing - create one by clicking "generate" or, if autosave is on, refresh this page
+
+PLUGIN_RAOPBRIDGE_INFO_UNIX
+	EN	RaopBridge uses the Squeeze2raop software player which is installed as part of the plugin.  You can control it from the server
+	EN	web interface or any other Squeezebox control application.
+
+PLUGIN_RAOPBRIDGE_INFO_WIN
+	EN	RaopBridge uses the Squeeze2raop software player which is installed as part of the plugin.  You can control it from the server
+	EN	web interface or any other Squeezebox control application.
+
+PLUGIN_RAOPBRIDGE_INFO_MAC
+	EN	RaopBridge uses the Squeeze2raop software player which is installed as part of the plugin.  You can control it from the server
+	EN	web interface or any other Squeezebox control application.
+	
+	
+	
+
+	
+

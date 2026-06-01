@@ -1,0 +1,26 @@
+{
+    "domain": "smartir_learn",
+    "name": "SmartIR Learn",
+    "version": "2025.2.20",
+    "documentation": "https://github.com/Seifon/smartir_learn",
+    "requirements": [
+        "broadlink==0.19.0"
+    ],
+    "dependencies": [
+
+    ],
+    "codeowners": [
+        "@Seifon"
+    ],
+    "config_flow": true,
+    "translations": [
+        {
+            "language": "en",
+            "path": "translations/en.json"
+        },
+        {
+            "language": "zh-Hans",
+            "path": "translations/zh-Hans.json"
+        }
+    ]
+}

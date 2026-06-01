@@ -1,0 +1,29 @@
+type: custom:button-card
+variables:
+  sportsversion: 1.1.0
+  var_teamtracker_device: >-
+    [[[ try {return
+    hass.states[variables.var_assistsat_entity].attributes.team_tracker} catch {
+    return  "sensor.team_tracker"}]]]
+template:
+  - variable_template
+  - body_template
+styles:
+  card:
+    - background-color: "#1c1c1c"
+    - background-size: cover
+  custom_fields:
+    message:
+      - font-size: "[[[ return variables.var_font_size ]]]"
+      - align-self: center
+      - justify-self: center
+      - width: 100%
+      - position: absolute
+      - justify-content: center
+      - text-align: start
+custom_fields:
+  title: ""
+  message:
+    card:
+      type: custom:teamtracker-card
+      entity: "[[[ return variables.var_teamtracker_device ]]]"

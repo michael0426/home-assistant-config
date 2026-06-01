@@ -1,0 +1,95 @@
+blueprint:
+  name: View Assist - Soundmachine
+  description: Plays ambient sounds for relaxation or noise cancelation
+  domain: automation
+  input:
+    soundmachine_dict:
+      name: Sound Machine Dictionary
+      description: A dictionary with names to use for the sound file and the path
+        to the file.  Formatting is very important.  Alter the examle to fit your
+        files
+      selector:
+        object:
+          multiple: false
+      default:
+        thunder: http://192.168.0.25:8123/local/viewassist/soundmachine/rainandthunder.mp3
+        ocean: http://192.168.0.25:8123/local/viewassist/soundmachine/oceanwaves.mp3
+    response:
+      name: Failure Response Text
+      description: The response to give when an error occurs
+      default: Something went wrong
+triggers:
+- command:
+  - (start|play) [the] {soundtype} sound machine
+  - play [the] {soundtype} sound machine for {when}
+  id: startsoundmachine
+  trigger: conversation
+- command:
+  - (stop|turnoff) [the] sound machine
+  id: stopsoundmachine
+  trigger: conversation
+- event_type: va_timer_command_expired
+  id: stopsoundmachine
+  trigger: event
+  event_data:
+    extra_info:
+      command: stop sound machine
+conditions: []
+actions:
+- variables:
+    target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+    target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')}}'
+- choose:
+  - conditions:
+    - condition: trigger
+      id:
+      - startsoundmachine
+    sequence:
+    - variables:
+        target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+        target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')}}'
+        soundmachine_dict: !input soundmachine_dict
+    - if:
+      - condition: template
+        value_template: '{{ trigger.slots.soundtype in soundmachine_dict }}'
+      then:
+      - if:
+        - condition: template
+          value_template: '{{ trigger.slots.when is defined}}'
+        then:
+        - action: view_assist.set_timer
+          data:
+            type: Command
+            entity_id: '{{ target_satellite_device }}'
+            time: '{{ trigger.slots.when }}'
+            extra:
+            - command: stop sound machine
+          response_variable: timer
+    - action: view_assist.sound_alarm
+      data:
+        entity_id: '{{ target_mediaplayer_device }}'
+        media_file: '{{ soundmachine_dict[trigger.slots.soundtype | lower] }}'
+    - set_conversation_response: ''
+  - conditions:
+    - condition: trigger
+      id:
+      - stopsoundmachine
+    sequence:
+    - variables:
+        target_satellite_device: "{% if trigger.event is defined and trigger.event.data.entity_id
+          is defined %}\n  {{ trigger.event.data.entity_id }}\n{% else %}\n  {{ target_satellite_device
+          }}\n{% endif %}"
+        target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')
+          }}'
+    - action: view_assist.cancel_sound_alarm
+      data:
+        entity_id: '{{ target_mediaplayer_device }}'
+    - set_conversation_response: ''
+  default:
+  - set_conversation_response: '{{ response }}'
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      last_said: '{{ response }}'
+mode: parallel

@@ -1,0 +1,102 @@
+switch.garage_light:
+  friendly_name: 車庫燈
+  icon: mdi:wall-sconce
+cover.bathroom_cover:
+  friendly_name: 浴室窗簾
+#  device_class: blind
+switch.bathroom_cover_up:
+  friendly_name: 浴室窗簾_開
+  assumed_state: false
+  icon: mdi:window-open
+switch.bathroom_cover_stop:
+  friendly_name: 浴室窗簾_停
+  assumed_state: false
+switch.bathroom_cover_down:
+  friendly_name: 浴室窗簾_關
+  assumed_state: false
+  icon: mdi:window-closed
+cover.garage_door:
+  friendly_name: 車庫門
+#  icon: mdi:garage
+switch.air_purifier:
+  assumed_state: false
+  friendly_name: 清淨機
+  homebridge_hidden: true
+switch.air_purifier_high_speed:
+  assumed_state: false
+  friendly_name: 清淨機超高速
+  homebridge_hidden: true
+switch.hitachi:
+  assumed_state: false
+  friendly_name: 主臥冷氣
+  homebridge_hidden: true
+  icon: mdi:air-conditioner
+switch.room_hitachi:
+  assumed_state: false
+  friendly_name: 客房冷氣
+  icon: mdi:air-conditioner
+media_player.bose:
+  assumed_state: false
+  friendly_name: BOSE
+#  homebridge_hidden: true
+#  icon: mdi:speaker-wireless
+switch.livingroom:
+  friendly_name: 客廳燈
+  icon: mdi:ceiling-light
+switch.bathroom_light:
+  friendly_name: 浴室燈
+  icon: mdi:ceiling-light
+switch.aisle:
+  friendly_name: 走道燈
+  icon: mdi:wall-sconce
+switch.kitchen_light:
+  assumed_state: false
+  friendly_name: 廚房燈
+  icon: mdi:ceiling-light
+switch.kitchen_table_light:
+  assumed_state: false
+  friendly_name: 餐桌燈
+  icon: mdi:ceiling-light
+script.mod:
+  friendly_name: MOD
+  icon: mdi:television
+  assumed_state: false
+switch.sony_tv:
+  friendly_name: SONY TV
+  icon: mdi:television
+  assumed_state: false
+switch.unblock:
+  friendly_name: 安博電視盒
+  icon: mdi:television-guide
+  assumed_state: false
+switch.speaker:
+  friendly_name: 浴室喇叭
+  icon: mdi:speaker-wireless
+sensor.humidity_158d00036b8918:
+  friendly_name: 儲藏室濕度
+sensor.temperature_158d00036b8918:
+  friendly_name: 儲藏室溫度
+binary_sensor.door_window_sensor_158d0006d6461f:
+  friendly_name: 3F洗衣機門窗
+binary_sensor.door_window_sensor_158d0005403a33:
+  friendly_name: 大門感應器
+binary_sensor.door_window_sensor_158d0002e2a009:
+  friendly_name: 主臥浴門感應器
+binary_sensor.motion_sensor_158d0002b44193:
+  friendly_name: 主臥人體感應器
+binary_sensor.motion_sensor_158d0002b483cf:
+  friendly_name: 浴室人體感應器
+climate.guest_room_ac:
+  icon: mdi:air-conditioner
+climate.livingroom_ac:
+  icon: mdi:air-conditioner
+climate.masterroom_ac:
+  icon: mdi:air-conditioner
+switch.sonoff_10010f4717:
+  icon: mdi:ceiling-light
+switch.sonoff_10005b61f7_2:
+  icon: mdi:garage-alert-variant
+fan.virtual_smart_fan:
+  friendly_name: 電風扇
+person.susan:
+  entity_picture: "/local/susan.jpg"

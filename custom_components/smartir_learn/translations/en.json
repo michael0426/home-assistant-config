@@ -1,0 +1,455 @@
+{
+    "title": "SmartIR Code Learning",
+    "steps": {
+        "user": {
+            "title": "Setup Broadlink Device"
+        }
+    },
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configure Your Device",
+                "description": "Enter details of your Broadlink device.",
+                "data": {
+                    "device_ip": "Broadlink Device IP Address"
+                }
+            },
+            "manual_input": {
+                "title": "Configure Your Device",
+                "description": "Please enter the device IP address",
+                "data": {
+                    "device_ip": "Broadlink Device IP Address"
+                }
+            }
+        },
+        "error": {
+            "invalid_device": "Invalid device IP. Please try again."
+        }
+    },
+    "options": {
+        "step": {
+            "device_configuration": {
+                "title": "Code Learning Configuration",
+                "description": "Configure essential information for your device",
+                "data": {
+                    "type": "Device Type"
+                }
+            },
+            "template_and_temperature": {
+                "title": "Code Learning Configuration",
+                "description": "Select temperature range and template {message}",
+                "data": {
+                    "min_temperature": "Minimum Temperature",
+                    "max_temperature": "Maximum Temperature",
+                    "template": "Template"
+                }
+            },
+            "commands_step": {
+                "title": "Device Info & Command List",
+                "description": "Fill device info and select commands to process",
+                "data": {
+                    "commands": "Commands",
+                    "select_all": "✅ Select All Commands",
+                    "deselect_all": "❌ Deselect All Commands",
+                    "manufacturer": "Manufacturer",
+                    "models": "Models (comma-separated)"
+                }
+            },
+            "select_existing_file": {
+                "title": "Select Existing Template File",
+                "description": "Choose an existing SmartIR file.",
+                "data": {
+                    "existing_file": "File",
+                    "template_deal_mode": "Operation Mode"
+                }
+            },
+            "view_smartir_content": {
+                "title": "View SmartIR File",
+                "description": "File contents:\n{file_contents}",
+                "data": {
+
+                }
+            },
+            "receive_ir_code": {
+                "title": "Receive IR Code",
+                "description": "Please ensure the device is sending the IR code for {command} and wait for reception.",
+                "data": {
+                    "command": "Command"
+                }
+            },
+            "learn_ir_code": {
+                "title": "Learn IR Code for Command",
+                "description": "Prepare to re-learn the IR code for command: {command}",
+                "data": {
+                    "command": "Command"
+                }
+            },
+            "learn_ir_code_progres": {
+                "title": "Learn IR Code for Command",
+                "description": "First switch to {command_pre} via remote control, then click Submit",
+                "data": {
+                    "command": "Command"
+                }
+            },
+            "test_command": {
+                "title": "Test IR Code Command",
+                "description": "Test Command:\n{command}\n\nCommand Value:\n{command_value}",
+                "data": {
+                    "test_result": "Result"
+                },
+                "options": {
+                    "test_result": {
+                        "pass": "Pass",
+                        "fail": "Fail"
+                    }
+                }
+            },
+            "finish_failed_tests": {
+                "title": "Failed Commands",
+                "description": "The following commands failed testing:\n{failed_commands}",
+                "data": {
+                    "retry_learning": "Retry learning these commands?"
+                },
+                "options": {
+                    "retry_learning": {
+                        "yes": "Yes",
+                        "no": "No"
+                    }
+                }
+            },
+            "finish": {
+                "title": "Confirm Information",
+                "description": "device_code:\n{device_code}\n\nSmartIR file will be saved to:\n{file_path}\n{file_contents}",
+                "data": {
+
+                }
+            }
+        },
+        "progress": {
+            "learn_ir_code_progres": "Point the remote and press the {command} key within 30 seconds..."
+        }
+    },
+    "common": {
+        "device_ip_mode": {
+            "scan": "Auto Scan",
+            "manual": "Manual Input"
+        },
+        "template_from_file": "Select SmartIR File",
+        "command_replace_map": {
+            "climate": {
+                "3dauto": "3D Auto",
+                "_comment": "Comment",
+                "_note": "Note",
+                "ai": "Artificial Intelligence",
+                "auto": "Auto Mode",
+                "auto + no swing": "Auto Mode + No Swing",
+                "auto + swing": "Auto Mode + Swing",
+                "both": "Both",
+                "bottom": "Bottom",
+                "breeze": "Breeze",
+                "center": "Center",
+                "cold": "Cold Air",
+                "comfort": "Comfort",
+                "cool": "Cooling",
+                "diffuse": "Diffuse",
+                "down": "Down",
+                "down_off": "Turn Off Down",
+                "dry": "Dehumidify",
+                "eco": "Energy Saving",
+                "econo": "Economy Mode",
+                "fan": "Fan",
+                "fan_auto": "Fan Auto",
+                "fan_high": "High Fan",
+                "fan_l": "Low Fan",
+                "fan_low": "Low Fan",
+                "fan_medium": "Medium Fan",
+                "fan_mid": "Medium Fan",
+                "fan_only": "Fan Only",
+                "fan_quiet": "Quiet Fan",
+                "feal": "Feeling",
+                "feel": "Feeling",
+                "hda": "High Precision",
+                "heat": "Heating Mode",
+                "heat_auto_": "Auto Heating",
+                "heat_cool": "Heating and Cooling",
+                "hi-power": "High Power",
+                "high": "High Wind",
+                "highest": "Highest Wind",
+                "hight": "High",
+                "horizontal": "Horizontal",
+                "horizontal swing": "Horizontal Swing",
+                "hswing": "Horizontal Swing",
+                "humidity": "Humidity",
+                "ifeel": "Smart Sensing",
+                "ion": "Ion",
+                "l": "Low",
+                "led": "LED",
+                "level": "Level",
+                "lo": "Low",
+                "low": "Low Fan",
+                "lowest": "Lowest Fan",
+                "lowmedium": "Low-Medium Fan",
+                "max": "Maximum",
+                "maximum": "Maximum Value",
+                "med": "Medium Fan",
+                "medium": "Medium Fan",
+                "mediumhigh": "Medium-High Fan",
+                "mediumlow": "Medium-Low Fan",
+                "mid": "Medium",
+                "mid_off": "Turn Off Medium Fan",
+                "middle": "Middle",
+                "min": "Minimum",
+                "money_saver": "Energy Saver",
+                "nature": "Natural Wind",
+                "night": "Night Mode",
+                "normal": "Normal",
+                "off": "Off",
+                "on": "On",
+                "on_once": "Turn On Once",
+                "position": "Position",
+                "powerful": "Powerful",
+                "quiet": "Quiet",
+                "set_angle": "Set Angle",
+                "silence": "Silence",
+                "silent": "Silent",
+                "sleep": "Sleep",
+                "static": "Static",
+                "stop": "Stop",
+                "stop_swing": "Stop Swing",
+                "stop_swing_eko": "Stop Swing Energy Saving",
+                "super high": "Super High Wind",
+                "superhigh": "Super High Wind",
+                "sweep": "Sweep Wind",
+                "swing": "Swing",
+                "swing off": "Turn Off Swing",
+                "swing_eko": "Energy Saving Swing",
+                "top": "Top",
+                "turbo": "Turbo",
+                "ultralow": "Ultra Low Fan",
+                "up": "Up",
+                "up_off": "Turn Off Up",
+                "updown": "Up and Down Wind",
+                "updown_off": "Turn Off Up and Down Wind",
+                "vertical": "Vertical",
+                "vertical swing": "Vertical Swing",
+                "vswing": "Vertical Swing",
+                "minTemperature-maxTemperature": "Range Temperature"
+            },
+            "fan": {
+                "boost": "Boost Mode",
+                "default": "Default Mode",
+                "forward": "Forward",
+                "high": "High Wind",
+                "low": "Low Wind",
+                "lowest": "Lowest Wind Speed",
+                "medium": "Medium Wind",
+                "mediumHigh": "Medium-High Wind",
+                "mediumLow": "Medium-Low Wind",
+                "mediumhigh": "Medium-High Wind",
+                "mediumlow": "Medium-Low Wind",
+                "off": "Off",
+                "oscillate": "Oscillate",
+                "reverse": "Reverse",
+                "rhythm": "Rhythm Mode"
+            },
+            "media_player": {
+                "2_1chooutput": "2.1 Channel Output",
+                "3dsoundmode": "3D Sound Mode",
+                "3dsurround": "3D Surround Sound",
+                "5.1ch/dvd": "5.1 Channel/DVD",
+                "5_1choutput": "5.1 Channel Output",
+                "6channel": "6 Channel",
+                "a": "A",
+                "alexa": "Alexa",
+                "am": "AM",
+                "am-fm": "AM-FM",
+                "antenna": "Antenna",
+                "aspect ratio": "Aspect Ratio",
+                "atv": "ATV",
+                "audio": "Audio",
+                "audiomodegame": "Audio Mode - Game",
+                "audiomodemovietv": "Audio Mode - Movie TV",
+                "audiomodemusic": "Audio Mode - Music",
+                "audiomodestereo": "Audio Mode - Stereo",
+                "aux": "Auxiliary Input",
+                "av": "AV",
+                "av side": "AV Side",
+                "back": "Back",
+                "band": "Band",
+                "bass ext": "Bass Extension",
+                "bassdown": "Bass Down",
+                "bassup": "Bass Up",
+                "bd/dvd": "BD/DVD",
+                "blue": "Blue",
+                "blue_button": "Blue Button",
+                "bluetooth": "Bluetooth",
+                "brightness": "Brightness",
+                "cbl/sat": "Cable/Satellite",
+                "cc": "Closed Captions",
+                "cd": "CD",
+                "channel": "Channel",
+                "clearvoice": "Clear Voice",
+                "clr": "Clear",
+                "cmp": "Compare",
+                "coax": "Coaxial",
+                "coaxial": "Coaxial",
+                "contrast": "Contrast",
+                "d": "D",
+                "db": "Decibels",
+                "direct": "Direct",
+                "display": "Display",
+                "dmp": "DMP",
+                "dmp_exit": "DMP Exit",
+                "dmp_fast_forward": "DMP Fast Forward",
+                "dmp_play_pause": "DMP Play/Pause",
+                "dmp_repeat": "DMP Repeat",
+                "dmp_rewind": "DMP Rewind",
+                "dmp_stop": "DMP Stop",
+                "dmp_zoom": "DMP Zoom",
+                "down": "Down",
+                "down arrow": "Down Arrow",
+                "down_arrow": "Down Arrow",
+                "dsp movie": "DSP Movie",
+                "dsp music": "DSP Music",
+                "dsp straight": "DSP Straight",
+                "dsp surround": "DSP Surround",
+                "dtv": "Digital TV",
+                "dvd": "DVD",
+                "eco": "Energy Saving",
+                "end": "End",
+                "enter": "Enter",
+                "epg": "Electronic Program Guide",
+                "exit": "Exit",
+                "ext": "External",
+                "fast_forward": "Fast Forward",
+                "fastforward": "Fast Forward",
+                "fm": "FM",
+                "game": "Game",
+                "green": "Green",
+                "green_button": "Green Button",
+                "guide": "Guide",
+                "hdmi": "HDMI",
+                "hdmi side": "HDMI Side",
+                "home": "Home",
+                "info": "Information",
+                "information": "Information",
+                "input": "Input",
+                "keystone": "Keystone Correction",
+                "left": "Left",
+                "left arrow": "Left Arrow",
+                "left_arrow": "Left Arrow",
+                "line": "Line",
+                "list": "List",
+                "menu": "Menu",
+                "mode": "Mode",
+                "movie": "Movie",
+                "music": "Music",
+                "mute": "Mute",
+                "navdown": "Navigate Down",
+                "navleft": "Navigate Left",
+                "navright": "Navigate Right",
+                "navup": "Navigate Up",
+                "net": "Network",
+                "netflix": "Netflix",
+                "news": "News",
+                "nextchannel": "Next Channel",
+                "off": "Off",
+                "ok": "OK",
+                "on": "On",
+                "opt": "Options",
+                "optical": "Optical",
+                "options": "Options",
+                "pause": "Pause",
+                "phono": "Phono",
+                "picture": "Picture",
+                "play": "Play",
+                "port": "Port",
+                "power": "Power",
+                "previouschannel": "Previous Channel",
+                "prime video": "Prime Video",
+                "radio": "Radio",
+                "rca": "RCA",
+                "rearward": "Rearward",
+                "rec": "Record",
+                "recall": "Recall",
+                "red": "Red",
+                "red_button": "Red Button",
+                "reset": "Reset",
+                "resync": "Resync",
+                "return": "Return",
+                "right": "Right",
+                "right arrow": "Right Arrow",
+                "right_arrow": "Right Arrow",
+                "sap": "Secondary Audio Program",
+                "scart": "SCART",
+                "scene": "Scene",
+                "search": "Search",
+                "settings": "Settings",
+                "setup": "Setup",
+                "sleep": "Sleep",
+                "sleep timer": "Sleep Timer",
+                "sound": "Sound",
+                "sound game": "Sound - Game",
+                "sound movie": "Sound - Movie",
+                "sound music": "Sound - Music",
+                "sound sports": "Sound - Sports",
+                "sound stereo": "Sound - Stereo",
+                "sound tv": "Sound - TV",
+                "sound_modes": "Sound Modes",
+                "source": "Source",
+                "sources": "Sources",
+                "stereo": "Stereo",
+                "still": "Still",
+                "stop": "Stop",
+                "tape": "Tape",
+                "trebledown": "Lower Treble",
+                "trebleup": "Increase Treble",
+                "tuner": "Tuner",
+                "tv": "TV",
+                "tv/cd": "TV/CD",
+                "up": "Up",
+                "up arrow": "Up Arrow",
+                "up_arrow": "Up Arrow",
+                "usb": "USB",
+                "user": "User",
+                "v-aux": "V-aux",
+                "vcr/dvd": "VCR/DVD",
+                "vga": "VGA",
+                "video": "Video",
+                "volumedown": "Volume Down",
+                "volumedowncenter": "Center Volume Down",
+                "volumedownfront": "Front Volume Down",
+                "volumedownrear": "Rear Volume Down",
+                "volumedownsubwoofer": "Subwoofer Volume Down",
+                "volumeup": "Volume Up",
+                "volumeupcenter": "Center Volume Up",
+                "volumeupfront": "Front Volume Up",
+                "volumeuprear": "Rear Volume Up",
+                "volumeupsubwoofer": "Subwoofer Volume Up",
+                "yellow": "Yellow",
+                "yellow_button": "Yellow Button",
+                "ypbpr": "YPbPr",
+                "zoom": "Zoom"
+            },
+            "light": {
+                "brighten": "Brighten",
+                "colder": "Colder",
+                "dim": "Dim",
+                "night": "Night Mode",
+                "off": "Off",
+                "on": "On",
+                "warmer": "Warmer"
+            }
+        },
+        "device_template_name": {
+            "Template1": "Standard Template 1",
+            "DEBUG": "Debug Template"
+        },
+        "template_deal_mode": {
+            "ref": "Reference",
+            "replace": "Replace",
+            "delete": "Delete",
+            "view": "View"
+        }
+    }
+}

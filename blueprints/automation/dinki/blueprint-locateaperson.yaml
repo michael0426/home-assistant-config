@@ -1,0 +1,189 @@
+blueprint:
+  name: View Assist - Locate a Person
+  description: Ask Assist to locate a person (View Assist locateaperson v 1.1.1)
+  domain: automation
+  input:
+    language:
+      name: Language
+      description: The desired spoken language
+      default: en
+      selector:
+        language:
+          languages:
+          - de
+          - en
+          - it
+          - pl
+          native_name: false
+          no_sort: false
+    command_prompt:
+      name: Command Text
+      description: The phrase you want to use to trigger the automation
+      default: (locate|map|where is|where's) [my] {person}
+    view_locate:
+      name: Locate View
+      description: The View Assist dashboard view used for the locate view
+      default: /view-assist/locate
+    view_info:
+      name: Info View
+      description: The View Assist dashboard view used for the info display
+      default: /view-assist/info
+    defined_names:
+      name: Defined Names
+      description: 'Phonetic name followed by the Person''s name as configured in
+        HA.
+
+        '
+      default: '{"john": "jon", "simon": "simon"}'
+    map_mode:
+      name: Map Mode Theme
+      description: This will change the map mode theme
+      default: dark
+      selector:
+        select:
+          mode: dropdown
+          options:
+          - dark
+          - light
+          custom_value: false
+          sort: false
+          multiple: false
+trigger:
+  platform: conversation
+  command: !input command_prompt
+condition: []
+action:
+- variables:
+    target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+    target_satellite_device_type: '{{ state_attr(target_satellite_device, ''type'')}}'
+    language: !input language
+    view_locate: !input view_locate
+    view_info: !input view_info
+    map_mode: !input map_mode
+    input_defined_names: !input defined_names
+    persons_name: '{{ input_defined_names | from_json }}'
+    translations:
+      en:
+        responses:
+          person_away: '{person} is away.'
+          person_location: '{person} is at {location}'
+          person_undefined: '{person} hasn''t been defined'
+        last_update:
+          prefix: Last updated
+          now_label: now
+          minute_label: minutes ago
+          hour_label: hours ago
+          day_label: days ago
+      it:
+        responses:
+          person_away: '{person} è fuori casa.'
+          person_location: '{person} è nella zona {location}'
+          person_undefined: '{person} non è definita'
+        last_update:
+          prefix: Ultimo aggiornamento
+          now_label: ora
+          minute_label: minuti fa
+          hour_label: ore fa
+          day_label: giorni fa
+      de:
+        responses:
+          person_away: '{person} ist nicht zu Hause.'
+          person_location: '{person} ist bei {location}'
+          person_undefined: '{person} ist nicht definiert'
+        last_update:
+          prefix: Zuletzt aktualisiert
+          now_label: jetzt
+          minute_label: Minuten zuvor
+          hour_label: Stunden zuvor
+          day_label: Tage zuvor
+      pl:
+        responses:
+          person_away: '{person} jest poza domem.'
+          person_location: '{person} jest w {location}'
+          person_undefined: '{person} nie został zdefiniowany'
+        last_update:
+          prefix: Ostatnia aktualizacja
+          now_label: teraz
+          minute_label: minut temu
+          hour_label: godzin temu
+          day_label: dni temu
+- if:
+  - condition: template
+    value_template: '{{ trigger.slots.person | lower in persons_name.keys() | map(''lower'')
+      | list }}'
+  then:
+  - variables:
+      target_person_id: "{% set spoken = trigger.slots.person | lower %} {% set ns
+        = namespace(found='') %} {% for k, v in persons_name.items() %}\n  {% if k
+        | lower == spoken %}{% set ns.found = v %}{% endif %}\n{% endfor %} {{ ns.found
+        }}"
+      person_source: '{{ ''person.'' + target_person_id }}'
+      tracker_source: '{{ state_attr(person_source, ''source'') }}'
+      geocoded_source: '{% set geocoded = ''sensor.'' + (tracker_source.split(''.'',
+        1)[1] if tracker_source else ''unknown'') + ''_geocoded_location'' %} {{ geocoded
+        }}'
+      location_source: "{% if states(person_source) != 'not_home' %}\n  {{ state_translated(person_source)|capitalize
+        }}\n{% elif states(geocoded_source) not in ['unknown', 'unavailable', 'None']
+        %}\n  {{ states(geocoded_source) }}\n{% else %}\n  {{ 'Unknown Location' }}\n{%
+        endif %}"
+      conversation_response: "{% if states(person_source) == 'not_home' %}\n  {{ translations[language]['responses']['person_away'].replace(\"{person}\",
+        trigger.slots.person) }}\n{% else %}\n  {{ translations[language]['responses']['person_location']\n
+        \   .replace(\"{person}\", trigger.slots.person)\n    .replace(\"{location}\",
+        state_translated(person_source)) }}\n{% endif %}"
+      location_last_update_translated: "{% set last_changed = states[person_source].last_changed
+        %}\n{% set now = now() %}\n{% set diff = (now - last_changed).total_seconds()
+        %}\n{% set minutes = (diff // 60) | int %}\n{% set hours = (diff // 3600)
+        | int %}\n{% set days = (diff // 86400) | int %}\n{% if minutes < 1 %}\n  {{
+        translations[language]['last_update']['prefix']}}: {{ translations[language]['last_update']['now_label']}}\n{%
+        elif minutes < 60 %}\n  {{ translations[language]['last_update']['prefix']}}:
+        {{ minutes }} {{ translations[language]['last_update']['minute_label']}}\n{%
+        elif hours < 24 %}\n  {{ translations[language]['last_update']['prefix']}}:
+        {{ hours }} {{ translations[language]['last_update']['hour_label']}}\n{% else
+        %}\n  {{ translations[language]['last_update']['prefix']}}: {{ days }} {{
+        translations[language]['last_update']['day_label']}}\n{% endif %}"
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      last_said: '{{ conversation_response }}'
+  - set_conversation_response: '{{ conversation_response }}'
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      locate_data: '{{ {''person'': person_source, ''tracker'': tracker_source, ''geocoded'':
+        geocoded_source, ''location_text'': location_source, ''location_last_change'':
+        location_last_update_translated, ''map_mode'': map_mode} }}'
+  - if:
+    - condition: template
+      value_template: '{{ target_satellite_device_type != ''audio_only'' }}'
+    then:
+    - action: view_assist.navigate
+      data:
+        device: '{{ target_satellite_device }}'
+        path: '{{ view_locate }}'
+    else:
+    - stop: Audio only device, navigation skipped
+  else:
+  - variables:
+      response_undefined: '{{ translations[language][''responses''][''person_undefined''].replace(''{person}'',
+        trigger.slots.person) }}'
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      title: ''
+      message: '{{ response_undefined }}'
+      message_font_size: 6vw
+      last_said: '{{ response_undefined }}'
+  - action: view_assist.navigate
+    data:
+      device: '{{ target_satellite_device }}'
+      path: '{{ view_info }}'
+  - set_conversation_response: '{{ response_undefined }}'
+  - action: view_assist.set_state
+    target:
+      entity_id: '{{ target_satellite_device }}'
+    data:
+      last_said: '{{ response_undefined }}'
+mode: single

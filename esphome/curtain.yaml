@@ -1,0 +1,99 @@
+esphome:
+  name: curtain
+
+esp8266:  
+  board: nodemcuv2
+  
+wifi:
+  ssid: "ORBI97"
+  password: "elatednest901"
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 10.0.0.55
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 10.0.0.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0
+  ap:
+    ssid: "Curtain Fallback Hotspot"
+    password: "hM9rPNOfl2hX"
+
+debug:
+
+# Enable logging
+logger:
+  level: debug
+
+# Enable Home Assistant API
+api:
+
+#  services:
+#    - service: control_servo
+#      variables:
+#        level: float
+#      then:
+#        - servo.write:
+#            id: blinds_tilt
+#            level: !lambda 'return level / 100.0;'
+
+ota:
+  platform: esphome
+  password: babypig1
+
+web_server:
+  port: 80
+
+output:
+  - platform: gpio
+    id: 'tilt_3'
+    pin: GPIO13
+  - platform: gpio
+    id: 'tilt_4'
+    pin: GPIO15
+  - platform: esp8266_pwm
+    id: 'blinds_t'
+    pin: GPIO14
+    frequency: 50 Hz
+
+switch:
+  - platform: output
+    name: "down"
+    output: 'tilt_3'
+    id: tilt3
+  - platform: output
+    name: "up"
+    output: 'tilt_4'
+    id: tilt4
+
+
+servo:
+  - output: 'blinds_t'
+    id: blinds_tilt
+    
+
+cover:
+  - platform: template
+    name: "Blinds Tilt"
+    id: blinds_tilt_control
+    optimistic: true
+    open_action:
+      - switch.turn_off: tilt4
+      - switch.turn_on: tilt3
+      - delay: 500ms
+      - servo.write:
+          id: blinds_tilt
+          level: -100.0%
+      - delay: 0.5s
+      - switch.turn_off: tilt3
+    close_action:
+      - switch.turn_off: tilt3
+      - switch.turn_on: tilt4
+      - delay: 500ms
+      - servo.write:
+          id: blinds_tilt
+          level: 100.0%
+      - delay: 0.5s
+      - switch.turn_off: tilt4
+    stop_action:
+      - switch.turn_off: tilt3
+      - switch.turn_off: tilt4

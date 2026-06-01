@@ -1,0 +1,9 @@
+# Ignore hidden core files and sensitive databases
+.storage/
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# Ignore your specific secrets file
+secrets.yaml

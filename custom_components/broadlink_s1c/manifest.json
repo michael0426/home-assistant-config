@@ -1,0 +1,14 @@
+{
+  "domain": "broadlink_s1c",
+  "name": "Broadlink s1c and s2c",
+  "documentation": "https://github.com/nick2525/broadlink_s1c_s2c",
+  "issue_tracker": "https://github.com/nick2525/broadlink_s1c_s2c/issues",
+  "requirements": [],
+  "dependencies": [
+    "http"
+  ],
+  "codeowners": [ 
+    "@nick2525"
+  ],
+  "version": "1.0.0"
+}

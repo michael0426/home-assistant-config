@@ -1,0 +1,183 @@
+
+mod:
+  alias: MOD
+  sequence:
+  - data:
+      command: Z6VXADMCAACXBgAAyAgAALERAABMIwAAPIwAAPR4AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0ABAQEBAQABAAEBAQEBAAEAAAAAAQEBAAEBAQEAAAABBQJGAkYCRgJGAkAA==
+      entity_id: remote.xiaomi_remote
+    service: remote.send_command
+air_purifier_off:
+  alias: air purifier off
+  sequence:
+  - service: remote.send_command
+    data:
+      command: Z6VHAAwCAABcAgAArwYAAOsIAACmEQAA7SIAAMSfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFEBAgEBAQEBAgIBAgIBAgICAgEBAQEBAgEBAgICAgIBBgNQA=
+      entity_id: remote.xiaomi_remote
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.air_purifier_states
+air_purifier_on:
+  alias: air purifier on
+  sequence:
+  - service: remote.send_command
+    data:
+      command: Z6VHAAwCAABcAgAArwYAAOsIAACmEQAA7SIAAMSfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFEBAgEBAQEBAgIBAgIBAgICAgEBAQEBAgEBAgICAgIBBgNQA=
+      entity_id: remote.xiaomi_remote
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.air_purifier_states
+  - delay:
+      seconds: 5
+air_purifier_fan_speed:
+  alias: fan speed
+  sequence:
+  - data:
+      command: Z6VHAAsCAAAuAgAAmgYAAMsIAACFEQAAASMAAMSfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFEBEhERAQEREhIBEhIREhIREhEBEREREhIRAgISEgIRFgNQE=
+      entity_id: remote.xiaomi_remote
+    service: remote.send_command
+air_purifier_time:
+  alias: time
+  sequence:
+  - data:
+      command: Z6VHABECAABSAgAArgYAANEIAAChEQAA8CIAAMSfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFEBAgEBAQEBAgIBAgIBAgICAQEBAQEBAgECAgICAgIBBgNQA=
+      entity_id: remote.xiaomi_remote
+    service: remote.send_command
+air_purifier_superspeed:
+  alias: superspeed
+  sequence:
+  - data:
+      command: Z6VLAC0CAACeBgAAywgAAIcRAAD8IgAAxJ8AADh2AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAQAAAAAAAQEAAQEAAQEAAAAAAAAAAQEBAQEBAQEABQJGAkAA==
+      entity_id: remote.xiaomi_remote
+    service: remote.send_command
+smart_fan_1x_oscillating:
+  alias: Smart Fan Oscillating
+  sequence:
+  - service: fan.oscillate
+    target:
+      entity_id: fan.xiaomi_smart_fan
+    data:
+      oscillating: '{{ oscillating }}'
+  mode: single
+smart_fan_1x_set_speed:
+  alias: Smart Fan Set Speed
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: fan.xiaomi_smart_fan
+        state: 'off'
+      sequence:
+      - service: homeassistant.turn_on
+        target:
+          entity_id: fan.xiaomi_smart_fan
+    default: []
+  - service: fan.set_percentage
+    target:
+      entity_id: fan.xiaomi_smart_fan
+    data:
+      percentage: '{{ percentage }}'
+  mode: single
+  
+chiuchiu_fan_1x_oscillating:
+  alias: Chiu Fan Oscillating
+  sequence:
+  - service: fan.oscillate
+    target:
+      entity_id: fan.qiu_qiu_feng_shan
+    data:
+      oscillating: '{{ oscillating }}'
+  mode: single
+chiuchiu_fan_1x_set_speed:
+  alias: Chiu Fan Set Speed
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: fan.qiu_qiu_feng_shan
+        state: 'off'
+      sequence:
+      - service: homeassistant.turn_on
+        target:
+          entity_id: fan.qiu_qiu_feng_shan
+    default: []
+  - service: fan.set_percentage
+    target:
+      entity_id: fan.qiu_qiu_feng_shan
+    data:
+      percentage: '{{ percentage }}'
+  mode: single
+  
+unblock:
+  alias: Unblock
+  sequence:
+  - data:
+      command: b64:JgAMAQABJpIVDxQRFBITEBQTExAUNxMRFDUVNRY0FTQUNhU0FTQVNhM2FBAUNRU2ExEVEBU1FBETERQ1FRITEBU1FTQVEBQ1FAAE9wABKUYVAAKyCQAJrwABJ0cUAAxrAAEnSRMADGsAASZHFAAMagABKEgTAAxqAAEnSBQADGoAASZJFAAMawABJUgUAAxvAAEmSRMADF4AASZJFAABnwgACM8KCAcNCwABwgABJ0gUAAxrAAEnRhUADGsAASZHFAAMagABJ0gUAAxqAAEmSRMADGoAAShGFQAMaQABJ0gUAAxqAAEnSBUADGoAASZHFQAJuAcAAqsAASVJEwAMawABJ0cWAAxpAAEoSBQADQUAAAAAAAAAAAAAAAA=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_ok:
+  sequence:
+  - data:
+      command: b64:JgBQAAABKJEVEBURFA8WDxYPFBEUNxMSEzYUNRQ1FjUTNhQ1FDcTNhM2FBAWNBU0FREVEBQRExEVEBM2FREUERQ2FDYUNBQ2FAAE9gABKEYVAA0FAAAAAAAAAAA=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_home:
+  sequence:
+  - data:
+      command: b64:JgBYAAABJZETEhMSExISEhMSEhMTNxMSEzYTNxM3EjcTNxM2EzcTNhQREzcTEhI3EzcTERMSExITNxMSEzYTEhITEzYTNxI3EwAE+AABJkkTAAxrAAEmSRMADQU=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_up:
+  sequence:
+  - data:
+      command: b64:JgBYAAABJJITEhMSExITEhISEhMTNhMSEzcTNxI3EzYTNxM2EzcTNhM3EzYTEhI4ExITEhMSExITEhISEzcTEhM2EzcTNhM3EwAE+QABJUkTAAxqAAEmSRMADQU=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_down:
+  sequence:
+  - data:
+      command: b64:JgBYAAABJJITEhMSExITERMSEhMTNhMSEzcTNhM3EzYTNxM2EzcTNhMSEzYTNxQ2EhITEhMSEhMTNxQRExISEhM3EzYTNxM3EwAE+AABJ0gTAAxrAAEmSRIADQU=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_right:
+  sequence:
+  - data:
+      command: b64:JgBYAAABJJMTERMSExITEhMSEhITNxMSEzcTNhQ2EzYTNxM2FDYTNxM2ExITEhMSEzYTEhMSExITEhM2EzcTNhMSEzYTNxM2EwAE+AABJ0kTAAxqAAEmSRMADQU=
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_left:
+  sequence:
+  - data:
+      command: b64:JgBQAAABJZITERMSExITEhMSEhMSOBMREzcUNRM3EzcTNhM3EzYTNxMSExITERMSEzcTEhMSExETNxM3EzcTNxISEzcTNhM3EwAE9wABJkkTAA0F
+      entity_id: remote.mini_4
+    service: remote.send_command
+unblock_return:
+  sequence:
+  - data:
+      command: b64:JgBcAAABKJEVDxQRFQ8VEhMRExEVNRUQFDUVNRQ2EzYTNxM3EzUUNhUQEzcTERQRFBETExI2FBEUNhMSFDUUNRQ3EjcTERQ2EwAE9wABKUcUAAccCgAFQgABJ0kTAA0FAAAAAAAAAAAAAAAA
+      entity_id: remote.mini_4
+    service: remote.send_command
+jvc_tv:
+  alias: Jvc Tv
+  sequence:
+  - data:
+      command: b64:JgBoAAABKpIUERUQFjUTEhQQFRISEhQQFDcTNxMSFTUUNhQ2FDcUNhMSExITEhM3FBMTEBQSExITNxM3EzgTEhI3FDYUNhQ2FAAFBQABKkgVAAiaCAACUwcAAUYAASlJEgAMRAABJ0kUAA0F
+      entity_id: remote.mini_4
+    service: remote.send_command
+jvc_volume_increase:
+  sequence:
+  - data:
+      command: b64:JgBcAAcAAk8AASqSGA0UEhQ1FhETERURExEUERU1FTUVERQ2FDYVNhQ1FjQUERY1FRAUERUQFBEWDxQTEzUVERU1FDcVNBQ3FDYTNhUABQUAASlIFAAMQgABKUkUAA0FAAAAAAAAAAAAAAAA
+      entity_id: remote.mini_4
+    service: remote.send_command
+jvc_volume_decrease:
+  sequence:
+  - data:
+      command: b64:JgBcAAABKZMTEhMTEzgTERMSFBISExITEzYTORMREzgSNxM3EzcTNxU1FDcTEhMTEhMTERUQFBETEhQRFTUUNxQ3EjcTNxU1FQAFBAABKUkUAAFiCQAK2QABKEkUAA0FAAAAAAAAAAAAAAAA
+      entity_id: remote.mini_4
+    service: remote.send_command
+jvc_source:
+  sequence:
+  - data:
+      command: b64:JgBYAAABJ5MUERQSEzcTEhMRFRAWDxYPFTUVNhQSEzYVNRU2FDYVNRQRFDYUNhUQFBEWERQ1FTUUNhUQFBEVNRU1FjYUERUQEwAFBAABK0cVAAxCAAEqSRMADQU=
+      entity_id: remote.mini_4
+    service: remote.send_command

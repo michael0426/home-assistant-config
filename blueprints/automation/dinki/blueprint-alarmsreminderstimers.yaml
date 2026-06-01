@@ -1,0 +1,336 @@
+blueprint:
+  name: View Assist - Alarms Reminders Timers
+  description: Ask Assist to set an alarm, reminder, or timer  (View Assist alarmsreminderstimers
+    v 1.2.2)
+  domain: automation
+  input:
+    alarmsound_path:
+      name: Alarm Sound Path
+      description: The path to the sound file that will sound repeatedly when the
+        timer expires
+      default: /view_assist/views/alarm/sounds_timer_finished.wav
+    snooze_time:
+      name: Snooze Time
+      description: The amount of time in minutes to wait after hitting snooze button
+        before sounding alarm again
+      default: '10'
+    view:
+      name: View
+      description: The View Assist dashboard view to use for displaying the notification
+        and buttons to dismiss/snooze
+      default: /view-assist/alarm
+trigger:
+- platform: conversation
+  command:
+  - set [a] timer for {when}
+  - set [a] {when} timer
+  - (set|start) [a | an] {name} timer for {when}
+  id: timer
+- platform: conversation
+  command:
+  - (remind me | set a reminder) to {name} (at | in) {when}
+  - remind me (at | in) {when} to {name}
+  - set a reminder (at | for) {when} to {name}
+  - set a reminder for {when}
+  id: reminder
+- platform: conversation
+  command:
+  - set [an] alarm for {when}
+  - set a {name} alarm for {when}
+  id: alarm
+- platform: conversation
+  command:
+  - list [me] my (timers | alarms | reminders)
+  id: listtimers
+- platform: conversation
+  command:
+  - show [me] my (timers | alarms | reminders)
+  id: showtimers
+- platform: conversation
+  command:
+  - snooze [my] (alarm | timer | reminder)
+  id: snoozealarm
+- platform: conversation
+  command:
+  - how much time [is] left on my (alarm | timer | reminder)
+  - how much time [is] left on my {name} (alarm | timer | reminder)
+  - how (long | long's) [is] left on my (alarm | timer | reminder)
+  - how (long | long's) [is] left on my {name} (alarm | timer | reminder)
+  id: timeremaining
+- platform: conversation
+  command:
+  - cancel my {name} (alarm | timer | reminder)
+  - cancel my (alarm | timer | reminder) for {when}
+  - (Turn off | cancel | stop) [my] (alarm | timer | reminder)
+  id: canceltimer
+- event_type: va_timer_warning
+  id: timerwarning
+  trigger: event
+  alias: When viewassist event warning expired fires
+- event_type: va_timer_expired
+  id: ringalarm
+  trigger: event
+  alias: When viewassist event timer expired fires
+- alias: When SNOOZE button pressed
+  event_type: viewassist
+  trigger: event
+  id: snoozealarm
+  enabled: true
+  event_data:
+    command: snooze alarm
+- alias: When DISMISS button pressed
+  event_type: viewassist
+  trigger: event
+  id: dismissalarm
+  enabled: true
+  event_data:
+    command: dismiss alarm
+condition: []
+action:
+- variables:
+    target_satellite_device: '{{ view_assist_entity(trigger.device_id) if trigger.platform
+      == ''conversation'' else trigger.event.data.entity_id }}'
+    target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')}}'
+    target_satellite_device_type: '{{ state_attr(target_satellite_device, ''type'')}}'
+    alarmsound_path: !input alarmsound_path
+    view: !input view
+    snooze_time_input: !input snooze_time
+    snooze_time: '{{ snooze_time_input | int }}'
+- choose:
+  - conditions:
+    - condition: trigger
+      id:
+      - timer
+      - alarm
+      - reminder
+    sequence:
+    - variables:
+        device_id: '{{ trigger.device_id }}'
+        type: '{{ trigger.id }}'
+        time: '{{ trigger.slots.when }}'
+        name: '{{ trigger.slots.name if trigger.slots.name is defined else "" }}'
+        language: '{{ trigger.user_input.language }}'
+    - action: view_assist.set_timer
+      metadata: {}
+      data:
+        device_id: '{{ device_id }}'
+        type: '{{ type }}'
+        time: '{{ time }}'
+        name: '{{ name }}'
+        language: '{{ language }}'
+      response_variable: timer_result
+    - set_conversation_response: '{{ timer_result.response }}'
+    - if:
+      - condition: template
+        value_template: '{{ timer_result.timer is defined and timer_result.timer !=
+          null and target_satellite_device_type != ''audio_only''}}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - timerwarning
+      - ringalarm
+    sequence:
+    - action: view_assist.navigate
+      data:
+        device: '{{ target_satellite_device }}'
+        path: '{{ view }}'
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        mode: hold
+    - if:
+      - condition: template
+        value_template: '{% if trigger.id == ''ringalarm'' %}true{% else %}false{%
+          endif %}'
+      then:
+      - action: view_assist.sound_alarm
+        data:
+          entity_id: '{{ target_mediaplayer_device }}'
+          media_file: '{{ alarmsound_path }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - dismissalarm
+    sequence:
+    - variables:
+        timer_id: '{{ trigger.event.data.timer_id }}'
+    - action: view_assist.cancel_sound_alarm
+      data:
+        entity_id: '{{ target_mediaplayer_device }}'
+    - action: view_assist.cancel_timer
+      data:
+        timer_id: '{{ timer_id }}'
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        mode: normal
+  - conditions:
+    - condition: trigger
+      id:
+      - snoozealarm
+    sequence:
+    - variables:
+        new_time: '{{ snooze_time }} minutes'
+        timer_id: '{{ trigger.event.data.timer_id }}'
+    - action: view_assist.cancel_sound_alarm
+      data:
+        entity_id: '{{ target_mediaplayer_device }}'
+    - action: view_assist.snooze_timer
+      data:
+        timer_id: '{{ timer_id }}'
+        time: '{{ new_time }}'
+      response_variable: snooze_response
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        mode: normal
+    - set_conversation_response: '{{ snooze_response.response }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - canceltimer
+    sequence:
+    - action: view_assist.get_timers
+      data:
+        device_id: '{{ trigger.device_id }}'
+        name: '{{ trigger.slots.name if trigger.slots.name is defined else trigger.slots.when
+          if trigger.slots.when is defined else "" }}'
+        include_expired: true
+      response_variable: timer_info
+    - variables:
+        timer_id: '{{ timer_info["result"][0].id if timer_info["result"] | length
+          > 0 else "" }}'
+        timer_class: '{{ timer_info["result"][0].timer_class if timer_info["result"]
+          | length > 0 else "" }}'
+        timer_name: '{{ timer_info["result"][0].name if timer_info["result"] | length
+          > 0 else "" }}'
+        timer_sentence: '{{ timer_info["result"][0].extra_info.sentence if timer_info["result"]
+          | length > 0 else "" }}'
+    - if:
+      - condition: template
+        value_template: '{% if timer_id != "" %}true{% endif %}'
+      then:
+      - action: view_assist.cancel_sound_alarm
+        data:
+          entity_id: '{{ target_mediaplayer_device }}'
+      - action: view_assist.cancel_timer
+        data:
+          timer_id: '{{ timer_id }}'
+      - set_conversation_response: Your {{ timer_name if timer_name else timer_sentence
+          }} {{ timer_class }} has been canceled
+      else:
+      - set_conversation_response: I could not find an active timer called {{ trigger.slots.name
+          }}
+      - if:
+        - condition: template
+          value_template: '{% if target_satellite_device_type != ''audio_only'' %}true{%
+            else %}false{% endif %}'
+        then:
+        - action: view_assist.navigate
+          data:
+            device: '{{ target_satellite_device }}'
+            path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - timeremaining
+    sequence:
+    - action: view_assist.get_timers
+      data:
+        device_id: '{{ trigger.device_id }}'
+        name: '{{ trigger.slots.name if trigger.slots.name is defined else "" }}'
+      response_variable: timer_info
+    - variables:
+        timer_id: '{{ timer_info["result"][0].id if timer_info["result"] | length
+          > 0 else "" }}'
+        timer_class: '{{ timer_info["result"][0].timer_class if timer_info["result"]
+          | length > 0 else "" }}'
+        timer_name: '{{ timer_info["result"][0].name if timer_info["result"] | length
+          > 0 else "" }}'
+        timer_duration: '{{ timer_info["result"][0].duration if timer_info["result"]
+          | length > 0 else "" }}'
+        time_left: '{{ timer_info["result"][0].expiry.text if timer_info["result"]
+          | length > 0 else "" }}'
+    - if:
+      - condition: template
+        value_template: '{% if timer_id != '''' %}true{% endif %}'
+      then:
+      - set_conversation_response: You have {{ time_left }} on your {{ timer_name
+          if timer_name else timer_duration}} {{ timer_class}}
+      - if:
+        - condition: template
+          value_template: '{% if target_satellite_device_type != ''audio_only'' %}true{%
+            else %}false{% endif %}'
+        then:
+        - action: view_assist.navigate
+          data:
+            device: '{{ target_satellite_device }}'
+            path: '{{ view }}'
+      else:
+      - set_conversation_response: No timer {{"called " ~ trigger.slots.name if trigger.slots.name
+          is defined else "" }} could be found
+      - if:
+        - condition: template
+          value_template: '{% if target_satellite_device_type != ''audio_only'' %}true{%
+            else %}false{% endif %}'
+        then:
+        - action: view_assist.navigate
+          data:
+            device: '{{ target_satellite_device }}'
+            path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - listtimers
+    sequence:
+    - variables:
+        target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+        target_satellite_device_type: '{{ state_attr(target_satellite_device, ''type'')}}'
+        device_id: '{{ trigger.device_id }}'
+    - action: view_assist.get_timers
+      data:
+        device_id: '{{ device_id }}'
+      response_variable: timer_info
+    - set_conversation_response: "{% set active_timers = timer_info['result'] | selectattr('status',\n'!=',
+        'expired') | list %}\n{% set count = active_timers | length %}\n{% if count
+        == 0 %}\n  There are no active timers.\n{% else %}\n    {% if count == 1 %}\n
+        \     There is 1 active timer:\n    {% else %}\n      There are {{ count }}
+        active timers:\n    {% endif -%}\n    {% for timer in active_timers -%}\n
+        \     {%- if count > 1 and loop.last %}\n        {{ 'and ' ~ timer['expiry']['speak']
+        }},\n      {% else %}\n        {{ timer['expiry']['speak'] }},\n      {% endif
+        -%}\n    {% endfor %}\n{% endif %}\""
+    - if:
+      - condition: template
+        value_template: '{% if target_satellite_device_type != ''audio_only'' %}true{%
+          else %}false{% endif %}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - showtimers
+    sequence:
+    - if:
+      - condition: template
+        value_template: '{% if target_satellite_device_type != ''audio_only'' %}true{%
+          else %}false{% endif %}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+      - set_conversation_response: ''
+      else:
+      - set_conversation_response: This device does not have a display to show timers
+mode: parallel

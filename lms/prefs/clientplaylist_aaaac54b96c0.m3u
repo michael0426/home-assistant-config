@@ -1,0 +1,5 @@
+﻿#CURTRACK 0
+#EXTM3U
+#EXTURL:upnp://10.0.0.27:51103/stream-0.flc
+#EXTINF:-1,Streaming from AirConnect
+upnp://10.0.0.27:51103/stream-0.flc

@@ -1,0 +1,293 @@
+blueprint:
+  name: View Assist - Thermostat Control
+  description: Control thermostat temperature  (View Assist thermostatcontrol v 1.1.3)
+  domain: automation
+  input:
+    language:
+      name: Language
+      description: The desired spoken language
+      default: en
+      selector:
+        language:
+          languages:
+          - de
+          - en
+          - nl
+          - pl
+          native_name: false
+          no_sort: false
+    increasetemperature:
+      name: Increase Temperature
+      description: The phrase used to increase the current thermostat temperature
+        set point
+      default: (increase thermostat | raise thermostat | increase temperature | raise
+        temperature) [by] {amount} (degree | degrees | °)
+    decreasetemperature:
+      name: Decrease Temperature
+      description: The phrase used to decrease the current thermostat temperature
+        set point
+      default: (decrease thermostat | lower thermostat | decrease temperature | lower
+        temperature) [by] {amount} (degree| degrees | °)
+    settemperature:
+      name: Set Temperature
+      description: The phrase used to set the current thermostat temperature set point
+      default: (set thermostat | change thermostat | set temperature | change temperature)
+        [to] {amount} [degree | degrees | °]
+    showthermostat:
+      name: Show Thermostat
+      description: The phrase used to show thermostat
+      default: show thermostat
+    thermostat:
+      name: Thermostat device
+      description: The thermostat device to control (example climate.livingroomtstat)
+      selector:
+        entity:
+          filter:
+          - domain:
+            - climate
+          reorder: false
+          multiple: false
+      default: ''
+    view:
+      name: View
+      description: The View Assist dashboard view to use for thermostat device
+      default: /view-assist/thermostat
+trigger:
+- platform: conversation
+  command: !input increasetemperature
+  id: increasetemperature
+- platform: conversation
+  command: !input decreasetemperature
+  id: decreasetemperature
+- platform: conversation
+  command: !input settemperature
+  id: settemperature
+- platform: conversation
+  command: !input showthermostat
+  id: showthermostat
+condition: []
+action:
+- variables:
+    target_satellite_device: '{{ view_assist_entity(trigger.device_id) }}'
+    target_mediaplayer_device: '{{ state_attr(target_satellite_device, ''mediaplayer_device'')}}'
+    target_satellite_device_type: '{{ state_attr(target_satellite_device, ''type'')}}'
+    language: !input language
+    thermostat: !input thermostat
+    view: !input view
+    amount: '{{ trigger.slots.amount }}'
+    translations:
+      en:
+        responses:
+          tstat_raise: Thermostat temperature raised {amount} degree
+          tstat_lower: Thermostat temperature lowered {amount} degree
+          tstat_set: Thermostat temperature set to {amount} degrees
+          tstat_show: Showing thermostat
+          tstat_display_error: Sorry.  This device cannot display the thermostat
+      de:
+        responses:
+          tstat_raise: Thermostattemperatur um {amount} Grad erhöht
+          tstat_lower: Thermostattemperatur um {amount} Grad gesenkt
+          tstat_set: Thermostattemperatur auf {amount} Grad eingestellt
+          tstat_show: Thermostat wird angezeigt
+          tstat_display_error: Entschuldigung. Dieses Gerät kann das Thermostat nicht
+            anzeigen
+      nl:
+        responses:
+          tstat_raise: Thermostaat temperatuur verhoogd met {amount} graad
+          tstat_lower: Thermostaat temperatuur verlaagd met {amount} graad
+          tstat_set: Thermostaat temperatuur ingesteld op {amount} graden
+          tstat_show: Thermostaat wordt weergegeven
+          tstat_display_error: Sorry. Dit apparaat kan de thermostaat niet weergeven
+      pl:
+        responses:
+          tstat_raise: Temperatura termostatu podniesiona o {amount} stopień
+          tstat_lower: Temperatura termostatu obniżona o {amount} stopień
+          tstat_set: Temperatura termostatu ustawiona na {amount} stopni
+          tstat_show: Wyświetlam termostat
+          tstat_display_error: Przepraszam. To urządzenie nie może wyświetlić termostatu
+- action: view_assist.set_state
+  target:
+    entity_id: '{{ target_satellite_device }}'
+  data:
+    climate: '{{ thermostat }}'
+- choose:
+  - conditions:
+    - condition: trigger
+      id:
+      - increasetemperature
+    sequence:
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''cool'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ state_attr(thermostat,''temperature'')+ amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''heat'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ state_attr(thermostat,''temperature'') + amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''heat_cool'' %} true {% endif
+          %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          target_temp_high: '{{ state_attr(thermostat,''target_temp_high'') + amount
+            }}'
+          target_temp_low: '{{ state_attr(thermostat,''target_temp_low'') + amount
+            }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - variables:
+        conversation_response: '{{ translations[language][''responses''][''tstat_raise''].replace("{amount}",
+          amount | string) }}'
+    - set_conversation_response: '{{ conversation_response }}'
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        last_said: '{{ conversation_response }}'
+    - if:
+      - condition: template
+        value_template: '{{ target_satellite_device_type != ''audio_only'' }}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - decreasetemperature
+    sequence:
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''cool'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ state_attr(thermostat,''temperature'') - amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''heat'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ state_attr(thermostat,''temperature'') - amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''heat_cool'' %} true {% endif
+          %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          target_temp_high: '{{ state_attr(thermostat,''target_temp_high'') - amount
+            }}'
+          target_temp_low: '{{ state_attr(thermostat,''target_temp_low'') - amount
+            }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - variables:
+        conversation_response: '{{ translations[language][''responses''][''tstat_lower''].replace("{amount}",
+          amount | string) }}'
+    - set_conversation_response: '{{ conversation_response }}'
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        last_said: '{{ conversation_response }}'
+    - if:
+      - condition: template
+        value_template: '{{ target_satellite_device_type != ''audio_only'' }}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - settemperature
+    sequence:
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''cool'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - if:
+      - condition: template
+        value_template: '{% if states(thermostat) == ''heat'' %} true {% endif %}'
+      then:
+      - action: climate.set_temperature
+        data:
+          temperature: '{{ amount }}'
+        target:
+          entity_id: '{{ thermostat }}'
+    - variables:
+        conversation_response: '{{ translations[language][''responses''][''tstat_set''].replace("{amount}",
+          amount | string) }}'
+    - set_conversation_response: '{{ conversation_response }}'
+    - action: view_assist.set_state
+      target:
+        entity_id: '{{ target_satellite_device }}'
+      data:
+        last_said: '{{ conversation_response }}'
+    - if:
+      - condition: template
+        value_template: '{{ target_satellite_device_type != ''audio_only'' }}'
+      then:
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+  - conditions:
+    - condition: trigger
+      id:
+      - showthermostat
+    sequence:
+    - if:
+      - condition: template
+        value_template: '{{ target_satellite_device_type != ''audio_only'' }}'
+      then:
+      - variables:
+          conversation_response: '{{ translations[language][''responses''][''tstat_show'']
+            }}'
+      - set_conversation_response: '{{ conversation_response }}'
+      - action: view_assist.set_state
+        target:
+          entity_id: '{{ target_satellite_device }}'
+        data:
+          last_said: '{{ conversation_response }}'
+      - action: view_assist.navigate
+        data:
+          device: '{{ target_satellite_device }}'
+          path: '{{ view }}'
+      else:
+      - variables:
+          conversation_response: '{{ translations[language][''responses''][''tstat_display_error'']
+            }}'
+      - set_conversation_response: '{{ conversation_response }}'
+      - action: view_assist.set_state
+        target:
+          entity_id: '{{ target_satellite_device }}'
+        data:
+          last_said: '{{ conversation_response }}'
+  default: []
+mode: single
