@@ -1,0 +1,26 @@
+##############################
+# Logging Package
+# Centralized logging configuration for performance and debugging
+##############################
+
+logger:
+  default: info
+  logs:
+    homeassistant.components.mqtt: info
+
+# History Configuration
+history:
+  exclude:
+    entities:
+      - sun.sun
+      - sensor.last_boot
+
+# Recorder Configuration (database)
+recorder:
+  purge_keep_days: 30
+  auto_purge: true
+  exclude:
+    entities:
+      - sun.sun
+    domains:
+      - update
