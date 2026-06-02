@@ -1,0 +1,42 @@
+##############################
+# Covers Package - Garage and Bathroom Covers
+# Template covers for automated door/blind controls
+##############################
+
+template:
+  # Garage Door Cover
+  - cover:
+      - name: "Garage Door"
+        unique_id: garage_door_cover
+        device_class: garage
+        state: "{{ 'open' if is_state('binary_sensor.garage_door', 'on') else 'closed' }}"
+        open_cover:
+          service: switch.turn_on
+          target:
+            entity_id: switch.sonoff_10005b61f7_1
+        close_cover:
+          service: switch.turn_on
+          target:
+            entity_id: switch.sonoff_10005b61f7_3
+        stop_cover:
+          service: switch.turn_on
+          target:
+            entity_id: switch.sonoff_10005b61f7_2
+        icon: "{{ 'mdi:garage-open-variant' if is_state('cover.garage_door', 'open') else 'mdi:garage-variant' }}"
+
+  # Bathroom Cover
+  - cover:
+      - name: "Bathroom Cover"
+        unique_id: bathroom_cover_template
+        open_cover:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.bathroom_cover_up
+        stop_cover:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.bathroom_cover_stop
+        close_cover:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.bathroom_cover_down
