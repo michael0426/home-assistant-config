@@ -1,0 +1,57 @@
+##############################
+# Switches Package - Broadlink IR and Smart Switches
+# Manages IR-controlled devices and smart outlets
+##############################
+
+switch:
+  # Broadlink RM4 Mini - First Unit
+  - platform: broadlink
+    mac: a0:43:b0:54:f6:3e
+    switches:
+      # SmartIR Media Player - Unblock
+      - name: unblock
+        command_on: 'JgAMAQABJpIVDxQRFBITEBQTExAUNxMRFDUVNRY0FTQUNhU0FTQVNhM2FBAUNRU2ExEVEBU1FBETERQ1FRITEBU1FTQVEBQ1FAAE9wABKUYVAAKyCQAJrwABJ0cUAAxrAAEnSRMADGsAASZHFAAMagABKEgTAAxqAAEnSBQADGoAASZ[...]'
+        command_off: 'JgCyAQABKJEVERMRExAVERQQFRAUNRUQFDcTHgoIHjAWNBU0FTYUNBY0FDYTERQ1FTUVERQQFTQUEhQQFDYWEBQQFDUUNRUREzcUAAT2AAEnSBQADGoAASdIFQAMagABJkkTAAxqAAEoRxQADGoAAShHFAACHQcACkUAASlGFgAMaQ[...]'
+
+      # Kitchen Light
+      - name: kitchen light
+        command_on: '6RA0ACIOCyQiDgskIg0iDgskCyQjDQslCwABYwwjIw0MIyMNIg0jDSMNIg0LJAskIg0iDgskIw0AAAAA'
+        command_off: '6RM0ACENIg0hDiENCiQLIyENIQ0LIyEOIQ4JJCEOCiQhDiEOCyQLJAolIA0KAAFcDSEiDQsjIQ0AAAAA'
+
+      # Kitchen Table Light
+      - name: kitchen table light
+        command_on: '6Qo0ACIOCiUiDgolIg4iDiIOCiUKJQslCwABZgwjIw0MJCMOIg0jDiMNIw4KJQskIw0jDQslIg4AAAAA'
+        command_off: '6RM0ACMNIw0LJSIOCyUKJQsAAWcNIyMMDCQjDSMNIw0jDSMOCyQMJCMOIg4LJSMOIw0LJSMNCyUAAAAA'
+
+      # Bathroom Cover Controls
+      - name: bathroom cover up
+        command_on: '6QC6AQd5kjQRDRIMEgwTDBIMEg0IFhMLEg0IFhIMEgwJFggVEwwSDAgWEw0RDRENEgwSDAkVEwsTDBIMCBYUChMLCRYJFhILFQoTCwkVChYSDAgVEwsKFRMLEwsJFhMLChQTCwoUCxQTCwoUChUJFhILChUJFRMMFAkUDAkUChQKFQ[...]'
+        command_off: '6QCmAgQEe084CBgJDRQXCQ0UFwkMFRcJDBUMFBcLCxQNFBcJDBUMFQsWFQsNEwwUDBUXCQwVDBQMFRYKDBYLFgoVDRMMFQwUDRQMFQwUDBQXCwwTDRQMFBcKt1E2CxUMCxUXCQsXFAsLFhYLChcKFRYLChcKFhYLCRgJGAkYEg4JF[...]'
+
+      - name: bathroom cover stop
+        command_on: '6QB5AwgEBAQGCQmHMBUKCxIWCQsTFQkMFBQJCxMVChQKCxMLFAoUChQLFBUJChQLFAoUChQUChULCRQKFBQKFQoVCQoVFAoKFAoVChQUCgsTFAoLFAoUChUKFAoUChQKFQoUFAoUCxMLChUTCgoUFQoKFBUJFQoVCRQKFAsKFBQKCx[...]'
+
+      - name: bathroom cover down
+        command_on: '6QBKAo8vFgkVCQsTFgkVCRUJFQoLFAsSFQoUChQLChQKFBQLFAoUChQKFAwTChQKDBQTDAgUChUTDBMKFAwIFQoUFAoUCxMLChQUCxMLChQKFBQLChUTChQLEwsLExQLCRUJFwgVCRUTDAgWCRUSDgcWCBgLFAYXCxMHFwYZCBcEGw[...]'
+
+  # Broadlink RM4 Mini - Second Unit
+  - platform: broadlink
+    mac: b4:43:0d:38:84:2f
+    switches:
+      # Air Purifier
+      - name: air purifier
+        command_on: 'JgBoAAABJ5MUEhMTEDcTFBAUEhQREhIUEjcRNxMVDzkSNxITEjYVNRM3EzYUERMTExISEhITEzYTEhMSEzcSNxQ1EjcTNhUREgAFPQABJ0sSAAxHAAEnSRQADEYAASdJEwAMRwABKEkSAA0F='
+        command_off: 'JgBoAAABKJEVEhQQFDYTERQRExEVEBUQFDUVNRQRFDUUNRURFDYTNhM2FDcTERQSExAUERQREzYUERQQFjUUNRQ1FTUTNhQRFAAFPQABJ0kVAAxFAAEnSBQADEYAASlIEwAMRgABJ0oTAA0F='
+
+      # Air Purifier High Speed Mode
+      - name: air purifier high speed
+        command_on: 'JgBoAAABKJEWDxUREzcTERQQFRAUERQQFTYTNxMSEjYUNRUSETcUNhQQFRAVEBMRFBITEhMRFDYUNRU2EjgSNhQ2FDUTNhUQFQAFOwABKEgTAAxIAAEoSRIADEcAAShHFgAMRQABKEcUAA0F='
+        command_off: 'JgBoAAABKJEWDxUREzcTERQQFRAUERQQFTYTNxMSEjYUNRUSETcUNhQQFRAVEBMRFBITEhMRFDYUNRU2EjgSNhQ2FDUTNhUQFQAFOwABKEgTAAxIAAEoSRIADEcAAShHFgAMRQABKEcUAA0F='
+
+# Media player for SmartIR
+media_player:
+  - platform: smartir
+    name: Unblock
+    unique_id: unblock_media
+    device_code: 1100
+    controller_data: remote.mini_4
