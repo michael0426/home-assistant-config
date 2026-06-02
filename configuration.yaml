@@ -1,232 +1,53 @@
-# Configure a default setup of Home Assistant (frontend, api, etc)
+##############################
+# Home Assistant Main Configuration
+# Optimized with package-based organization
+# See packages/ directory for component configurations
+##############################
+
+# Configure default setup
 default_config:
-#zeroconf:
-#  default_interface: true
 
+# Home Assistant core configuration
+homeassistant:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  unit_system: metric
+  time_zone: Asia/Taipei
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
 
-my:
-zeroconf:
+# Frontend
+frontend:
+  extra_module_url:
+    - /local/custom-lovelace/bar-card/bar-card.js
+
+# Groups
 group: !include groups.yaml
+
+# Automations
 automation: !include automations.yaml
+
+# Scripts
 script: !include scripts.yaml
+
+# Scenes
 scene: !include scenes.yaml
 
-
-homeassistant:
-  customize: !include customize.yaml
-
-#frontend:
-#  themes: !include_dir_merge_named themes
-
-
-
-zone:
-  - name: home
-    latitude: 22.8522
-    longitude: 120.2782088
-    radius: 300
-  - name: mother home
-    latitude: 22.5713803
-    longitude: 120.3545592    
-
-dhcp:  
-
-ios:
-homekit:
-  - name: socket
-    port: 21073
-    filter:
-      include_entities:
-        - switch.sonoff_10012b7b40 
-        - switch.jellyfish
-    entity_config:
-      switch.sonoff_10012b7b40:         #1F智能開關
-        type: outlet
-      switch.jellyfish:         #水母音響
-        type: outlet
-  - name: valve
-    port: 21074
-    filter:
-      include_entities:
-        - switch.sonoff_1001648a34
-    entity_config:
-      switch.sonoff_1001648a34: #1F抽水馬達
-        type: valve
-
-
+# HTTP Configuration
 http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 172.30.33.0/24
-    - 172.30.32.0/24    
+    - 172.30.32.0/24
     - 192.168.1.0/24
     - 10.0.0.0/24
-    
-    
-media_player:
-#  - platform: soundtouch
-#    host: 10.0.0.29
-#    port: 8090
-#    name: bose
-  - platform: smartir
-    name: Unblock
-    unique_id: Unblock
-    device_code: 1100
-    controller_data: remote.mini_4
 
-switch:
-  - platform: broadlink
-    mac: a0:43:b0:54:f6:3e
-    switches:
-#      - name: hitachi room
-#        command_on: JgC2Am82DycRDRENEA8OEA8ODg8PDw8QDg8PDg8QDycPDxAODg8QDg8QDw8ODw4PEA8PDRAPDw8ODw8QEA0PDg8QDikPDg8pDicPKQ8nDygPKQ8PDycPKRAnDygQJxAnDygPKQ8nDw8PDg8PDxAPDg8OEA4RDhANDxAOKA8nEA8PDw4oDykOKA8oDw8PEA0qDycODxAODw8PDhAODykQJhAODw8PKQ4oECYRJhAQDREOJxAnEA4PKA8nDw8QDg8oEA4PDhAPEA4ODw8pDikODw8oDycPKQ8ODxAQDRAnDw4PKBApDw8OJxAnDygPDxAnDxANEQ4oEA0QDhAODxANDxAODw8QDRAnDygPKBAoECYPKBAnECgQDQ8QDg4RDg4PEA0RDQ8QDygPJw8oECcQJw8oDygQKA4PDg8PEQ4ODw8PDhAODw8PKA8pECYPKA8oECcQKA8nDw4QDw4PEA4PDxANDw8PDxAnECcPKA8oDycPKBAnDykPEA4ODxAODw8ODw8RDg4QDigQJxAmESYQJxApDSkOKQ8nESYQDg8QDygOEA8NEA4QDg8PECcQJhENDykQJg8oDygPDw8PDxAOJxEmESYPKBENECcPKA8oDw8PEA8PDQ8PKA8oDxAOKQ4oDw8PDw4PDw8PDxAmDw8PDw8pDigPKQ4pDikOEA8OEA8ODg8PDw8PEA0QDycPKA8pDigPKQ4pDw4QDg4PDw8QDg8ODxAOKQ8nDygQKA4oECcPKQ4oEA8ODhENDykOEA4PDw8PDw4PECgOKA8PDykOKBAnECcPKBAOEA0QDhAODw4RDQ8PDw8PKBAnDygPKA8pDigRJw8nEA4PKBAOEA4PDxANEQ0QDg8oEA0PKBApECcOKA8qDSgRDg8nDw8PKQ4OEA4QJw8pDykODhEmEA8OKA8oEA4QDg8ADQUPDw==
-#        command_off: JgC2Am83DigPDw4QDhENEQ4ODhAOEA4QDg8PDw4RDigOEA4PDxAODw8QDRENEA0QDxAODw4QDw4PDw8PDhAODxAPDigOEA4pDigPKA8oDioOKQ0QDygPKA8pDigPKA4pECcOKQ8oDhAODw4QDhAODw8RDBAOEQ0QDhAPKA0pDxAODw4qDSoNKQ4pDhAODw4pDikQDg4QDg8PEA4PDykOKA4QDg8PKA8oDygOKRAODhENKg4oDhAPJw8oDhEODw8oDg8QDg4QEA4OEA4pDygODw8oDikOKg8ODhAPDw8oDhANKQ8pDhANKQ8oDioNEA8pDRANEA8oDw8OEQwRDg8QDw0QDg8OEA4qDSkQKA0pDikOKQ4pDikODw8PDw8PDw8PDg8PEA0QDikPKQ4oDygPKA8nECgOKQ8ODxANEQ0PDhINDxAODhAOKg4nDykOKQ4oECgOKA4rDg4OEA4QDw4PEA0RDRAOEA4pDigOKQ8oECcOKQ4pDikQDg8PDxAODw4PDhAOEA4PDykPJw4pDykPKA0qDSkPKA4qDigPEA4PDikOEQ4PDg8PEA0RDSkPKA4PDykOKBAnDygPDw4RDg8OEA8nESYPKg4ODisNKA4pDikPEA4PDhENDw4qDRAOKQ4pDhAODw4QDikOEA4pDhENDw4qDigPKQ8OEA8OKQ0RDQ8PDw4RDRAOKQ8pDRAOKgwqDigOKQ4rDg8ODw8PDg8OEA4QDxAOKA4oDykNKRAnDioOKQ0qDRENEQ0PDioPDg4QDw8PDg4RDSkOKQ4QDikOKQ4qDSkPKA8PDRAQDg4RDRAPDw8ODxAOKA4pDioNKQ4pDSkPKQ0rDicPEA8nDhAPDw4RDQ0SEAwQDikQDg4pDioNKA8qDSkPDg4QDhENKQ4pDygPDw0QDikOKQ4pDhEODg8PDioOKgwADQUOEQ==
-      - name: unblock
-        command_on: 'JgAMAQABJpIVDxQRFBITEBQTExAUNxMRFDUVNRY0FTQUNhU0FTQVNhM2FBAUNRU2ExEVEBU1FBETERQ1FRITEBU1FTQVEBQ1FAAE9wABKUYVAAKyCQAJrwABJ0cUAAxrAAEnSRMADGsAASZHFAAMagABKEgTAAxqAAEnSBQADGoAASZJFAAMawABJUgUAAxvAAEmSRMADF4AASZJFAABnwgACM8KCAcNCwABwgABJ0gUAAxrAAEnRhUADGsAASZHFAAMagABJ0gUAAxqAAEmSRMADGoAAShGFQAMaQABJ0gUAAxqAAEnSBUADGoAASZHFQAJuAcAAqsAASVJEwAMawABJ0cWAAxpAAEoSBQADQUAAAAAAAAAAAAAAAA=' 
-        command_off: 'JgCyAQABKJEVERMRExAVERQQFRAUNRUQFDcTHgoIHjAWNBU0FTYUNBY0FDYTERQ1FTUVERQQFTQUEhQQFDYWEBQQFDUUNRUREzcUAAT2AAEnSBQADGoAASdIFQAMagABJkkTAAxqAAEoRxQADGoAAShHFAACHQcACkUAASlGFgAMaQABJ0gUAAxpAAEnSBQADG8AASZIFAAMXgABJ0gVAAxqAAElShQADGgAASdJEwAMaQABJ0oTAAxqAAEmSBUABHMHAAfuAAEnShIADGoAASdJEwAMagABJ0gUAAxqAAEnSRMADGoAASdIFAAMaQABJ0gUAAxqAAEnSBUADGoAASZJEwAMaQABJ0gUAAxqAAEoRxQACXwIAALmAAEoRhUADGsAASVIFAAMagABJ0gVAAxpAAEnSBQADHcAASdHFgAMXAABKEgVAAxpAAEmSBQADGsAASZHFgAMaQABJ0gTAAxsAAEmSBQADGkAASlHFAAMaQABJ0kTAAxqAAEnSRQADGkAASdIFQAMaQABJ0cVAAxqAAEnSRMADGsAASZIFAAMagABJ0kTAAM/CAAJIgABKEcVAA0FAAAAAAAA'        
-  - platform: broadlink
-    mac: b4:43:0d:38:84:2f 
-    switches:
-      - name: air purifier
-        command_on: 'JgBoAAABJ5MUEhMTEDcTFBAUEhQREhIUEjcRNxMVDzkSNxITEjYVNRM3EzYUERMTExISEhITEzYTEhMSEzcSNxQ1EjcTNhUREgAFPQABJ0sSAAxHAAEnSRQADEYAASdJEwAMRwABKEkSAA0F='
-        command_off: 'JgBoAAABKJEVEhQQFDYTERQRExEVEBUQFDUVNRQRFDUUNRURFDYTNhM2FDcTERQSExAUERQREzYUERQQFjUUNRQ1FTUTNhQRFAAFPQABJ0kVAAxFAAEnSBQADEYAASlIEwAMRgABJ0oTAA0F='
-      - name: air purifier high speed
-        command_on: 'JgBoAAABKJEWDxUREzcTERQQFRAUERQQFTYTNxMSEjYUNRUSETcUNhQQFRAVEBMRFBITEhMRFDYUNRU2EjgSNhQ2FDUTNhUQFQAFOwABKEgTAAxIAAEoSRIADEcAAShHFgAMRQABKEcUAA0F=' 
-        command_off: 'JgBoAAABKJEWDxUREzcTERQQFRAUERQQFTYTNxMSEjYUNRUSETcUNhQQFRAVEBMRFBITEhMRFDYUNRU2EjgSNhQ2FDUTNhUQFQAFOwABKEgTAAxIAAEoSRIADEcAAShHFgAMRQABKEcUAA0F=' 
-#      - name: hitachi
-#        command_on: 'JgC2Am82DycRDRENEA8OEA8ODg8PDw8QDg8PDg8QDycPDxAODg8QDg8QDw8ODw4PEA8PDRAPDw8ODw8QEA0PDg8QDikPDg8pDicPKQ8nDygPKQ8PDycPKRAnDygQJxAnDygPKQ8nDw8PDg8PDxAPDg8OEA4RDhANDxAOKA8nEA8PDw4oDykOKA8oDw8PEA0qDycODxAODw8PDhAODykQJhAODw8PKQ4oECYRJhAQDREOJxAnEA4PKA8nDw8QDg8oEA4PDhAPEA4ODw8pDikODw8oDycPKQ8ODxAQDRAnDw4PKBApDw8OJxAnDygPDxAnDxANEQ4oEA0QDhAODxANDxAODw8QDRAnDygPKBAoECYPKBAnECgQDQ8QDg4RDg4PEA0RDQ8QDygPJw8oECcQJw8oDygQKA4PDg8PEQ4ODw8PDhAODw8PKA8pECYPKA8oECcQKA8nDw4QDw4PEA4PDxANDw8PDxAnECcPKA8oDycPKBAnDykPEA4ODxAODw8ODw8RDg4QDigQJxAmESYQJxApDSkOKQ8nESYQDg8QDygOEA8NEA4QDg8PECcQJhENDykQJg8oDygPDw8PDxAOJxEmESYPKBENECcPKA8oDw8PEA8PDQ8PKA8oDxAOKQ4oDw8PDw4PDw8PDxAmDw8PDw8pDigPKQ4pDikOEA8OEA8ODg8PDw8PEA0QDycPKA8pDigPKQ4pDw4QDg4PDw8QDg8ODxAOKQ8nDygQKA4oECcPKQ4oEA8ODhENDykOEA4PDw8PDw4PECgOKA8PDykOKBAnECcPKBAOEA0QDhAODw4RDQ8PDw8PKBAnDygPKA8pDigRJw8nEA4PKBAOEA4PDxANEQ0QDg8oEA0PKBApECcOKA8qDSgRDg8nDw8PKQ4OEA4QJw8pDykODhEmEA8OKA8oEA4QDg8ADQUPDw=='
-#        command_off: 'JgC2Am83DigPDw4QDhENEQ4ODhAOEA4QDg8PDw4RDigOEA4PDxAODw8QDRENEA0QDxAODw4QDw4PDw8PDhAODxAPDigOEA4pDigPKA8oDioOKQ0QDygPKA8pDigPKA4pECcOKQ8oDhAODw4QDhAODw8RDBAOEQ0QDhAPKA0pDxAODw4qDSoNKQ4pDhAODw4pDikQDg4QDg8PEA4PDykOKA4QDg8PKA8oDygOKRAODhENKg4oDhAPJw8oDhEODw8oDg8QDg4QEA4OEA4pDygODw8oDikOKg8ODhAPDw8oDhANKQ8pDhANKQ8oDioNEA8pDRANEA8oDw8OEQwRDg8QDw0QDg8OEA4qDSkQKA0pDikOKQ4pDikODw8PDw8PDw8PDg8PEA0QDikPKQ4oDygPKA8nECgOKQ8ODxANEQ0PDhINDxAODhAOKg4nDykOKQ4oECgOKA4rDg4OEA4QDw4PEA0RDRAOEA4pDigOKQ8oECcOKQ4pDikQDg8PDxAODw4PDhAOEA4PDykPJw4pDykPKA0qDSkPKA4qDigPEA4PDikOEQ4PDg8PEA0RDSkPKA4PDykOKBAnDygPDw4RDg8OEA8nESYPKg4ODisNKA4pDikPEA4PDhENDw4qDRAOKQ4pDhAODw4QDikOEA4pDhENDw4qDigPKQ8OEA8OKQ0RDQ8PDw4RDRAOKQ8pDRAOKgwqDigOKQ4rDg8ODw8PDg8OEA4QDxAOKA4oDykNKRAnDioOKQ0qDRENEQ0PDioPDg4QDw8PDg4RDSkOKQ4QDikOKQ4qDSkPKA8PDRAQDg4RDRAPDw8ODxAOKA4pDioNKQ4pDSkPKQ0rDicPEA8nDhAPDw4RDQ0SEAwQDikQDg4pDioNKA8qDSkPDg4QDhENKQ4pDygPDw0QDikOKQ4pDhEODg8PDioOKgwADQUOEQ=='
-      - name: kitchen light
-        command_on: '6RA0ACIOCyQiDgskIg0iDgskCyQjDQslCwABYwwjIw0MIyMNIg0jDSMNIg0LJAskIg0iDgskIw0AAAAA'
-        command_off: '6RM0ACENIg0hDiENCiQLIyENIQ0LIyEOIQ4JJCEOCiQhDiEOCyQLJAolIA0KAAFcDSEiDQsjIQ0AAAAA'
-      - name: kitchen table light
-        command_on: '6Qo0ACIOCiUiDgolIg4iDiIOCiUKJQslCwABZgwjIw0MJCMOIg0jDiMNIw4KJQskIw0jDQslIg4AAAAA'
-        command_off: '6RM0ACMNIw0LJSIOCyUKJQsAAWcNIyMMDCQjDSMNIw0jDSMOCyQMJCMOIg4LJSMOIw0LJSMNCyUAAAAA'
-      - name: bathroom cover up
-        command_on: '6QC6AQd5kjQRDRIMEgwTDBIMEg0IFhMLEg0IFhIMEgwJFggVEwwSDAgWEw0RDRENEgwSDAkVEwsTDBIMCBYUChMLCRYJFhILFQoTCwkVChYSDAgVEwsKFRMLEwsJFhMLChQTCwoUCxQTCwoUChUJFhILChUJFRMMFAkUDAkUChQKFQkVChQUCwkVEwsKFQoTFAsUCgoVCneTMhQKFAsTDBILFAoUCwkWEwoWCAoVFQoTCgoVCRUUChQMCRQUChUJFAsTCxQKChQUDBIMEwsJFRMMFAkKFQoUFAoUChQLCRYJFRMLCxMUCgoVFAoUCgoUFAsKFBUKCRQKFRQKChQLEwsUFAsLEgsUFAsTCxUJChQLFAkUCxQKFBQKCxQUCgoUChUUChQLCxQJdpQyFAoUChULEwoUCxMLCxMUChQLChQUChUJCxMLFBQLEwsJFRQKFAsUChQKFAsKFBQKFQkUCwoUFQkVCgoUChQUChQLFAoKFAsVEwoKFRMKCxQUCxMKCxQTCwoUFAwJFQkUFAwJFAoUChQUDAkUChQUChUKFAoKFAsTCxUJFAwTFAoKFRMKCxQKFBULEgoLFAoABdwAAAAAAAAAAAAAAAAAAA=='
-        command_off: '6QCmAgQEe084CBgJDRQXCQ0UFwkMFRcJDBUMFBcLCxQNFBcJDBUMFQsWFQsNEwwUDBUXCQwVDBQMFRYKDBYLFgoVDRMMFQwUDRQMFQwUDBQXCwwTDRQMFBcKt1E2CxUMCxUXCQsXFAsLFhYLChcKFRYLChcKFhYLCRgJGAkYEg4JFwkYCBkSDgcaCBgIGBQNCBgKFgoYCBkHGAkXCxYJFwoXCRcUDQkXChcJFxQNtlI0DRQLCxgTDAoXEwwLFhQMChcKFhUMCxULFhULCxYKFgwVFQwKFgoWCxYVCwsWChYLFRYLCxULFgsWChcKFQsWCxcJFgsVCxYWCg0UCxUMFRUNtVI2ChYLDBQWCwsVFwsKFRYMChULFhUMCxQMFRcKCxULFQwVFgsLFQwUDRQWCgwVCxYMFBYKDBULFQ0VCxQMFQwUDBUMFgoVCxYWCgwUDBUNExcKt1E2CxYKDBUWCgwVFgoNFBYKDBUMFBcKCxUMFRYKDBULFQwVFgoMFQsVDBQXCgwVCxYLFRYLCxULFgsUDhQLFAwVDBULFQ0TDRUXCQ0TDBQMFhULt1E3ChYMChQYCQwWFQoMFBcKDBYLFBYLCxUMFBcLChYLFQsVGAkMFgoVDBUWCg0TDBUMFBcLCxQMFQwWChULFQwVDBULFQ0UCxUXCwoVDBQMFhcIuFE2ChYLCxUWCwsVFgoNFBgJCxUNFBYLCxQMFRYLDBULFgoVFgsNFAsVCxUWCwsVDBQMFRcKCxUMFAwVDBYKFQwVCxUMFQsVDRMXCg0TDRQMFBcKuFA3ChYLCxYWCwoVFgoMFhULDBUKFRcKDRMMFRYKDRQMFAwVFgoMFQwWChUWCgwVDBQMFRYLDBQMFAwVDBQMFQwUDBUMFQsVDBUWCgwUDBUMFBcKFgAF3AsV'
-      - name: bathroom cover stop
-        command_on: '6QB5AwgEBAQGCQmHMBUKCxIWCQsTFQkMFBQJCxMVChQKCxMLFAoUChQLFBUJChQLFAoUChQUChULCRQKFBQKFQoVCQoVFAoKFAoVChQUCgsTFAoLFAoUChUKFAoUChQKFQoUFAoUCxMLChUTCgoUFQoKFBUJFQoVCRQKFAsKFBQKCxMKFRQKChYIFggVChQUCxMMEgsTDAkXEA4HeIIEDjURDgYYEQ4HFhENCBYSDAgXEQ4RDAgWCRcHFgkVCBYTDQcWCRUKFAkWEgwUCgkWCBYTCxQKEwwJFhILCRUJFgkVEw0HFhIMCRYIFQoVCRULEwkVChYIFRQKEw0SCwkVEwsKFRMMCRQUChQLEwwUCxILCRUTCwkVChUTCwoUChYIFQoUFAsTCxMLFAoLFBMLCnaUMhQKChQUCwoUFQoJFRQKCxMUChYJChQMFAoTChQKFRMKCxYIFAsTCxQUChQKChQLFRMKFQoUCgoUFggKFQoUChQUCgoVFAoMEgsTCxQKFAoUCxQKFAoVFAoUCxMKChQLBAcKChUTCgsUFAwSChQKFQoUCgoUFAwJFAoUFAsKFQoTCxMLFBQKFAsUChQKChQWCAt2lTEVCgsTFAoKFBQMCRUTCgsTFAsUCgoVCxILFAsTChUUCgoUCxMLFAoUFAoVCQsVChMUChUKFQkKFBYJChQKFAwUEwoKFBQKCxQKFQoVCRQLEwoUCxQLFBMKFQkVCgoUFAoLExUKCxMVCRYJFAoUChUKChQUCgsTCxQUCgsTCxMNEgoVEwoVChQKFAoLFBQKCneUMRULCRQVCwoSFgkKFBQLChQUCxMKCxQMEgoUCxUKExUJCxUJFAsTCxMVCxMKCxQKExUKFQkUDAkUFAoLEwsUChQUCgsTFQoKFAwUCRQKFAoVChMLFAsTFAoVChQLChMVCgoUFAoLExUKFQkVCRUKFAoMExQKChUKExUJCxQKFAwSCxQUChUJFQoUCgoUFQkLdpUxFAoLExUKChQUCgsUFAoKFhILFAoKFAsTCxQKFAsTFQsJFQkUCxQKFBQKFAoLEwsUFAoVChQKChUTCwoVCRQLExYICxQUCgsVCRQLFAoVCxILEwsTCxMVChQLEwsKFBQKCxUTCgsTFAoVChQKFgkUCwoTFQkLFQkTFQoKFAwSCxQKFBUJFQoUChYICxQUCgoABdwKFggLFBQKCgAF3AAAAAA='
-      - name: bathroom cover down
-        command_on: '6QBKAo8vFgkVCQsTFgkVCRUJFQoLFAsSFQoUChQLChQKFBQLFAoUChQKFAwTChQKDBQTDAgUChUTDBMKFAwIFQoUFAoUCxMLChQUCxMLChQKFBQLChUTChQLEwsLExQLCRUJFwgVCRUTDAgWCRUSDgcWCBgLFAYXCxMHFwYZCBcEGwghBg0RDAkWEQ0IFhINBxgHFgh5kzMTChMMCBcRDRIMEgwTCwoUCRcRDBMMEgwJFggWEwsSDBQKEwwSDBMMEgsJFhIMCRcHFRMNEgsTCwkWCRUTCxMLEwwKFBMLEwwJFQkVEwsKFRMMEgsTDQgVEwsKFAoVCRULExQLCRULExQKCxQJFRMLEwwTCxMLChQUCwoUFAoUCxMLChQUCwkVEwwJFAoVCnaUMhQKFAoLFBQKFAoUCxUJChQKFBQMEwoUCwkUCxQUCxMLFAoUChQLFAoUCgoUFAsKFAoUFAsTCxQKChUKFBUJFAoUCwsUEwoUCwkVChQUCwkVEwsUChUKChQVCQsTCxQKFQoTFAoLFQkUFAwJFAoUFAoVChQKFAoLFBMLChUUChMLFAoKFBQLChQUCgsTCxQKd5QyEwoUCwoUFAoUCxQKFAoKFQoUFAoUCxUJChQLExQKFQoUChUJFQsTChQKCxMVCgoUCxMUCxMMEwoKFQoUFAoUDBMKChQVCRQLChQKFBQLChUTChQKFAsKFBQKCxQKFQkUChQWCQoVCRUUCgoUCxMUCxQKFQoTCgsUFAoKFBQLFAoUCgsTFAsKFBQMCRQKFAoABdwUChQLEwsKFBQLCRUTDA=='
-#      jvc_tv:
-#        friendly_name: "jvc tv"
-#        command_on: 'JgBoAAABKpIUERUQFjUTEhQQFRISEhQQFDcTNxMSFTUUNhQ2FDcUNhMSExITEhM3FBMTEBQSExITNxM3EzgTEhI3FDYUNhQ2FAAFBQABKkgVAAiaCAACUwcAAUYAASlJEgAMRAABJ0kUAA0F'
-#        command_off: 'JgBmAAABKJIWEBUQFDcVEBQQFRETERURFDUVNhUREzYUNxM2FTUWNBURFRETERQ2FBEUERQSFBAVNxM1FjUVERM3EzYWNBQ2FgAFBAABKUgUAAqVCAgIAAGUAAEqSBQADEEAASlJFAANBQAA'
+# My Home Assistant
+my:
 
+# Zeroconf for local discovery
+zeroconf:
 
-sonoff:
-  username: 'michael.pic@gmail.com'
-#  username: '+8860960626503'
-  password: babypig1
-  sensors: [temperature, humidity, power, current, voltage]
-
-
-
-remote:
-  - platform: xiaomi_miio
-    name: xiaomi remote
-    host: 10.0.0.31
-    token: dff23da4fc861f6ee00cff1866407242
-
-
-smartir:
-  update_branch: rc
-climate:
-  - platform: smartir
-    name: Masterroom AC
-    unique_id: masterroom_ac
-    device_code: 1080              #依據你的空調
-    controller_data: remote.zhi_neng_yao_kong_remote
-    temperature_sensor: sensor.temperature_158d00036b8918
-    humidity_sensor: sensor.humidity_158d00036b8918    
-  - platform: smartir
-    name: Livingroom AC
-    unique_id: livingroom_ac
-    controller_data: remote.chuangmi_v2_3524_ir
-    device_code: 3100
-    temperature_sensor: sensor.temperature_158d00036b8918
-    humidity_sensor: sensor.humidity_158d00036b8918
-  - platform: smartir
-    name: Guest room AC
-    unique_id: guestroom_ac
-    device_code: 1080               #依據你的空調
-    controller_data: remote.mini_4
-    temperature_sensor: sensor.temperature_158d00036b8918
-    humidity_sensor: sensor.humidity_158d00036b8918
-
-    
-template:
-- cover:
-  - name: "Garage Door"
-#    device_class: garage
-
-    state: >
-      {% if is_state('binary_sensor.garage_door', 'on') %}
-        open
-      {% else %}
-        closed
-      {% endif %}
-
-    open_cover:
-      service: switch.turn_on
-      target:
-        entity_id: switch.sonoff_10005b61f7_1
-
-    close_cover:
-      service: switch.turn_on
-      target:
-        entity_id: switch.sonoff_10005b61f7_3
-
-    stop_cover:
-      service: switch.turn_on
-      target:
-        entity_id: switch.sonoff_10005b61f7_2
-
-    icon: >
-      {% if is_state('cover.garage_door', 'open') %}
-        mdi:garage-open-variant
-      {% else %}
-        mdi:garage-variant
-      {% endif %}
-#- sensor:
-#  - name: "garage_cover"
-#    state: >
-#      {% if is_state('binary_sensor.garage_door', 'on') %}
-#        open
-#      {% else %}
-#        closed
-#      {% endif %}
-
-
-- cover:
-  - open_cover:
-    - data:
-        entity_id: switch.bathroom_cover_up
-      action: switch.turn_on
-    stop_cover:
-    - data:
-        entity_id: switch.bathroom_cover_stop
-      action: switch.turn_on
-    close_cover:
-    - data:
-        entity_id: switch.bathroom_cover_down
-      action: switch.turn_on
-    default_entity_id: cover.bathroom_cover
-    name: Bathroom Cover 
-    
-- lock:
-  - name: door
-    optimistic: true
-    lock:
-    - target:
-        entity_id:
-        - switch.sonoff_10012e407e
-      action: switch.turn_on
-    unlock:
-    - target:
-        entity_id:
-        - switch.sonoff_10012e407e
-      action: switch.turn_on
-    state: '{{ is_state(''switch.sonoff_10012e407e'', ''off'') }}' 
-
+# Cloud (optional - uncomment to enable)
+# cloud:
