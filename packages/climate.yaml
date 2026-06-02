@@ -1,0 +1,35 @@
+##############################
+# Climate Package - Air Conditioning
+# Manages all AC units across different rooms
+##############################
+
+smartir:
+  update_branch: rc
+
+climate:
+  # Master Room AC
+  - platform: smartir
+    name: Masterroom AC
+    unique_id: masterroom_ac
+    device_code: 1080
+    controller_data: remote.zhi_neng_yao_kong_remote
+    temperature_sensor: sensor.temperature_158d00036b8918
+    humidity_sensor: sensor.humidity_158d00036b8918
+
+  # Living Room AC
+  - platform: smartir
+    name: Livingroom AC
+    unique_id: livingroom_ac
+    controller_data: remote.chuangmi_v2_3524_ir
+    device_code: 3100
+    temperature_sensor: sensor.temperature_158d00036b8918
+    humidity_sensor: sensor.humidity_158d00036b8918
+
+  # Guest Room AC
+  - platform: smartir
+    name: Guest room AC
+    unique_id: guestroom_ac
+    device_code: 1080
+    controller_data: remote.mini_4
+    temperature_sensor: sensor.temperature_158d00036b8918
+    humidity_sensor: sensor.humidity_158d00036b8918
