@@ -1,0 +1,51 @@
+##############################
+# Integrations Package
+# Centralized configuration for integrations and remotes
+##############################
+
+# Xiaomi Mi Remote
+remote:
+  - platform: xiaomi_miio
+    name: xiaomi remote
+    host: !secret xiaomi_remote_host
+    token: !secret xiaomi_remote_token
+
+# Sonoff/eWelink Integration
+sonoff:
+  username: !secret sonoff_email
+  password: !secret sonoff_password
+  sensors:
+    - temperature
+    - humidity
+    - power
+    - current
+    - voltage
+
+# HomeKit Bridge
+homekit:
+  - name: socket
+    port: 21073
+    filter:
+      include_entities:
+        - switch.sonoff_10012b7b40
+        - switch.jellyfish
+    entity_config:
+      switch.sonoff_10012b7b40:
+        type: outlet
+      switch.jellyfish:
+        type: outlet
+
+  - name: valve
+    port: 21074
+    filter:
+      include_entities:
+        - switch.sonoff_1001648a34
+    entity_config:
+      switch.sonoff_1001648a34:
+        type: valve
+
+# iOS Integration
+ios:
+
+# Zigbee2MQTT
+dhcp:

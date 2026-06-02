@@ -1,0 +1,15 @@
+##############################
+# Locations Package - Zones
+# Defines important geographic zones for automations
+##############################
+
+zone:
+  - name: home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 300
+
+  - name: mother home
+    latitude: !secret mother_home_latitude
+    longitude: !secret mother_home_longitude
+    radius: 300

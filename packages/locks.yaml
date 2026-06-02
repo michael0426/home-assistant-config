@@ -1,0 +1,22 @@
+##############################
+# Locks Package - Smart Locks
+# Template lock for door control
+##############################
+
+template:
+  # Door Lock
+  - lock:
+      - name: door
+        unique_id: door_lock_template
+        optimistic: true
+        lock:
+          - action: switch.turn_on
+            target:
+              entity_id:
+                - switch.sonoff_10012e407e
+        unlock:
+          - action: switch.turn_on
+            target:
+              entity_id:
+                - switch.sonoff_10012e407e
+        state: "{{ is_state('switch.sonoff_10012e407e', 'off') }}"
